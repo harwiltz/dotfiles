@@ -10,35 +10,31 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Run (spawnPipe)
 
---main = statusBar bar prettyPrint toggleStrut xmonadConfig >>= xmonad
-
 main = spawnPipe bar >>= (xmonad . xmonadConfig)
 
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
-
-barArgs :: [String]
-barArgs = [ "-t", "\"%StdinReader%}{%alsa:default:Master% | %date% [%battery%]\""
-          , "-d"
-          , "-C", show [batteryCmd, dateCmd, volumeCmd]
-          , "-f", "\"xft: xos4 terminus\""
-          ]
+    where barArgs :: [String]
+          barArgs = [ "-t", "\"%StdinReader%}{%alsa:default:Master% | %date% [%battery%]\""
+                    , "-d"
+                    , "-C", show [batteryCmd, dateCmd, volumeCmd]
+                    , "-f", "\"xft: xos4 terminus\""
+                    ]
 
 batteryCmd :: String
 batteryCmd = unwords ["Run Battery", show batteryOpts, "50"]
-
-batteryOpts :: [String]
-batteryOpts = [ "--template", "<acstatus>"
-              , "--Low"     , "20"
-              , "--High"    , "90"
-              , "--low"     , "#BB0000"
-              , "--high"    , "#336633"
-              , "--normal"  , "darkorange"
-              , "--"
-              , "-o"        , "<left>%"
-              , "-O"        , "<left>%(<fc=#ffff00>AC</fc>)"
-              , "-i"        , "<fc=#008800>Charged</fc>"
-              ]
+    where batteryOpts :: [String]
+          batteryOpts = [ "--template", "<acstatus>"
+                        , "--Low"     , "20"
+                        , "--High"    , "90"
+                        , "--low"     , "#BB0000"
+                        , "--high"    , "#336633"
+                        , "--normal"  , "darkorange"
+                        , "--"
+                        , "-o"        , "<left>%"
+                        , "-O"        , "<left>%(<fc=#ffff00>AC</fc>)"
+                        , "-i"        , "<fc=#008800>Charged</fc>"
+                        ]
 
 dateCmd :: String
 dateCmd = unwords [ "Run Date"
@@ -52,16 +48,8 @@ volumeCmd = unwords [ "Run Alsa"
                     , show "Master"
                     , show volumeOpts
                     ]
-
-volumeOpts :: [String]
-volumeOpts = [ "--template", "<fc=#444477>Vol</fc>: <volume>% <status>" ]
-
-prettyPrint :: PP
-prettyPrint = xmobarPP { ppCurrent = xmobarColor "#FFFF00" "" . pad
-                       , ppHiddenNoWindows = xmobarColor "#444444" "" . pad
-                       , ppHidden = pad
-                       }
-toggleStrut XConfig {XMonad.modMask = modMask} = (modMask, xK_f)
+    where volumeOpts :: [String]
+          volumeOpts = [ "--template", "<fc=#444477>Vol</fc>: <volume>% <status>" ]
 
 xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , modMask            = mod4Mask
@@ -70,8 +58,14 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , focusedBorderColor = "#FFFF00"
                                      , layoutHook         = avoidStruts $ layoutHook defaultConfig
                                      , workspaces         = myWorkspaces
-                                     , logHook            = dynamicLogWithPP prettyPrint { ppOutput = hPutStrLn h }
+                                     , logHook            = dynamicLogWithPP prettyPrint
                                      } `additionalKeys` keyMaps
+    where prettyPrint :: PP
+          prettyPrint = xmobarPP { ppCurrent = xmobarColor "#FFFF00" "" . pad
+                                 , ppHiddenNoWindows = xmobarColor "#444444" "" . pad
+                                 , ppHidden = pad
+                                 , ppOutput = hPutStrLn h
+                                 }
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = romanNumerals
