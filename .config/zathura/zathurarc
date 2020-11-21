@@ -1,0 +1,4 @@
+set recolor-darkcolor \#777777
+set recolor-lightcolor \#1d1d1d
+
+map <C-r> :set recolor true

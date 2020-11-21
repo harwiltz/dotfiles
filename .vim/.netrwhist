@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/harwiltz/abs/vim/trunk'
+let g:netrw_dirhist_5='/home/harwiltz/lab/continuous-distributional-rl/continuous_distributional_rl/agents/policy_gradient'
+let g:netrw_dirhist_4='/home/harwiltz/lab/yechesskel/yechesskel/environment'
+let g:netrw_dirhist_3='/home/harwiltz/lab/yechesskel/conf/model'
+let g:netrw_dirhist_2='/home/harwiltz/lab/yechesskel/conf'
+let g:netrw_dirhist_1='/home/harwiltz/lab/yechesskel/conf/logger'
+let g:netrw_dirhist_0='/home/harwiltz/lab/yechesskel/conf'
+let g:netrw_dirhist_9='/home/harwiltz/lab/yechesskel/conf/model'
+let g:netrw_dirhist_8='/home/harwiltz/lab/yechesskel/conf'
+let g:netrw_dirhist_7='/home/harwiltz/lab/yechesskel/conf/logger'

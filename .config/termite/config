@@ -1,0 +1,28 @@
+[options]
+font = DejaVuSansMono 10
+cursor_blink = off
+
+[colors]
+foreground = #EEEEEE
+background = #030303
+color12 = #333366
+color4 = #9999FF
+color4 = #23a6d0
+
+color0 = #000000
+color8 = #222222
+
+color1 = #FF0000
+color9 = #FF3333
+
+color2 = #c38320
+color10 = #226622
+
+color3 = #FFFF33
+color11 = #AAAA00
+
+color5 = #444477
+color13 = #666699
+
+color6 = #888888
+color14 = #85D5D4

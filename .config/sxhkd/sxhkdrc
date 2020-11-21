@@ -1,0 +1,228 @@
+
+# bspwm hotkeys
+#
+
+super + alt + Escape
+	bspc quit
+
+
+super + shift + c
+	bspc node -c
+
+super + v
+	bspc desktop -l next
+
+super + b
+  tabbed-surf.sh
+
+super + {s,f,t,p}
+	bspc node -t {floating,fullscreen,tiled,pseudo_tiled}
+
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+super + apostrophe
+	bspc node -s last
+
+super + {o,i}
+	bspc control --record-history off; \
+	bspc node {older,newer} -f; \
+	bspc control --record-history on
+
+alt + space
+	$HOME/scripts/dropdown.sh
+
+alt + {minus,equal}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2))
+
+alt + 0
+	bspc config -d focused window_gap 16
+
+alt + f
+	/home/harwiltz/scripts/togglemargin.sh
+
+super + y
+	bspc node -w last.manual
+
+super + m
+	bspc node -s biggest
+
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {_, + }c
+	bspc node -f {next.local,prev.local}
+
+super + {comma,period}
+	bspc desktop -C {backward,forward}
+
+super + bracket{left,right}
+	bspc desktop -f {prev,next}
+
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+super + ctrl + {_,shift + }space
+	bspc {node -p cancel,desktop -c}
+
+super + alt + {h,j,k,l}
+	bspc node {@west -r -10,@south -r +10, @north -r -10,@east -r +10}
+#	bspc node -e {left -10,down +10,up -10,right +10}
+
+super + alt + shift + {h,j,k,l}
+	bspc node {@east -r -10,@north -r +10, @south -r -10,@west -r +10}
+#	bspc node -e {right -10,up +10,down -10,left +10}
+
+super + ctrl + {1-9}
+	bspc node -r 0.{1-9}
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} ^{1-9,10}
+
+super + q
+	bspc node @focused:/ --rotate 90
+#	bspc node --rotate 90
+#	bspc desktop --rotate 90
+
+super + e
+	bspc node @focused:/ --rotate 270
+#	bspc desktop --rotate 270
+
+super + w
+	bspc node @focused:/ --rotate 180
+
+super + shift + {q,e}
+	bspc node --circulate {backward,forward}
+
+#~button1
+#	bspc pointer -g focus
+#
+#super + button{1-3}
+#	bspc pointer -g {move,resize_side,resize_corner}
+#
+#super + alt + button{1}
+#	bspc pointer -g resize_side
+#
+#super + !button{1-3}
+#	bspc pointer -t %i %i
+#
+#super + @button{1-3}
+#	bspc pointer -u
+#
+#alt + button1
+#	bspc pointer_action1
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+	termite
+
+super + shift + Return
+	termite -c ~/termitetestconfig
+
+super + alt + Return
+	urxvt
+
+super + ctrl + c
+	google-chrome-stable
+#	chromium # && pkill chromium
+
+super + ctrl + alt + c
+	chromium --incognito # && pkill chromium
+
+super + ctrl + p
+	midori -p
+
+super + alt + b
+	abs/surf/src/surf-0.6/surf-open.sh www.google.ca
+#	tabbed -d >/tmp/tabbed.xid && surf -e $(</tmp/tabbed.xid) https://www.archlinux.org
+#midori -p
+
+super + space
+	dmenu_run
+
+super + alt + space
+	/home/harwiltz/rofiscript.sh
+
+ctrl + alt + space
+	/home/harwiltz/rofifull.sh
+
+alt + l
+	libreoffice
+
+super + alt + c
+	tty-clock -s -c -C6
+
+super + ctrl + f
+	thunar
+
+alt + p
+	scrot temp.png
+
+super + ctrl + d
+	xbacklight -dec 20
+
+super + ctrl + b
+	xbacklight -inc 20
+
+super + alt + p
+	/home/harwiltz/scripts/musictl.sh toggle
+
+super + alt + s 
+	/home/harwiltz/scripts/musictl.sh stop
+
+super + alt + comma
+	/home/harwiltz/scripts/musictl.sh previous
+
+super + alt + period
+	/home/harwiltz/scripts/musictl.sh next
+
+super + alt + m
+	~/scripts/volume.sh mute
+#	amixer -q sset Master toggle
+
+ctrl + alt + minus
+	~/scripts/volume.sh down
+#	amixer -q sset Headphone 10%-
+
+ctrl + alt + equal
+	~/scripts/volume.sh up
+#	amixer -q sset Headphone 10%+
+
+super + alt + v
+	~/scripts/volume.sh
+
+ctrl + alt + underscore
+	xbacklight -dec 20
+
+ctrl + alt + plus
+	xbacklight -inc 20
+
+ctrl + alt + l
+	/home/harwiltz/lockscreen.sh
+
+ctrl + alt + p
+	/home/harwiltz/project.sh
+
+ctrl + alt + u
+	/home/harwiltz/unproject.sh
+
+ctrl + super + s
+	bspc desktop -l monocle && feh /home/harwiltz/"Harley's Projects"/Semester3.png && bspc desktop -l tiled
+
+# reload dzen2
+super + alt + d
+	pkill dzen2 && /home/harwiltz/dzenbspwm.sh
+#	pkill dzen2 && /home/harwiltz/bar/launcher.sh
+
+ctrl + alt + t
+	bspc desktop focused -l tiled
+
+ctrl + alt + m
+	bspc desktop focused -l monocle
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd

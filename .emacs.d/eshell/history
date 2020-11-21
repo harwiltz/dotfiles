@@ -1,0 +1,110 @@
+(+ 2 2)
+ls
+ipython
+echo $TERM
+exit
+ncmpcpp
+mpc add ~/Music/Haken/Affinity/
+nohup mpd &
+mpc add ~/Music/Haken/Affinity/
+please
+ls -l ~/Music/
+ls -l ~/Music/Haken
+exit
+org-file-apps
+exit
+su
+su
+exit
+cd lab
+ls
+cd ..
+ls
+cd scripts/
+ls
+cd ..
+mkdir hacking
+cd hacking/
+ls
+mkdir bandcamp-raid
+cd bandcamp-raid/
+mkdir bandcamp_raid
+touch bandcamp_raid/__init__.py
+vim requirements.txt
+echo "selenium" > requirements.txt
+cat requirements.txt 
+vim bandcamp_raid/bandcamp_retriever.py
+python
+python
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+ls
+rm -rf NativeConstruct--Quiet_World/
+Welcome to the Emacs shell
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+rm -rf NativeConstruct--Quiet_World/
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World"
+python -m bandcamp_raid.download_album --band "Native Construct" --album "Quiet World" --basedir /home/harwiltz/
+rm -rf NativeConstruct--Quiet_World/
+ls
+rm geckodriver.log 
+vim requirements.txt 
+cat requirements.txt 
+echo "urllib" >> requirements.txt 
+python setup.py install --user
+cd
+ls
+python -m bandcamp_raid.download_album --band "Haken" --album "Enter the 5th Dimension"
+python -m bandcamp_raid.download_album --band "Haken" --album "Enter the Fifth Dimension"
+python -m bandcamp_raid.download_album --band "Haken Official" --album "Enter the 5th Dimension"
+rm -rf HakenOfficial--Enter_the_5th_Dimension/
+python -m bandcamp_raid.download_album --band Arsis --album "A Celebration of Guilt (Reissue)"
+cd hacking/bandcamp-raid/
+python setup.py install
+python setup.py install --user
+cd
+python -m bandcamp_raid.download_album --band Arsis --album "A Celebration of Guilt (Reissue)"
+cd hacking/bandcamp-raid/
+python setup.py install --user
+python -m bandcamp_raid.download_album --band Arsis --album "A Celebration of Guilt (Reissue)" --basedir /home/harwiltz
+vim bandcamp_raid/bandcamp_retriever.py 
+python
+python setup.py install --user
+python -m bandcamp_raid.download_album --band Arsis --album "A Celebration of Guilt (Reissue)" --basedir /home/harwiltz
+git init
+git status
+git status
+git add .
+git commit -m "Working simple version" -S
+git config user.email "harleyw@hotmail.com"
+git commit -m "Working simple version"
+git remote add origin https://gitlab.com/DestructiveReasoning/bandcamp-raid
+git push origin master
+clear
+ls Pictures/
+cp compton.conf xmonad-compton.conf
+:q
+xlsfonts | grep terminus
+rm .xmobarrc
+exit
+ghci
+xmobar -C "Run Battery [] 50"
+xmobar -C ["Run Battery [] 50"]
+xmobar -C ["Run Battery [\"-o\", \"<left>\"] 50"]
+xmobar -C ["Run Battery [\"-o\", \"<left>\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<left>%\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\", \"--Low\", 20] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\", \"--Low\", \"20\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\", \"--Low\", \"20\", \"--\", \"-o\", \"<left>%\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\", \"--Low\", \"20\", \"--\", \"-o\", \"<left>%\", \"-O\", \"<fc=#ffff00>AC</fc>\"] 50"] -t "}{%battery%"
+xmobar -C ["Run Battery [\"-t\", \"<acstatus>%\", \"--Low\", \"20\", \"--\", \"-o\", \"<left>%\", \"-O\", \"<fc=#ffff00>AC</fc>\", \"-i\", \"<fc=#006600>Charged</fc>\"] 50"] -t "}{%battery%"
+ghi
+ghci
+exit
+cd
+cat .xinitrc
+picom --config=.config/xmonad-compton.conf 
