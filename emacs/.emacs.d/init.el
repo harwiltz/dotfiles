@@ -11,8 +11,13 @@
 (display-time)
 (setq doc-view-continuous t)
 
+;; hotkeys
+(global-set-key (kbd "M-e") 'eshell)
+(global-set-key (kbd "M-s") 'multi-term)
+
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
+(setq org-latex-create-formula-image-program 'dvipng)
 
 ;; shell stuff
 (setq explicit-shell-file-name "/bin/bash")
