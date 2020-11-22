@@ -23,6 +23,22 @@
 (setq explicit-shell-file-name "/bin/bash")
 (setq multi-term-program "/bin/bash")
 
+(defun insthm (type header)
+  "Insert text block with header"
+    (interactive "sBlock type: \nsHeader: ")
+    (insert "#+ATTR_LATEX: :options [" header "]\n")
+    (insert "#+begin_" (downcase type) "\n")
+    (insert ":PROPERTIES:\n")
+    (insert ":CUSTOM_ID: " (idify header) "\n")
+    (insert ":END:\n")
+    (insert "#+end_" (downcase type) "\n")
+    (forward-line -2)
+    (end-of-line))
+
+(defun idify (s)
+  "Make id string from arbitrary string"
+  (downcase (string-join (split-string s " ") "-")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
