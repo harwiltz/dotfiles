@@ -78,6 +78,7 @@ stars = take 10 $ repeat "*"
 
 keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
           , ((mod4Mask, xK_e), spawn "emacs")
+          , ((mod4Mask, xK_p), spawn dmenuCmd)
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
           , ((mod4Mask .|. shiftMask, xK_0), windows $ W.shift $ myWorkspaces !! 9)
@@ -87,3 +88,13 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
           , ((mod4Mask .|. mod1Mask, xK_m), toggleMute >> return())
           ]
     where volDeltaPct = 5.0
+
+dmenuCmd = unwords [ "dmenu_run"
+                   , "-fn", show "xos4 Terminus"
+                   , "-p" , show "run:"
+                   , "-nb", show "#111"
+                   , "-nf", show "#888"
+                   , "-sb", show "#333"
+                   , "-sf", show "#ff0"
+                   , "-b"
+                   ]

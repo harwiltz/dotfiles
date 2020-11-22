@@ -4,3 +4,6 @@
 *~
 *.errors
 **/xmonad-x86_64-linux
+**/history
+vim/.vim/view
+**/eshell
