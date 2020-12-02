@@ -39,6 +39,33 @@
   "Make id string from arbitrary string"
   (downcase (string-join (split-string s " ") "-")))
 
+(defun cid (s)
+  (interactive "sHeader: ")
+  (insert ":PROPERTIES:\n:CUSTOM_ID: " (idify s) "\n:END:\n"))
+
+(defun org-jekyll-add-project (path)
+  (interactive "sProject path: ")
+  (let* ((bdir (concat path "/org/posts"))
+	(pdir (concat path "/_posts"))
+	(adir (concat path "/assets"))
+	(notes `("org-notes"
+		 :base-directory ,(identity bdir)
+		 :base-extension "org"
+		 :publishing-directory ,(identity pdir)
+		 :recursive t
+		 :publishing-function org-html-publish-to-html
+		 :body-only t
+		))
+	(static `("org-static"
+		  :base-directory ,(identity bdir)
+		  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|webp\\|pdf\\|"
+		  :publishing-directory ,(identity adir)
+		  :publishing-function org-publish-attachment
+		 ))
+	(publish '("org" :components ("org-notes" "org-static"))))
+    (setq org-publish-project-alist
+	  (nconc (list notes static publish) (car org-publish-project-alist)))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -64,7 +91,8 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages '(ample-theme haskell-mode multi-term spacemacs-theme evil))
- '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
+ '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+ '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
