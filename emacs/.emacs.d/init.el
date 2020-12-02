@@ -90,7 +90,8 @@
      ("FIXME" . "#dc752f")
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
- '(package-selected-packages '(ample-theme haskell-mode multi-term spacemacs-theme evil))
+ '(package-selected-packages
+   '(htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it))
 (custom-set-faces
