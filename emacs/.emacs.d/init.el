@@ -43,6 +43,7 @@
   (interactive "sHeader: ")
   (insert ":PROPERTIES:\n:CUSTOM_ID: " (idify s) "\n:END:\n"))
 
+(require 'ox-publish)
 (defun org-jekyll-add-project (path)
   (interactive "sProject path: ")
   (let* ((bdir (concat path "/org/posts"))
@@ -55,6 +56,8 @@
 		 :recursive t
 		 :publishing-function org-html-publish-to-html
 		 :body-only t
+		 :auto-preamble t
+		 :html-extension "html"
 		))
 	(static `("org-static"
 		  :base-directory ,(identity bdir)
@@ -64,7 +67,9 @@
 		 ))
 	(publish '("org" :components ("org-notes" "org-static"))))
     (setq org-publish-project-alist
-	  (nconc (list notes static publish) (car org-publish-project-alist)))))
+	  (if (boundp 'org-publish-project-alist)
+	      (nconc (list notes static publish) (car org-publish-project-alist))
+	    (list notes static publish)))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
