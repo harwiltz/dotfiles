@@ -43,6 +43,18 @@
   (interactive "sHeader: ")
   (insert ":PROPERTIES:\n:CUSTOM_ID: " (idify s) "\n:END:\n"))
 
+(defun wc ()
+  "Count words in buffer"
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (if (use-region-p)
+	  (narrow-to-region region-beginning region end)
+	(widen))
+      (goto-char (if (boundp 'point-min) point-min 0))
+      (let ((ws (count-matches "\\sw+")))
+	(message "Words: %d" ws)))))
+
 (require 'ox-publish)
 (defun org-jekyll-add-project (path)
   (interactive "sProject path: ")

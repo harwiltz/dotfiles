@@ -1,0 +1,4 @@
+*** You are running in headless mode.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1607183959048	Marionette	INFO	Listening on port 34213
+1607183959097	Marionette	WARN	TLS certificate errors will be ignored for this session

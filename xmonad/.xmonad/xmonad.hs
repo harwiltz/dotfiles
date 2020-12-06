@@ -86,6 +86,9 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
           [ ((mod4Mask .|. mod1Mask, xK_equal), raiseVolume volDeltaPct >> return())
           , ((mod4Mask .|. mod1Mask, xK_minus), lowerVolume volDeltaPct >> return())
           , ((mod4Mask .|. mod1Mask, xK_m), toggleMute >> return())
+          ] ++ -- brightness stuff
+          [ ((mod4Mask .|. controlMask, xK_equal), spawn "xbacklight -inc 10" )
+          , ((mod4Mask .|. controlMask, xK_minus), spawn "xbacklight -dec 10" )
           ]
     where volDeltaPct = 5.0
 
