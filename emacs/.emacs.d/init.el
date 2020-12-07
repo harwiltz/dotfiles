@@ -11,6 +11,8 @@
 (display-time)
 (setq doc-view-continuous t)
 
+(setq load-path (cons "~/.emacs.d/lisp" load-path))
+
 ;; hotkeys
 (global-set-key (kbd "M-e") 'eshell)
 (global-set-key (kbd "M-s") 'multi-term)
@@ -82,6 +84,10 @@
 	  (if (boundp 'org-publish-project-alist)
 	      (nconc (list notes static publish) (car org-publish-project-alist))
 	    (list notes static publish)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
+;; Let emacs do its thing after the following line: ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

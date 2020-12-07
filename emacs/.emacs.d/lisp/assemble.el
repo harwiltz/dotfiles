@@ -1,3 +1,7 @@
+(provide 'assemble)
+
+(require 'ox)
+(require 'ox-latex)
 (require 'subr-x)
 
 (defvar assemble-file "assemb.el")
@@ -24,4 +28,32 @@
       (default)
     (let ((out_dir "./")
 	  (fn (intern target)))
-      (funcall fn out_dir r))))
+      (funcall fn))))
+
+(defun defile (target-name thunk)
+  "Perform actions in a temporary file"
+  (with-temp-buffer
+    (rename-buffer (concat target-name "---assembling"))
+    (message (concat "Assembling " target-name "..."))
+    (funcall thunk)
+    (message "DONE")))
+
+(defun simple-org-export (type export-fn file-name)
+  "Wrapper around org-export-to-file with simple defaults"
+  (message (concat ":: Exporting to " file-name "..."))
+  (org-export-to-file
+      type
+      file-name
+    nil nil nil nil nil
+    export-fn))
+
+(defun assemble-latex (file-name)
+  "Produce latex pdf from buffer"
+  (simple-org-export
+   'latex
+   'org-latex-compile
+   file-name))
+
+(defun assemble-html(file-name)
+  "Produce HTML from buffer"
+  (simple-org-export 'html nil file-name))
