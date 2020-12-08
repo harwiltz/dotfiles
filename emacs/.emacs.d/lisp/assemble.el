@@ -57,3 +57,17 @@
 (defun assemble-html(file-name)
   "Produce HTML from buffer"
   (simple-org-export 'html nil file-name))
+
+(defun html-clean-org ()
+  (save-excursion
+    (goto-char 0)
+    (flush-lines ":CUSTOM_ID:")
+    (goto-char 0)
+    (flush-lines "#\\+STARTU")))
+
+(defun insert-css (file)
+  (insert (concat "#+HTML_HEAD: " (make-css-link file) "\n")))
+
+(defun make-css-link (file)
+  (format "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />"
+	  file))
