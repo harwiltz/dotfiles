@@ -38,6 +38,10 @@
     (funcall thunk)
     (message "DONE")))
 
+(defun append-file-to-buffer (file)
+  (insert-file-contents file)
+  (goto-char (point-max)))
+
 (defun simple-org-export (type export-fn file-name)
   "Wrapper around org-export-to-file with simple defaults"
   (message (concat ":: Exporting to " file-name "..."))
