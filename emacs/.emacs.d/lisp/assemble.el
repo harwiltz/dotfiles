@@ -75,3 +75,13 @@
 (defun make-css-link (file)
   (format "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />"
 	  file))
+
+(defun file-contents-if-exists (file-path)
+  (if (and (boundp file-path) (symbol-value file-path))
+      (get-file-as-string (symbol-value file-path))
+    ""))
+
+(defun get-file-as-string (file)
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))

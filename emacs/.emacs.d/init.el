@@ -20,10 +20,29 @@
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
 (setq org-latex-create-formula-image-program 'dvipng)
+(setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "PASS")))
 
 ;; shell stuff
 (setq explicit-shell-file-name "/bin/bash")
 (setq multi-term-program "/bin/bash")
+
+(defun insderiv ()
+  "Insert equation* aligned"
+  (interactive)
+  (insert "\\begin{equation*}\n")
+  (insert "\\begin{aligned}\n")
+  (insert "\\end{aligned}\n")
+  (insert "\\end{equation*}")
+  (forward-line -2)
+  (end-of-line))
+
+(defun inseq (label)
+  "Insert labeled equation"
+  (interactive "sEnter label: ")
+  (insert (format "\\begin{equation}\\label{eq:%s}\n" label))
+  (insert "\\end{equation}")
+  (forward-line -1)
+  (end-of-line))
 
 (defun insthm (type header)
   "Insert text block with header"
