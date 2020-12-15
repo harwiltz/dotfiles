@@ -21,6 +21,15 @@
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
 (setq org-latex-create-formula-image-program 'dvipng)
 (setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "PASS")))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t) (haskell . t)))
+
+(setq org-agenda-files
+      (let ((base "~/research"))
+	`(,base
+	  ,(concat base "/notes")
+	  ,(concat base "/papers"))))
 
 ;; shell stuff
 (setq explicit-shell-file-name "/bin/bash")
