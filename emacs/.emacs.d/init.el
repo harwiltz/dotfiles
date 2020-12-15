@@ -12,6 +12,7 @@
 (setq doc-view-continuous t)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
+(require 'assemble)
 
 ;; hotkeys
 (global-set-key (kbd "M-e") 'eshell)
@@ -28,6 +29,7 @@
 (setq org-agenda-files
       (let ((base "~/research"))
 	`(,base
+    ,(concat base "/backlog")
 	  ,(concat base "/notes")
 	  ,(concat base "/papers"))))
 
