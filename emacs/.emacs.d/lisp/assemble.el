@@ -4,6 +4,8 @@
 (require 'ox-latex)
 (require 'subr-x)
 
+(autoload 'assemble "assemble.el")
+
 (defvar assemble-file "assemb.el")
 
 (defun assemble (target)
