@@ -6,6 +6,8 @@ import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks (avoidStruts, docks)
+import XMonad.Layout.BinarySpacePartition
+import XMonad.Layout.Grid
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Run (spawnPipe)
@@ -56,7 +58,7 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , borderWidth        = 2
                                      , normalBorderColor  = "#222222"
                                      , focusedBorderColor = "#FFFF00"
-                                     , layoutHook         = avoidStruts $ layoutHook defaultConfig
+                                     , layoutHook         = avoidStruts $ layouts
                                      , workspaces         = myWorkspaces
                                      , logHook            = dynamicLogWithPP prettyPrint
                                      } `additionalKeys` keyMaps
@@ -66,6 +68,10 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                  , ppHidden = pad
                                  , ppOutput = hPutStrLn h
                                  }
+          layouts =
+            Tall 1 (3/100) (1/2) |||
+            emptyBSP |||
+            Mirror (Tall 1 (3/100) (3/5)) ||| Full
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = romanNumerals
