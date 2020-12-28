@@ -11,6 +11,7 @@ import XMonad.Layout.Grid
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Types (Direction1D(..))
 
 main = spawnPipe bar >>= (xmonad . xmonadConfig)
 
@@ -95,6 +96,16 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
           ] ++ -- brightness stuff
           [ ((mod4Mask .|. controlMask, xK_equal), spawn "xbacklight -inc 10" )
           , ((mod4Mask .|. controlMask, xK_minus), spawn "xbacklight -dec 10" )
+          ] ++ --bspc stuff
+          [ ((mod4Mask .|. mod1Mask, xK_l), sendMessage $ ExpandTowards R)
+          , ((mod4Mask .|. mod1Mask, xK_h), sendMessage $ ExpandTowards L)
+          , ((mod4Mask .|. mod1Mask, xK_j), sendMessage $ ExpandTowards D)
+          , ((mod4Mask .|. mod1Mask, xK_k), sendMessage $ ExpandTowards U)
+          , ((mod4Mask, xK_r), sendMessage Rotate)
+          , ((mod4Mask, xK_s), sendMessage Swap)
+          , ((mod4Mask, xK_n), sendMessage FocusParent)
+          , ((mod4Mask .|. controlMask, xK_n), sendMessage SelectNode)
+          , ((mod4Mask .|. shiftMask, xK_n), sendMessage MoveNode)
           ]
     where volDeltaPct = 5.0
 

@@ -12,6 +12,7 @@
 (setq doc-view-continuous t)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (require 'assemble)
 
 ;; hotkeys
@@ -129,9 +130,9 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
- '(custom-enabled-themes '(ample))
+ '(custom-enabled-themes '(wiltz-base16-brewer))
  '(custom-safe-themes
-   '("f126f3b6ca7172a4a2c44186d57e86a989c2c196d0855db816a161bf857b58fb" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+   '("82b3fb1703e57aa18b363314c3e84bc822cc5677d5130d1da3a8740a8c05c500" "835bbafb65098338b773c2366efd72fb2e70557a2206061df364a0ae065d1d1a" "5880994631cd35eaa4648192abcf54d3a17d0c7a7299ca701edb6f7dc4dc2a00" "9a6432059f6c37f284bcff1b93c43eaca5119b03dba2197acb90c91165a1d5bf" "12bf83c6042c2e8574dae0615d8822d861f2a13a9b62bf5753cea438e97c4712" "abacfed3d9e3ef3c5a3e246e2878aa1f54539e9db86e21ec64e3243ff80615ca" "d3df0fb2912c994b3f8aed5445c37063593c6d813d35329b2e18ee126899d134" "4f372184a71ff469e0b56e00b88ed24b2ece05cea235567935d8c932f91c4b34" "bf364807168504cc693b37ad9d5af9a46edbbac55d523b2976c2c069e0088e97" "0f5bb770f15793bfb0e79e05738fbf1c1e238952b7806736898f7619900f5298" "02940c38e51991e8ee8ac69537341149d56e9c88d57f2c357eeb1744daad1953" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "840db7f67ce92c39deb38f38fbc5a990b8f89b0f47b77b96d98e4bf400ee590a" "f126f3b6ca7172a4a2c44186d57e86a989c2c196d0855db816a161bf857b58fb" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(fci-rule-color "#14151E")
  '(hl-todo-keyword-faces
    '(("TODO" . "#dc752f")
@@ -150,7 +151,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
@@ -179,7 +180,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(mode-line ((t (:background "#2c2c2c" :foreground "#959697" :box (:line-width 1 :color "black" :style pressed-button))))))
 
 (require 'emacs)
 (evil-mode 1)
