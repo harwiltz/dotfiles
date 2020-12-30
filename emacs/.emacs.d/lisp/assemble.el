@@ -58,6 +58,18 @@
    'org-latex-compile
    file-name))
 
+(defun assemble-latex-bibtex (file-base-name)
+  "Produce latex pdf and compile bibtex from buffer"
+  (require 'org-ref)
+  (let* ((pdflatex-cmd (format "pdflatex %s.tex" file-base-name))
+	 (bibtex-cmd (format "bibtex %s.aux" file-base-name))
+	 (org-latex-pdf-process
+	  `(,pdflatex-cmd
+	    ,bibtex-cmd
+	    ,pdflatex-cmd
+	    ,pdflatex-cmd)))
+    (assemble-latex (concat file-base-name ".tex"))))
+
 (defun assemble-html(file-name)
   "Produce HTML from buffer"
   (simple-org-export 'html nil file-name))
