@@ -51,24 +51,43 @@
     nil nil nil nil nil
     export-fn))
 
-(defun assemble-latex (file-name)
+(defun assemble-latex (file-name &optional out-dir)
   "Produce latex pdf from buffer"
   (simple-org-export
    'latex
    'org-latex-compile
-   file-name))
+   (concat out-dir "/" file-name)))
 
-(defun assemble-latex-bibtex (file-base-name)
+(defun assemble-latex-bibtex (file-base-name &optional out-dir)
   "Produce latex pdf and compile bibtex from buffer"
   (require 'org-ref)
-  (let* ((pdflatex-cmd (format "pdflatex %s.tex" file-base-name))
-	 (bibtex-cmd (format "bibtex %s.aux" file-base-name))
+  (let* ((pdflatex-cmd (format "pdflatex %s %s.tex"
+			       (and out-dir (concat "-output-directory=" out-dir))
+			       file-base-name))
+	 (bibtex-cmd (format "bibtex %s"
+			     (if out-dir (concat out-dir "/" file-base-name) file-base-name)))
 	 (org-latex-pdf-process
 	  `(,pdflatex-cmd
 	    ,bibtex-cmd
 	    ,pdflatex-cmd
 	    ,pdflatex-cmd)))
-    (assemble-latex (concat file-base-name ".tex"))))
+    (assemble-latex (concat file-base-name ".tex") (and (boundp 'out-dir) out-dir))))
+
+(defun assemble-latex-compile (file-list out-name)
+  "Compile list of org files into a single pdf"
+  (defile out-name
+    (lambda ()
+      (mapcar 'append-file-to-buffer
+	      (mapcar (lambda (s) (concat s ".org")) file-list))
+      (replace-links-with-references)
+      (assemble-latex-bibtex out-name))))
+
+(defun replace-links-with-references ()
+  "Replace links to files with links to headers"
+  (save-excursion
+    (goto-char 0)
+    (while (re-search-forward "file:" nil t)
+      (replace-match "#"))))
 
 (defun assemble-html(file-name)
   "Produce HTML from buffer"
