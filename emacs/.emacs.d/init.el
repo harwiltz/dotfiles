@@ -148,7 +148,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
@@ -177,7 +177,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "#2c2c2c" :foreground "#959697" :box (:line-width 1 :color "black" :style pressed-button))))))
+ '(mode-line ((t (:background "#2c2c2c" :foreground "#959697" :box (:line-width 1 :color "black" :style pressed-button)))))
+ '(org-level-1 ((t (:height 1.5 :weight bold))))
+ '(org-level-2 ((t (:height 1.4 :weight bold))))
+ '(org-level-3 ((t (:height 1.3 :weight bold))))
+ '(org-level-4 ((t (:height 1.2 :weight bold))))
+ '(org-level-5 ((t (:height 1.1 :weight bold)))))
 
 (require 'emacs)
 (evil-mode 1)
