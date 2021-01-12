@@ -9,6 +9,7 @@
 (menu-bar-mode 0)
 (global-display-line-numbers-mode 1)
 (display-time)
+(setq x-select-enable-clipboard t)
 (setq doc-view-continuous t)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
@@ -20,6 +21,7 @@
 (global-set-key (kbd "M-e") 'eshell)
 (global-set-key (kbd "M-s") 'multi-term)
 (global-set-key (kbd "C-c p") 'parcel-add-zettel)
+(global-set-key (kbd "C-c b") 'parcel-add-reference)
 (global-set-key (kbd "C-c P") 'parcel-assemble)
 
 ;; org-mode stuff

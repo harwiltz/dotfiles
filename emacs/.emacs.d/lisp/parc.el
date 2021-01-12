@@ -1,7 +1,16 @@
 (provide 'parc.el)
 
+(require 's)
+
 (defvar parcel-sepchar "-")
 (defvar parcel-parent-tree-max-depth 5)
+
+;; parcel-split-window: Controls splitting of window when creating zettel
+;; 1   : split horizontally
+;; 2   : split vertically
+;; nil : don't split, just open new buffer
+(or (boundp 'parcel-split-window)
+    (setq parcel-split-window 1))
 
 (defun parcel-add-zettel (title)
   "Add a zettel at the current level"
@@ -24,7 +33,12 @@
 					  (concat (call-interactively 'parcel-tag-prompt)
 						  "-0"))))
 	 (parents (save-excursion (parcel-get-parents))))
-    (if (one-window-p) (split-window-horizontally) (other-window 1))
+    (and parcel-split-window
+	 (if (one-window-p)
+	     (if (eq 1 parcel-split-window)
+		 (split-window-horizontally)
+	       (split-window)))
+	   (other-window 1))
     (find-file (concat base-dir new-id ".org"))
     (parcel-init-zettel title new-id parents filename)))
 
@@ -44,7 +58,12 @@
   (insert "#+BEGIN_EXPORT html\n")
   (insert "</div>\n")
   (insert "#+END_EXPORT\n")
-  (forward-line -5)
+  (insert "\n")
+  (require 'org-ref)
+  (insert "#+BEGIN_bibliography\n")
+  (insert "bibliography:sources.bib\n")
+  (insert "#+END_bibliography\n")
+  (forward-line -9)
   (beginning-of-line))
 
 (defun parcel-get-parents (&optional cur-depth)
@@ -126,7 +145,63 @@
   "Converts the file name to a suitable index title"
   (let* ((file-base-name (string-remove-suffix ".org" filename))
 	 (words (split-string file-base-name "-")))
-    (mapconcat 's-capitalize title-words " ")))
+    (mapconcat 's-capitalize words " ")))
+
+(defun parcel-add-reference ()
+  "Prompt user to add reference"
+  (interactive)
+  (let ((basedir default-directory))
+    (switch-to-buffer (get-buffer-create "*parcel add reference*"))
+    (lisp-interaction-mode)
+    (erase-buffer)
+    (insert ";; Paste bibtex reference below this line\n\n\n")
+    (insert ";; Execute the following code to add the reference:\n\n")
+    (insert (format "(parcel-commit-reference \"%s\")" basedir))
+    (goto-char 0)
+    (forward-line 1)))
+
+(defun parcel-commit-reference (basedir)
+  "Install the reference from the scratch buffer"
+  (goto-char 0)
+  (forward-line 1)
+  (let ((match-source-type "@[a-z]+")
+	(match-alnum-string "[a-zA-Z0-9]+")
+	(match-arbitrary-lines "\\(.*\n\\)*.*")
+	(match-attr-text ".*"))
+    (re-search-forward (concat match-source-type
+			       "{"
+			       "\\(" match-alnum-string "\\)" ","
+			       match-arbitrary-lines
+			       "title={"
+			       "\\(" match-attr-text "\\)"
+			       "},"
+			       match-arbitrary-lines
+			       "}"))
+    (let ((bibtex (match-string 0))
+	  (id     (match-string 1))
+	  (title  (match-string 3)))
+      (parcel-add-sources-entry bibtex basedir)
+      (parcel-add-bibliography-entry bibtex id title basedir))))
+
+(defun parcel-add-sources-entry (bibtex basedir)
+  "Add bibtex entry to sources.bib"
+  (append-to-file (concat bibtex "\n")
+		  nil
+		  (concat basedir "/sources.bib")))
+
+(defun parcel-add-bibliography-entry (bibtex id title basedir)
+  "Add section with bibtex entry to bibliography"
+  (let ((buf (find-file-noselect (concat basedir "/bibliography.org"))))
+    (with-current-buffer buf
+      (save-excursion
+	(end-of-buffer)
+	(insert (concat "* " title " [" id "]\n"))
+	(org-set-property "CUSTOM_ID" id)
+	(insert "#+BEGIN_SRC latex\n")
+	(insert bibtex)
+	(insert "\n")
+	(insert "#+END_SRC\n"))
+      (save-buffer))))
 
 (require 'assemble)
 (setq parcel-builddir "build")
@@ -154,6 +229,7 @@
 
 (defun parcel-build-init ()
   (shell-command (concat "mkdir -p " parcel-builddir))
+  (message "Synchronizing style...")
   (shell-command (format "cp %s %s/"
 			 parcel-css
 			 parcel-builddir))

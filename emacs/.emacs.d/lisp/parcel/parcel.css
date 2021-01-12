@@ -1,3 +1,14 @@
+:root {
+    --width: 500pt;
+    --total-width: 524pt;
+    --padding: 12pt;
+    --margin: -12pt;
+    --shadow-x: 4px;
+    --shadow-y: 4px;
+    --shadow-blur: 16px;
+    --shadow-rad: 6pt;
+}
+
 @font-face {
     font-family: SourceSerif;
     src: url(SourceSerifFont/SourceSerifPro-Regular.ttf);
@@ -37,27 +48,37 @@ body {
     background-color: #eeeeee;
 }
 
+a {
+    text-decoration: none;
+    color: #33f;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #99f;
+}
+
 .parcel {
     display: block;
     margin: 0 auto;
     text-align: justify;
     background-color: white;
     border-radius: 4px;
-    box-shadow: 4px 4px 16px 6pt rgba(0, 0, 0, 0.2);
-    width: 500pt;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-rad) rgba(0, 0, 0, 0.2);
+    width: var(--width);
     padding-top: 0;
-    padding-left: 12pt;
-    padding-right: 12pt;
-    padding-bottom: 12pt;
-    margin-bottom: 12pt;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    padding-bottom: var(--padding);
+    margin-bottom: var(--padding);
 }
 
 .parcel-title {
     text-align: center;
-    margin-left: -12pt;
-    margin-right: -12pt;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
     background-color: #dddddd;
-    width: 524pt;
+    width: var(--total-width);
     overflow: hidden;
 }
 
@@ -86,7 +107,7 @@ body {
 
 .parcel-parents li {
     display: block;
-    padding: 12pt;
+    padding: var(--padding);
 }
 
 .parcel-parents li a {
@@ -96,6 +117,7 @@ body {
     border-radius: 4px;
     color: inherit;
     opacity: 0.5;
+    transition: box-shadow 0.3s, background-color 0.3s, opacity 0.3s, border 0.3s;
 }
 
 .parcel-parents li a:hover {
@@ -103,4 +125,21 @@ body {
     border: none;
     background-color: white;
     box-shadow: inset -0.5px -0.5px 3px 0.125em rgba(0, 0, 0, 0.4);
+}
+
+.bibliography {
+    max-width: var(--width);
+    padding: var(--padding);
+    margin: 0 auto;
+    background-color: #444;
+    color: white;
+    box-shadow: inset var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-rad) rgba(0, 0, 0,0.3);
+}
+
+.bibliography a {
+    color: cornflowerblue;
+}
+
+.bibliography a:hover {
+    color: lavender;
 }
