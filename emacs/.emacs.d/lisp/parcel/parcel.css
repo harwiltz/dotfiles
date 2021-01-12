@@ -1,0 +1,106 @@
+@font-face {
+    font-family: SourceSerif;
+    src: url(SourceSerifFont/SourceSerifPro-Regular.ttf);
+}
+
+@font-face {
+    font-family: SourceSerif;
+    src: url(SourceSerifFont/SourceSerifPro-SemiBold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: SourceSerif;
+    src: url(SourceSerifFont/SourceSerifPro-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: RobotoSlabLight;
+    src: url(RobotoSlabFont/RobotoSlab-Light.ttf);
+}
+
+@font-face {
+    font-family: RobotoSlabLight;
+    src: url(RobotoSlabFont/RobotoSlab-Regular.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: RobotoSlabLight;
+    src: url(RobotoSlabFont/RobotoSlab-Thin.ttf);
+    font-style: italic;
+}
+
+body {
+    font-family: SourceSerif;
+    background-color: #eeeeee;
+}
+
+.parcel {
+    display: block;
+    margin: 0 auto;
+    text-align: justify;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 4px 4px 16px 6pt rgba(0, 0, 0, 0.2);
+    width: 500pt;
+    padding-top: 0;
+    padding-left: 12pt;
+    padding-right: 12pt;
+    padding-bottom: 12pt;
+    margin-bottom: 12pt;
+}
+
+.parcel-title {
+    text-align: center;
+    margin-left: -12pt;
+    margin-right: -12pt;
+    background-color: #dddddd;
+    width: 524pt;
+    overflow: hidden;
+}
+
+.parcel-title code {
+    font-size: 50%;
+    font-weight: regular;
+    background-color: #444;
+    padding: 2pt;
+    border-radius: 2px;
+    color: white;
+}
+
+.parcel-parents {
+    text-align: center;
+    float: center;
+}
+
+.parcel-parents ul {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 75%;
+    border-left: solid 2px rgba(0, 0, 0, 0.3);
+}
+
+.parcel-parents li {
+    display: block;
+    padding: 12pt;
+}
+
+.parcel-parents li a {
+    text-decoration: none;
+    padding: 6pt;
+    border: solid 1px #888888;
+    border-radius: 4px;
+    color: inherit;
+    opacity: 0.5;
+}
+
+.parcel-parents li a:hover {
+    opacity: 1.0;
+    border: none;
+    background-color: white;
+    box-shadow: inset -0.5px -0.5px 3px 0.125em rgba(0, 0, 0, 0.4);
+}

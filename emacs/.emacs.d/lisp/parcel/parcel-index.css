@@ -1,0 +1,51 @@
+:root {
+    --linkcolor: #9999ff;
+    --linkhovercolor: #ccccff;
+}
+
+body {
+    font-family: RobotoSlabLight;
+    text-align: center;
+}
+
+#content {
+    margin: 0 auto;
+    max-width: 400pt;
+    padding: 24pt;
+    background-color: white;
+    box-shadow: 0pt 4pt 8pt 4pt rgba(0, 0, 0, 0.2);
+}
+
+h2, h3, h4, h5, h6 {
+    text-align: left;
+}
+
+a { text-decoration: none; }
+
+h2 a { color: var(--linkcolor); }
+h3 a { color: var(--linkcolor); }
+h4 a { color: var(--linkcolor); }
+h5 a { color: var(--linkcolor); }
+h6 a { color: var(--linkcolor); }
+
+h2 a:hover { color: var(--linkhovercolor); }
+h3 a:hover { color: var(--linkhovercolor); }
+h4 a:hover { color: var(--linkhovercolor); }
+h5 a:hover { color: var(--linkhovercolor); }
+h6 a:hover { color: var(--linkhovercolor); }
+
+h3 {
+    margin-left: 12pt;
+}
+
+h4 {
+    margin-left: 24pt;
+}
+
+h5 {
+    margin-left: 36pt;
+}
+
+h6 {
+    margin-left: 48pt;
+}

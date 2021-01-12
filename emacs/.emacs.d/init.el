@@ -14,10 +14,13 @@
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (require 'assemble)
+(require 'parc.el)
 
 ;; hotkeys
 (global-set-key (kbd "M-e") 'eshell)
 (global-set-key (kbd "M-s") 'multi-term)
+(global-set-key (kbd "C-c p") 'parcel-add-zettel)
+(global-set-key (kbd "C-c P") 'parcel-assemble)
 
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
