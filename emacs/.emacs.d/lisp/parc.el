@@ -197,7 +197,7 @@
 	(end-of-buffer)
 	(insert (concat "* " title " [" id "]\n"))
 	(org-set-property "CUSTOM_ID" id)
-	(insert "#+BEGIN_SRC latex\n")
+	(insert "#+BEGIN_SRC bibtex\n")
 	(insert bibtex)
 	(insert "\n")
 	(insert "#+END_SRC\n"))
@@ -208,34 +208,72 @@
 (setq parcel-assets-path "~/.emacs.d/lisp/parcel")
 (setq parcel-css-name "parcel.css")
 (setq parcel-index-css-name "parcel-index.css")
-(setq parcel-css (concat parcel-assets-path "/" parcel-css-name))
+(setq parcel-master-index-css-name "parcel-master-index.css")
+(setq parcel-bibliography-css-name "parcel-bibliography.css")
+(setq parcel-css-files
+      `(,parcel-css-name
+	,parcel-index-css-name
+	,parcel-master-index-css-name
+	,parcel-bibliography-css-name))
 (setq parcel-fonts
       '("SourceSerifFont"
 	"RobotoSlabFont"))
 
-(defun parcel-assemble ()
+(defun parcel-assemble-all ()
+  "Assemble the entire zettelkasten"
   (interactive)
+  (parcel-assemble-index)
+  (let ((files (directory-files "." nil ".org$")))
+    (mapcar 'parcel-assemble files)))
+
+(defun parcel-assemble (&optional filename)
+  (interactive)
+  (require 'org-ref)
   (parcel-build-init)
-  (let* ((file-base-name (car (last (split-string (buffer-file-name) "/"))))
+  (let* ((file-base-name (or filename (car (last (split-string (buffer-file-name) "/")))))
 	 (target-path (concat parcel-builddir "/"
 			      (concat (string-remove-suffix "org" file-base-name) "html"))))
     (defile "parcel"
       (lambda ()
+	(message (concat ">>> " file-base-name))
 	(insert-css parcel-css-name)
 	(and (string-suffix-p "-index.org" file-base-name)
 	     (insert-css parcel-index-css-name))
+	(and (string-suffix-p "bibliography.org" file-base-name)
+	     `(,(insert (concat "#+TITLE: " (user-login-name) "'s Bibliography\n"))
+	       ,(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
+	       ,(insert "#+OPTIONS: toc:nil num:nil\n")
+	       ,(insert-css parcel-bibliography-css-name)))
 	(append-file-to-buffer file-base-name)
 	(assemble-html target-path)))))
 
+(defun parcel-assemble-index (&optional out-name)
+  "Build a master index page"
+  (let ((index-files (directory-files "." nil "\\(-index\\)\\|\\(^bibliography\\)\\.org$"))
+	(page-name (concat parcel-builddir "/" (or out-name "index.html"))))
+    (defile "index"
+      (lambda ()
+	(insert-css parcel-css-name)
+	(insert-css parcel-master-index-css-name)
+	(insert (concat "#+TITLE: Zettelkasten of " (user-login-name) "\n"))
+	(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
+	(insert "#+OPTIONS: toc:nil num:nil\n\n")
+	(insert "#+BEGIN_parcel-master-index-list\n")
+	(mapcar
+	 (lambda (file)
+	   (insert (concat "- [[file:" file "][" (index-name file) "]]\n")))
+	 index-files)
+	(insert "#+END_parcel-master-index-list\n")
+	(assemble-html page-name)))))
+
 (defun parcel-build-init ()
   (shell-command (concat "mkdir -p " parcel-builddir))
-  (message "Synchronizing style...")
-  (shell-command (format "cp %s %s/"
-			 parcel-css
-			 parcel-builddir))
-  (shell-command (format "cp %s %s/"
-			 (concat parcel-assets-path "/" parcel-index-css-name)
-			 parcel-builddir))
+  (mapcar
+   (lambda (css)
+     (shell-command (format "cp %s %s/"
+			    (concat parcel-assets-path "/" css)
+			    parcel-builddir)))
+   parcel-css-files)
   (mapcar
    (lambda (font)
      (shell-command (format "cp -R %s %s/"

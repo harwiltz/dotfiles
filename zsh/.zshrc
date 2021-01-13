@@ -161,3 +161,9 @@ export PATH="/home/harwiltz/.local/bin:$PATH"
 source /home/harwiltz/api_tokens
 
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/harwiltz/nomadic-packages/google-cloud-sdk/path.zsh.inc' ]; then . '/home/harwiltz/nomadic-packages/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/harwiltz/nomadic-packages/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/harwiltz/nomadic-packages/google-cloud-sdk/completion.zsh.inc'; fi
