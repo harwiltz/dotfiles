@@ -1,0 +1,21 @@
+<script>
+  console.log("Script loaded");
+  window.onscroll = function() {
+      var tau = 100;
+      var base = 0.3;
+      var buttonBase = 0.5;
+      var buttonTau = 500;
+      var navbar = document.getElementById("the-navbar");
+      var opacity = base * Math.exp(-window.scrollY / tau);
+      navbar.style.backgroundColor = "rgba(0, 0, 0, " + opacity.toString() + ")";
+      var buttonOpacity = buttonBase * Math.exp(-window.scrollY/buttonTau);
+      navbuttons = document.getElementsByClassName("navbutton");
+      navbuttonColor = "rgba(0, 0, 0, " + buttonOpacity.toString() + ")";
+      for(i = 0; i < navbuttons.length; i++) {
+	  navbuttons[i].children[0].style.backgroundColor = navbuttonColor;
+      }
+  };
+</script>
+<div class="navbar" id="the-navbar">
+  <ul><li class="navbutton"><a href="/">ZK</a></li></ul>
+</div>

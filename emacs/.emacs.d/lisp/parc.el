@@ -33,7 +33,7 @@
 					  (concat (call-interactively 'parcel-tag-prompt)
 						  "-0"))))
 	 (parents (save-excursion (parcel-get-parents))))
-    (and parcel-split-window
+    (when parcel-split-window
 	 (if (one-window-p)
 	     (if (eq 1 parcel-split-window)
 		 (split-window-horizontally)
@@ -244,6 +244,9 @@
 	       ,(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
 	       ,(insert "#+OPTIONS: toc:nil num:nil\n")
 	       ,(insert-css parcel-bibliography-css-name)))
+	(insert "#+BEGIN_EXPORT html\n")
+	(append-file-to-buffer (concat parcel-assets-path "/navbar.html"))
+	(insert "#+END_EXPORT\n\n")
 	(append-file-to-buffer file-base-name)
 	(assemble-html target-path)))))
 
@@ -258,6 +261,9 @@
 	(insert (concat "#+TITLE: Zettelkasten of " (user-login-name) "\n"))
 	(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
 	(insert "#+OPTIONS: toc:nil num:nil\n\n")
+	(insert "#+BEGIN_EXPORT html\n")
+	(append-file-to-buffer (concat parcel-assets-path "/navbar.html"))
+	(insert "#+END_EXPORT\n\n")
 	(insert "#+BEGIN_parcel-master-index-list\n")
 	(mapcar
 	 (lambda (file)

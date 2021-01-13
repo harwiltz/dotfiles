@@ -7,6 +7,8 @@
     --shadow-y: 4px;
     --shadow-blur: 16px;
     --shadow-rad: 6pt;
+    --navbar-height: 24pt;
+    --navbar-width: 600pt;
 }
 
 @font-face {
@@ -46,6 +48,8 @@
 body {
     font-family: SourceSerif;
     background-color: #eeeeee;
+    margin: 0;
+    padding-top: var(--navbar-height);
 }
 
 a {
@@ -142,4 +146,44 @@ a:hover {
 
 .bibliography a:hover {
     color: lavender;
+}
+
+.navbar {
+    position: fixed;
+    margin: 0 auto;
+    margin-bottom: 12pt;
+    left: 0;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    height: var(--navbar-height);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar ul {
+    max-width: var(--navbar-width);
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.navbar li {
+    padding: 2pt;
+}
+
+.navbar li a {
+    font-family: monospace;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    margin: 0;
+    border-radius: 2pt;
+    padding: 4pt;
+    transition: box-shadow 0.3s, border 0.3s;
+}
+
+.navbar li a:hover {
+    border: 2px solid #444444;
+    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
 }
