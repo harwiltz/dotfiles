@@ -255,7 +255,7 @@
 
 (defun parcel-assemble-index (&optional out-name)
   "Build a master index page"
-  (let ((index-files (directory-files "." nil "\\(-index\\)\\|\\(^bibliography\\)\\.org$"))
+  (let ((index-files (directory-files "." nil "\\(-index\\|^bibliography\\)\\.org$"))
 	(page-name (concat parcel-builddir "/" (or out-name "index.html"))))
     (defile "index"
       (lambda ()
