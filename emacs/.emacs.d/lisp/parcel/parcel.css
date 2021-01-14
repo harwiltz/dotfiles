@@ -69,7 +69,8 @@ a:hover {
     background-color: white;
     border-radius: 4px;
     box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-rad) rgba(0, 0, 0, 0.2);
-    width: var(--width);
+    max-width: var(--width);
+    width: 100%;
     padding-top: 0;
     padding-left: var(--padding);
     padding-right: var(--padding);
@@ -82,8 +83,9 @@ a:hover {
     margin-left: var(--margin);
     margin-right: var(--margin);
     background-color: #dddddd;
-    width: var(--total-width);
+    max-width: var(--total-width);
     overflow: hidden;
+    padding-left: var(--padding);
 }
 
 .parcel-title code {
@@ -186,4 +188,8 @@ a:hover {
 .navbar li a:hover {
     border: 2px solid #444444;
     box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.MathJax_Display {
+    overflow: auto;
 }

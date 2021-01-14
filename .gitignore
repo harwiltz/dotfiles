@@ -8,3 +8,4 @@
 vim/.vim/view
 emacs/.emacs.d/eshell
 emacs/.emacs.d/network-security.data
+**/*#*

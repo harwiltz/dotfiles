@@ -127,6 +127,11 @@
 	    (message "Turning off line numbers")
 	    (display-line-numbers-mode -1)))
 
+(add-hook 'org-mode'hook
+	  (lambda ()
+	    (org-indent-mode)
+	    (auto-fill-mode)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
 ;; Let emacs do its thing after the following line: ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

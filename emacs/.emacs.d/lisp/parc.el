@@ -166,13 +166,16 @@
   (forward-line 1)
   (let ((match-source-type "@[a-z]+")
 	(match-alnum-string "[a-zA-Z0-9]+")
-	(match-arbitrary-lines "\\(.*\n\\)*.*")
+	(match-arbitrary-lines "\\(.*\n\\)*")
+	(match-whitespace "\\s-*")
 	(match-attr-text ".*"))
     (re-search-forward (concat match-source-type
 			       "{"
 			       "\\(" match-alnum-string "\\)" ","
 			       match-arbitrary-lines
-			       "title={"
+			       match-whitespace "title"
+			       match-whitespace "="
+			       match-whitespace "{"
 			       "\\(" match-attr-text "\\)"
 			       "},"
 			       match-arbitrary-lines
