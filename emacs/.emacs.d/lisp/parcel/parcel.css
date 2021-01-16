@@ -191,5 +191,16 @@ a:hover {
 }
 
 .MathJax_Display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.parcel img {
+    max-width: var(--width);
+    width: 100%;
+    overflow: auto;
+}
+
+pre.src {
     overflow: auto;
 }
