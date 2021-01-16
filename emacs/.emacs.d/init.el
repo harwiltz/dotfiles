@@ -131,7 +131,7 @@
 	    (message "Turning off line numbers")
 	    (display-line-numbers-mode -1)))
 
-(add-hook 'org-mode'hook
+(add-hook 'org-mode-hook
 	  (lambda ()
 	    (org-indent-mode)
 	    (auto-fill-mode)))
