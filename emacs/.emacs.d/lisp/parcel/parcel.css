@@ -204,3 +204,29 @@ a:hover {
 pre.src {
     overflow: auto;
 }
+
+.theorem, .definition, .lemma, .corollary {
+    box-shadow: inset 3pt 3pt 8pt 8pt rgba(0, 0, 0, 0.2);
+    background-color: #eeeeee;
+    padding: 6pt;
+}
+
+.theorem:before {
+    content: "Theorem ("attr(id)"): ";
+    font-weight: bold;
+}
+
+.definition:before {
+    content: "Definition ("attr(id)"): ";
+    font-weight: bold;
+}
+
+.lemma:before {
+    content: "Lemma ("attr(id)"): ";
+    font-weight: bold;
+}
+
+.corollary:before {
+    content: "Corollary ("attr(id)"): ";
+    font-weight: bold;
+}
