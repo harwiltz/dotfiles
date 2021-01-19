@@ -6,6 +6,9 @@
 
 (defvar assemble-file "assemb.el")
 
+(defmacro assemble-target (depending on deps producing out-name &rest body)
+  `(cons (mapcar 'assemble ,deps) ,@body))
+
 (defun assemble (target)
   (interactive "sTarget (nil): ")
   (let* ((dir (find-assemble-dir default-directory))

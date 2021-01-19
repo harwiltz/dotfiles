@@ -164,14 +164,15 @@
   "Install the reference from the scratch buffer"
   (goto-char 0)
   (forward-line 1)
-  (let ((match-source-type "@[a-z]+")
-	(match-alnum-string "[a-zA-Z0-9]+")
-	(match-arbitrary-lines "\\(.*\n\\)*")
-	(match-whitespace "\\s-*")
-	(match-attr-text ".*"))
+  (let* ((match-source-type "@[a-z]+")
+	 (match-alnum-string "[a-zA-Z0-9]+")
+	 (match-id-string (concat match-alnum-string "[a-zA-Z0-9-:]+"))
+	 (match-arbitrary-lines "\\(.*\n\\)*")
+	 (match-whitespace "\\s-*")
+	 (match-attr-text ".*"))
     (re-search-forward (concat match-source-type
 			       "{"
-			       "\\(" match-alnum-string "\\)" ","
+			       "\\(" match-id-string "\\)" ","
 			       match-arbitrary-lines
 			       match-whitespace "title"
 			       match-whitespace "="
@@ -208,6 +209,7 @@
 
 (require 'assemble)
 (setq parcel-builddir "build")
+(setq parcel-res-dir "res")
 (setq parcel-assets-path "~/.emacs.d/lisp/parcel")
 (setq parcel-css-name "parcel.css")
 (setq parcel-index-css-name "parcel-index.css")
@@ -278,6 +280,7 @@
 
 (defun parcel-build-init ()
   (shell-command (concat "mkdir -p " parcel-builddir))
+  (shell-command (format "cp -R %s %s/" parcel-res-dir parcel-builddir))
   (mapcar
    (lambda (css)
      (shell-command (format "cp %s %s/"
