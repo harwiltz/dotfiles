@@ -13,6 +13,7 @@
 (setq doc-view-continuous t)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/lisp/assemb.el" load-path))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (require 'assemble)
 (require 'parc.el)
