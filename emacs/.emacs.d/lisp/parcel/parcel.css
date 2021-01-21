@@ -230,3 +230,21 @@ pre.src {
     content: "Corollary ("attr(id)"): ";
     font-weight: bold;
 }
+
+.proof:before {
+    content: "Proof";
+    font-weight: bold;
+    font-style: italic;
+}
+
+.proof {
+    margin: 12pt;
+    padding: 2pt;
+    background-color: #eeeecc;
+    box-shadow: 3pt 3pt 6pt 2pt rgba(0, 0, 0, 0.2);
+}
+
+.proof:after {
+    content: "QED.";
+    font-weight: 800;
+}
