@@ -201,6 +201,21 @@ a:hover {
     overflow: auto;
 }
 
+.figure p {
+    overflow: auto;
+}
+
+.figure img {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: none;
+    width: unset;
+}
+
+.parcel table {
+    margin: auto;
+}
+
 pre.src {
     overflow: auto;
 }
