@@ -28,10 +28,18 @@
 (global-set-key (kbd "C-c p") 'parcel-add-zettel)
 (global-set-key (kbd "C-c b") 'parcel-add-reference)
 (global-set-key (kbd "C-c P") 'parcel-assemble-all)
+(global-set-key (kbd "C-c v") (lambda () (interactive) (assemble nil)))
 
 ;; latex/auctex stuff
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+(setq reftex-plug-into-AUCTeX t)
+
+(setq bibtex-completion-library-path '("/home/harwiltz/zettelkasten/"))
+(setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
 
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
