@@ -56,6 +56,11 @@
 	  ,(concat base "/notes")
 	  ,(concat base "/papers"))))
 
+;; org-journal stuff
+(setq org-journal-dir "/home/harwiltz/research/backlog/journal")
+(setq org-journal-date-format "%A, %d %B %Y")
+(require 'org-journal)
+
 ;; shell stuff
 (setq explicit-shell-file-name "/bin/bash")
 (setq multi-term-program "/bin/bash")
@@ -183,9 +188,9 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(org-agenda-files
-   '("~/zettelkasten/ctdrl-6.org" "/home/harwiltz/research/backlog/agenda.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org"))
+   '("~/zettelkasten/math2-k.org" "~/zettelkasten/ctdrl-6.org" "/home/harwiltz/research/backlog/agenda.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org"))
  '(package-selected-packages
-   '(latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
