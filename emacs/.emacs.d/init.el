@@ -52,7 +52,8 @@
 (setq org-agenda-files
       (let ((base "~/research"))
 	`(,base
-    ,(concat base "/backlog")
+	  ,(concat base "/backlog")
+	  ,(concat base "/backlog/roadmap")
 	  ,(concat base "/notes")
 	  ,(concat base "/papers"))))
 
