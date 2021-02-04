@@ -133,6 +133,48 @@ a:hover {
     box-shadow: inset -0.5px -0.5px 3px 0.125em rgba(0, 0, 0, 0.4);
 }
 
+.parcel-relevant-links {
+    max-width: var(--width);
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 12pt;
+    float: center;
+    font-family: robotoslablight;
+    padding: 12pt;
+    background: white;
+    box-shadow: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-rad) rgba(0, 0, 0, 0.3);
+}
+
+.parcel-relevant-links:before {
+    content: "Relevant Notes";
+    font-size: 125%;
+    font-weight: bold;
+    font-family: robotoslablight;
+    display: block;
+}
+
+.parcel-relevant-links ul {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.parcel-relevant-links li {
+    padding: var(--padding);
+    margin: auto;
+    text-align: left;
+    display: block;
+}
+
+.parcel-relevant-links li a {
+    text-decoration: none;
+    padding: 6pt;
+}
+
+.parcel-relevant-links li a:hover {
+    border-bottom: 2px solid;
+}
+
 .bibliography {
     max-width: var(--width);
     padding: var(--padding);

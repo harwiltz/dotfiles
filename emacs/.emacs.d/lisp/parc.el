@@ -242,6 +242,7 @@
 (defun parcel-assemble-all ()
   "Assemble the entire zettelkasten"
   (interactive)
+  (parcel-build-init)
   (parcel-assemble-index)
   (let ((files (directory-files "." nil ".org$")))
     (mapcar 'parcel-assemble files)))
@@ -254,21 +255,28 @@
 	 (target-path (concat parcel-builddir "/"
 			      (concat (string-remove-suffix "org" file-base-name) "html"))))
     (when (file-newer-than-file-p file-base-name target-path)
-      (defile "parcel"
-	(message (concat ">>> " file-base-name))
-	(insert-css parcel-css-name)
-	(and (string-suffix-p "-index.org" file-base-name)
-	     (insert-css parcel-index-css-name))
-	(and (string-suffix-p "bibliography.org" file-base-name)
-	     `(,(insert (concat "#+TITLE: " (user-login-name) "'s Bibliography\n"))
-	       ,(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
-	       ,(insert "#+OPTIONS: toc:nil num:nil\n")
-	       ,(insert-css parcel-bibliography-css-name)))
-	(insert "#+BEGIN_EXPORT html\n")
-	(append-file-to-buffer (concat parcel-assets-path "/navbar.html"))
-	(insert "#+END_EXPORT\n\n")
-	(append-file-to-buffer file-base-name)
-	(assemble-html target-path)))))
+      (let ((links (and (parcel-zettel? (file-name-nondirectory file-base-name))
+			(parcel-pagerank (concat (file-name-nondirectory file-base-name))
+					 parcel-pagerank-reset-prob
+					 parcel-pagerank-runs
+					 parcel-stochastic-backlinks
+					 parcel-num-backlink-candidates))))
+	(defile "parcel"
+	  (message (concat ">>> " file-base-name))
+	  (insert-css parcel-css-name)
+	  (and (string-suffix-p "-index.org" file-base-name)
+	       (insert-css parcel-index-css-name))
+	  (and (string-suffix-p "bibliography.org" file-base-name)
+	       `(,(insert (concat "#+TITLE: " (user-login-name) "'s Bibliography\n"))
+		 ,(insert (concat "#+AUTHOR: " (user-login-name) "\n"))
+		 ,(insert "#+OPTIONS: toc:nil num:nil\n")
+		 ,(insert-css parcel-bibliography-css-name)))
+	  (insert "#+BEGIN_EXPORT html\n")
+	  (append-file-to-buffer (concat parcel-assets-path "/navbar.html"))
+	  (insert "#+END_EXPORT\n\n")
+	  (append-file-to-buffer file-base-name)
+	  (and links (parcel-insert-relevant-links links))
+	  (assemble-html target-path))))))
 
 (defun parcel-assemble-index (&optional out-name)
   "Build a master index page"
@@ -307,23 +315,36 @@
 			    parcel-builddir)))
    parcel-fonts))
 
-(defun parcel-insert-relevant-links ()
-  (let ((links (parcel-pagerank nil
-				parcel-pagerank-reset-prob
-				parcel-pagerank-runs
-				parcel-stochastic-backlinks
-				parcel-num-backlink-candidates)))
-    (save-excursion
-      (end-of-buffer)
-      (insert "\n#+BEGIN_parcel-relevant-links\n")
-      (mapcar (lambda (rel)
-		(pcase rel (`(,id . ,title)
-			    (insert (concat
-				     "[[file:" id
-				     "]["
-				     (parcel-describe-zettel (title (file-name-base id)))
-				     "]\n"))))))
-      (insert "#+END_parcel-relevant-links\n"))))
+(defun parcel-insert-relevant-links (links)
+  (save-excursion
+    (parcel-remove-existing-relevant-links)
+    (end-of-buffer)
+    (insert "#+BEGIN_parcel-relevant-links\n")
+    (mapcar (lambda (rel)
+	      (pcase rel (`(,id . ,title)
+			  (insert (concat
+				   "- [[file:" id
+				   "]["
+				   (parcel-describe-zettel title (file-name-base id))
+				   "]]\n")))))
+	    links)
+    (insert "#+END_parcel-relevant-links\n")))
+
+(defun parcel-remove-existing-relevant-links ()
+  (let ((bounds (org-element-map (org-element-parse-buffer)
+		    'special-block (lambda (block)
+				     (and (string= (org-element-property :type block)
+						   "parcel-relevant-links")
+					  `(,(org-element-property :begin block)
+					    ,(org-element-property :end block)))))))
+    (mapcar
+     (lambda (b)
+       (save-excursion
+	 (goto-char (car b))
+	 (set-mark-command nil)
+	 (goto-char (pop (cdr b)))
+	 (delete-forward-char 1)))
+     (nreverse (delq nil bounds)))))
 
 (defun parcel-pagerank (&optional file
 				  reset-prob
@@ -356,7 +377,7 @@
 		  (-zip-pair chosen-roots path-lengths)))
 	 (filtered-leaves (seq-filter
 			   (lambda (f)
-			     (not (string= (car f) filepath)))
+			     (not (string= (car f) relfile)))
 			   leaves))
 	 (grouped-leaves (-group-by 'identity filtered-leaves)))
     (mapcar 'car
@@ -365,7 +386,7 @@
 
 (defun parcel-random-walk (root path-length)
   (let* ((has-visitor (get-buffer root))
-	 (buf (or has-visitor(find-file-noselect root)))
+	 (buf (or has-visitor (find-file-noselect root)))
 	 (title (with-current-buffer buf (parcel-get-title)))
 	 (links (and (> path-length 0) (with-current-buffer buf (parcel-get-linked-zettels))))
 	 (num-links (and (> path-length 0) (length links)))
@@ -373,7 +394,7 @@
 	 (chosen-index (or dead-end (random (length links))))
 	 (chosen (or dead-end (nth chosen-index links))))
     (progn (or has-visitor (kill-buffer root))
-	   (if dead-end
+	   (if (not dead-end)
 	       (parcel-random-walk chosen (- path-length 1))
 	     `(,root . ,title)))))
 
@@ -407,7 +428,8 @@
     (seq-filter 'parcel-zettel? orgs)))
 
 (defun parcel-zettel? (file)
-  (and (not (string-suffix-p "-index.org" file))
+  (and (string-suffix-p ".org" file)
+       (not (string-suffix-p "-index.org" file))
        (not (string= "bibliography.org" file))))
 
 (defun parcel-get-linked-zettels ()
