@@ -1,6 +1,8 @@
 (provide 'parc.el)
 
+(require 'dash)
 (require 's)
+(require 'seq)
 
 (defvar parcel-sepchar "-")
 (defvar parcel-parent-tree-max-depth 5)
@@ -11,6 +13,18 @@
 ;; nil : don't split, just open new buffer
 (or (boundp 'parcel-split-window)
     (setq parcel-split-window 1))
+
+(or (boundp 'parcel-pagerank-reset-prob)
+    (setq parcel-pagerank-reset-prob 0.15))
+
+(or (boundp 'parcel-pagerank-runs)
+    (setq parcel-pagerank-runs 200))
+
+(or (boundp 'parcel-stochastic-backlinks)
+    (setq parcel-stochastic-backlinks nil))
+
+(or (boundp 'parcel-num-backlink-candidates)
+    (setq parcel-num-backlink-candidates 20))
 
 (defun parcel-add-zettel (title)
   "Add a zettel at the current level"
@@ -223,6 +237,7 @@
 (setq parcel-fonts
       '("SourceSerifFont"
 	"RobotoSlabFont"))
+(setq zettel-regex "\\.org$")
 
 (defun parcel-assemble-all ()
   "Assemble the entire zettelkasten"
@@ -291,3 +306,120 @@
 			    (concat parcel-assets-path "/" font)
 			    parcel-builddir)))
    parcel-fonts))
+
+(defun parcel-insert-relevant-links ()
+  (let ((links (parcel-pagerank nil
+				parcel-pagerank-reset-prob
+				parcel-pagerank-runs
+				parcel-stochastic-backlinks
+				parcel-num-backlink-candidates)))
+    (save-excursion
+      (end-of-buffer)
+      (insert "\n#+BEGIN_parcel-relevant-links\n")
+      (mapcar (lambda (rel)
+		(pcase rel (`(,id . ,title)
+			    (insert (concat
+				     "[[file:" id
+				     "]["
+				     (parcel-describe-zettel (title (file-name-base id)))
+				     "]\n"))))))
+      (insert "#+END_parcel-relevant-links\n"))))
+
+(defun parcel-pagerank (&optional file
+				  reset-prob
+				  num-runs
+				  stochastic-backlinks
+				  num-backlink-candidates)
+  (let* ((filepath (or file (buffer-file-name)))
+	 (p (or reset-prob parcel-pagerank-reset-prob))
+	 (stochastic-backlinks? (or stochastic-backlinks parcel-stochastic-backlinks))
+	 (num-stochastic-backlinks (or num-backlink-candidates parcel-num-backlink-candidates))
+	 (backlinks (parcel-find-backlinks filepath
+					   stochastic-backlinks?
+					   num-stochastic-backlinks))
+	 (runs (or num-runs parcel-pagerank-runs))
+	 (relfile (file-name-nondirectory filepath))
+	 (roots (cons relfile backlinks))
+	 (chosen-roots (mapcar
+			(lambda (n)
+			  (nth (random (length roots)) roots))
+			(number-sequence 1 runs)))
+	 (geometric-samples (mapcar
+			     (lambda (n)
+			       (let* ((precision 10000)
+				      (u (/ (float (random precision)) precision)))
+				 (/ (log (- 1 u)) (log (- 1 p)))))
+			     chosen-roots))
+	 (path-lengths (mapcar 'ceiling geometric-samples))
+	 (leaves (mapcar
+		  (lambda (z) (pcase z (`(,r . ,l) (parcel-random-walk r l))))
+		  (-zip-pair chosen-roots path-lengths)))
+	 (filtered-leaves (seq-filter
+			   (lambda (f)
+			     (not (string= (car f) filepath)))
+			   leaves))
+	 (grouped-leaves (-group-by 'identity filtered-leaves)))
+    (mapcar 'car
+	    (--sort (> (length it) (length other))
+		    grouped-leaves))))
+
+(defun parcel-random-walk (root path-length)
+  (let* ((has-visitor (get-buffer root))
+	 (buf (or has-visitor(find-file-noselect root)))
+	 (title (with-current-buffer buf (parcel-get-title)))
+	 (links (and (> path-length 0) (with-current-buffer buf (parcel-get-linked-zettels))))
+	 (num-links (and (> path-length 0) (length links)))
+	 (dead-end (or (eq num-links 0) (eq path-length 0)))
+	 (chosen-index (or dead-end (random (length links))))
+	 (chosen (or dead-end (nth chosen-index links))))
+    (progn (or has-visitor (kill-buffer root))
+	   (if dead-end
+	       (parcel-random-walk chosen (- path-length 1))
+	     `(,root . ,title)))))
+
+(defun parcel-find-backlinks (&optional file stochastic stochastic-candidates)
+  (let* ((filename (file-name-base (or file (buffer-file-name))))
+	 (all-zettels (parcel-get-all-zettels))
+	 (num-zettels-total (length all-zettels))
+	 (candidates (if stochastic
+			 (let ((num (or stochastic-candidates 20)))
+			   (mapcar (lambda (n)
+				     (nth (random num-zettels-total)
+					  all-zettels))
+				   (number-sequence 0 (- num-zettels-total 1))))
+		       all-zettels)))
+    (seq-reduce
+     (lambda (acc zettel)
+       (let* ((has-visitor (get-buffer zettel))
+	      (buf (or has-visitor (find-file-noselect zettel)))
+	      (links (with-current-buffer buf (parcel-get-linked-zettels))))
+	 (progn
+	   (unless has-visitor (kill-buffer buf))
+	   (if (member (concat filename ".org") links)
+	       (cons zettel acc)
+	     acc))))
+     (delq nil (delete-dups candidates))
+     nil)))
+
+(defun parcel-get-all-zettels (&optional dir)
+  (let* ((directory (or dir "."))
+	 (orgs (directory-files directory nil zettel-regex)))
+    (seq-filter 'parcel-zettel? orgs)))
+
+(defun parcel-zettel? (file)
+  (and (not (string-suffix-p "-index.org" file))
+       (not (string= "bibliography.org" file))))
+
+(defun parcel-get-linked-zettels ()
+  (save-excursion
+    (let ((links (org-element-map (org-element-parse-buffer) 'link
+		   (lambda (link)
+		     (when (string= (org-element-property :type link) "file")
+		       (org-element-property :path link))))))
+      (seq-filter 'parcel-zettel? links))))
+
+(defun parcel-get-title ()
+  (save-excursion
+    (goto-char 0)
+    (re-search-forward "#\\+TITLE: \\(.+\\)$")
+    (match-string 1)))

@@ -191,7 +191,7 @@
  '(org-agenda-files
    '("~/zettelkasten/math2-k.org" "~/zettelkasten/ctdrl-6.org" "/home/harwiltz/research/backlog/agenda.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org"))
  '(package-selected-packages
-   '(org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
