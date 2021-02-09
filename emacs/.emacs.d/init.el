@@ -66,6 +66,13 @@
 (setq explicit-shell-file-name "/bin/bash")
 (setq multi-term-program "/bin/bash")
 
+(defun org-latex-scale (scale)
+  (interactive "nEnter scale (default 1.0): ")
+  (let ((s (or scale 1.0)))
+    (setq org-format-latex-options
+	  (plist-put org-format-latex-options
+		     :scale s))))
+
 (defun insderiv ()
   "Insert equation* aligned"
   (interactive)

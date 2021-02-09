@@ -146,7 +146,7 @@ a:hover {
 }
 
 .parcel-relevant-links:before {
-    content: "Relevant Notes";
+    content: "Relevant Zettels";
     font-size: 125%;
     font-weight: bold;
     font-family: robotoslablight;
