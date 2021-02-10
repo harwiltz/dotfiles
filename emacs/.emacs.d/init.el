@@ -160,7 +160,10 @@
 (add-hook 'org-mode-hook
 	  (lambda ()
 	    (org-indent-mode)
-	    (auto-fill-mode)))
+	    (auto-fill-mode)
+	    (org-bullets-mode)
+	    (setq org-hide-emphasis-markers t)
+	    (org-latex-scale 1.2)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
 ;; Let emacs do its thing after the following line: ;;
@@ -196,7 +199,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(org-agenda-files
-   '("~/zettelkasten/math2-k.org" "~/zettelkasten/ctdrl-6.org" "/home/harwiltz/research/backlog/agenda.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org"))
+   '("~/zettelkasten/math-34.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org" "/home/harwiltz/research/backlog/roadmap/roadmap.org"))
  '(package-selected-packages
    '(dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
