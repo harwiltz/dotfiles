@@ -18,6 +18,10 @@
 (require 'assemble)
 (require 'parc.el)
 
+;; configuring my scripts
+(setq parcel-split-window 0) ;; split horizontally
+(setq parcel-pagerank-runs 10)
+
 ;; highlight line
 (add-hook 'prog-mode-hook #'hl-line-mode)
 (add-hook 'hl-line-mode-hook (lambda () (set-face-background 'hl-line "#181818")))
@@ -199,7 +203,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(org-agenda-files
-   '("~/zettelkasten/math-34.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org" "/home/harwiltz/research/backlog/roadmap/roadmap.org"))
+   '("~/zettelkasten/math-41.org" "~/zettelkasten/math-34.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org" "/home/harwiltz/research/backlog/roadmap/roadmap.org"))
  '(package-selected-packages
    '(dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
