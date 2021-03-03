@@ -61,6 +61,9 @@
 	  ,(concat base "/notes")
 	  ,(concat base "/papers"))))
 
+;; org-reveal stuff
+(setq org-reveal-root "file:///home/harwiltz/reveal")
+
 ;; org-journal stuff
 (setq org-journal-dir "/home/harwiltz/research/backlog/journal")
 (setq org-journal-date-format "%A, %d %B %Y")
@@ -205,7 +208,7 @@
  '(org-agenda-files
    '("~/zettelkasten/math-41.org" "~/zettelkasten/math-34.org" "/home/harwiltz/research/backlog/marl.org" "/home/harwiltz/research/backlog/profslist.org" "/home/harwiltz/research/backlog/roadmap/roadmap.org"))
  '(package-selected-packages
-   '(dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
