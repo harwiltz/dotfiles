@@ -84,7 +84,7 @@ stars :: [WorkspaceId]
 stars = take 10 $ repeat "*"
 
 keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
-          , ((mod4Mask, xK_e), spawn "emacs")
+          , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
