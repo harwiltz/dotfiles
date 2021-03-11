@@ -59,6 +59,11 @@
 (setq org-roam-directory "~/zettelkasten")
 (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
 (setq org-roam-file-exclude-regexp "-index.org")
+(setq org-roam-graph-extra-config '(("bgcolor" . "grey12")))
+(setq org-roam-graph-edge-extra-config '(("color" . "grey42")))
+(setq org-roam-graph-node-extra-config '(("shape" . "rect")
+					 ("style" . "filled")
+					 ("fillcolor" . "gray50")))
 (setq org-roam-capture-templates
       `(("b" "backlog"
 	 plain #'org-roam-capture--get-point
