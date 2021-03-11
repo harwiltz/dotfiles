@@ -56,6 +56,7 @@
 
 ;; org-roam stuff
 (require 'org-roam-protocol)
+(require 'org-agenda)
 (setq org-roam-directory "~/zettelkasten")
 (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
 (setq org-roam-file-exclude-regexp "-index.org")
@@ -67,20 +68,22 @@
 (setq org-roam-capture-templates
       `(("b" "backlog"
 	 plain #'org-roam-capture--get-point
-	 "* TODO %?"
-	 :file-name ,(concat org-roam-task-dir "/%<%Y%m%d%H%M%S>-${slug}")
-	 :head "#+TITLE: ${title}\n"
+	 "* TODO %^{PROMPT}\n%?"
+	 :file-name ,(concat org-roam-task-dir "/backlog")
+	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
 	 :unnarrowed t)))
 (setq org-roam-capture-ref-templates
       `(("c" "org-protocol-capture"
 	 plain #'org-roam-capture--get-point
-	 "* TODO </> [[${ref}][${title}]]\n${body}"
+	 "* TODO [[${ref}][${title}]] :web:\n${body}"
 	 :immediate-finish t
 	 :file-name ,(concat org-roam-task-dir "/backlog")
-	 :head "#+TITLE: Backlog\n\n"
+	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
 	 :no-save nil)))
 (add-hook 'after-init-hook 'org-roam-mode) ;; enable roam minor mode on startup
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
+(define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
+(global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
 
 (setq org-agenda-files
       (let ((base "~/research"))
@@ -90,6 +93,35 @@
 	  ,(concat base "/notes")
 	  ,(concat base "/papers")
 	  ,(concat org-roam-task-dir "/"))))
+
+(setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %DEADLINE(Deadline)")
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+	(todo . " %i %-12:c %(symbol-name 'E)%-6 e")
+	(tags . " %i %-12:c %(symbol-name 'E)%-6 e")
+	(search . " %i %-12:c %(symbol-name 'E)%-6 e")))
+(setq org-agenda-custom-commands
+      '(("h" "Main agenda"
+	 ((agenda "")
+	  (tags-todo "CATEGORY=\"mission\""
+		     ((org-agenda-sorting-strategy '(deadline-up priority-down))))
+	  (tags-todo "-processed")))))
+
+(setq harwiltz/current-mission "mission")
+(setq org-clock-report-include-clocking-task t)
+(setq org-agenda-start-with-clockreport-mode t)
+
+(defun harwiltz/process-backlog-task ()
+  (interactive)
+  (org-agenda-priority)
+  (org-agenda-set-effort)
+  (org-agenda-deadline nil)
+  (org-agenda-set-tags "processed")
+  (org-agenda-refile nil
+		     `(nil
+		       ,(concat org-roam-task-dir "/" harwiltz/current-mission ".org")
+		       nil
+		       nil)))
 
 ;; org-reveal stuff
 (setq org-reveal-root "file:///home/harwiltz/reveal")
