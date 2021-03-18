@@ -152,6 +152,8 @@ ARG may be any of the following values:
   (org-roam-message "starting graph build & export...")
   (org-roam-message (concat "org-roam-graph-executable is "
 			    org-roam-graph-executable))
+  (org-roam-message (concat "temporary-file-directory is "
+			    temporary-file-directory))
   (let ((file (or file (buffer-file-name (buffer-base-buffer)))))
     (unless (or (not arg) (equal arg '(16)))
       (unless file
