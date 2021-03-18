@@ -214,6 +214,7 @@ a:hover {
 
 .navbar li {
     padding: 2pt;
+    display: inline;
 }
 
 .navbar li a {

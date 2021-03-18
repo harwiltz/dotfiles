@@ -57,6 +57,7 @@
 ;; org-roam stuff
 (require 'org-roam-protocol)
 (require 'org-agenda)
+(require 'org-roam-graph-export)
 (setq org-roam-directory "~/zettelkasten")
 (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
 (setq org-roam-file-exclude-regexp "-index.org")
@@ -270,6 +271,9 @@
  '(package-selected-packages
    '(org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+ '(safe-local-variable-values
+   '((assemble-pdf-beamer . t)
+     (default-assemble-target . "dev-env.pdf")))
  '(send-mail-function 'smtpmail-send-it)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
