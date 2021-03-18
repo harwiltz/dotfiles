@@ -150,6 +150,8 @@ ARG may be any of the following values:
   (interactive "P")
   (unless org-roam-mode (org-roam-mode))
   (org-roam-message "starting graph build & export...")
+  (org-roam-message (concat "org-roam-graph-executable is "
+			    org-roam-graph-executable))
   (let ((file (or file (buffer-file-name (buffer-base-buffer)))))
     (unless (or (not arg) (equal arg '(16)))
       (unless file
