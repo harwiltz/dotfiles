@@ -157,7 +157,9 @@ ARG may be any of the following values:
         (user-error "\"%s\" is not an org-roam file" file)))
     (org-roam-graph-export--build node-query format
 				  (lambda (file)
-				    (rename-file file output t)))))
+				    (and (org-roam-message
+					  (concat "Attempting to copy " file " to " output))
+					 (rename-file file output t))))))
 
 (provide 'org-roam-graph-export)
 
