@@ -149,6 +149,7 @@ ARG may be any of the following values:
   - `\\[universal-argument]' -N  build the graph for FILE limiting nodes to N steps."
   (interactive "P")
   (unless org-roam-mode (org-roam-mode))
+  (org-roam-message "starting graph build & export...")
   (let ((file (or file (buffer-file-name (buffer-base-buffer)))))
     (unless (or (not arg) (equal arg '(16)))
       (unless file
