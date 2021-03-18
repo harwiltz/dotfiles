@@ -108,7 +108,7 @@ into a digraph."
       (insert "}")
       (buffer-string))))
 
-(defun org-roam-graph-export--build (&optional node-query format callback)
+(defun org-roam-graph-export--build (&optional node-query format callback no-async)
   "Generate a graph showing the relations between nodes in NODE-QUERY.
 Execute CALLBACK when process exits successfully.
 CALLBACK is passed the graph file as its sole argument."
@@ -126,18 +126,21 @@ CALLBACK is passed the graph file as its sole argument."
          (temp-dot   (make-temp-file "graph." nil ".dot" graph))
          (temp-graph (make-temp-file "graph." nil ".svg")))
     (org-roam-message "building graph")
-    (make-process
-     :name "*org-roam-graph--build-process*"
-     :buffer "*org-roam-graph--build-process*"
-     :command `(,org-roam-graph-executable ,temp-dot "-Tsvg" "-o" ,temp-graph)
-     :sentinel (when callback
-                 (lambda (process _event)
-                   (when (= 0 (process-exit-status process))
-                     (funcall callback temp-graph)))))))
+    (if no-async
+	(and (shell-command (concat org-roam-graph-executable " " temp-dot " -Tsvg -o " temp-graph))
+	     (funcall callback temp-graph))
+      (make-process
+       :name "*org-roam-graph--build-process*"
+       :buffer "*org-roam-graph--build-process*"
+       :command `(,org-roam-graph-executable ,temp-dot "-Tsvg" "-o" ,temp-graph)
+       :sentinel (when callback
+		   (lambda (process _event)
+		     (when (= 0 (process-exit-status process))
+		       (funcall callback temp-graph))))))))
 
 ;;;; Commands
 ;;;###autoload
-(defun org-roam-graph-export (&optional arg file node-query format output)
+(defun org-roam-graph-export (&optional arg file node-query format output no-async)
   "Build and possibly display a graph for FILE from NODE-QUERY.
 If FILE is nil, default to current buffer's file name.
 ARG may be any of the following values:
@@ -164,7 +167,8 @@ ARG may be any of the following values:
 				  (lambda (file)
 				    (and (org-roam-message
 					  (concat "Attempting to copy " file " to " output))
-					 (rename-file file output t))))))
+					 (rename-file file output t)))
+				  no-async)))
 
 (provide 'org-roam-graph-export)
 
