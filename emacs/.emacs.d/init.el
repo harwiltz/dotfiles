@@ -10,6 +10,8 @@
 (global-display-line-numbers-mode 1)
 (display-time)
 (setq x-select-enable-clipboard t)
+
+(require 'doc-view)
 (setq doc-view-continuous t)
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
@@ -33,6 +35,8 @@
 (global-set-key (kbd "C-c b") 'parcel-add-reference)
 (global-set-key (kbd "C-c P") 'parcel-assemble-all)
 (global-set-key (kbd "C-c v") (lambda () (interactive) (assemble nil)))
+(define-key doc-view-mode-map (kbd "j") 'doc-view-next-line-or-next-page)
+(define-key doc-view-mode-map (kbd "k") 'doc-view-previous-line-or-previous-page)
 
 ;; latex/auctex stuff
 (setq TeX-auto-save t)
@@ -52,6 +56,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t) (haskell . t)))
+(setq bibtex-completion-library-path "~/zettelkasten/library")
 
 
 ;; org-roam stuff
@@ -89,8 +94,6 @@
 (setq org-agenda-files
       (let ((base "~/research"))
 	`(,base
-	  ,(concat base "/backlog")
-	  ,(concat base "/backlog/roadmap")
 	  ,(concat base "/notes")
 	  ,(concat base "/papers")
 	  ,(concat org-roam-task-dir "/"))))
