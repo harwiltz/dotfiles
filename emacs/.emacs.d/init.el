@@ -11,6 +11,18 @@
 (display-time)
 (setq x-select-enable-clipboard t)
 
+;; color themes
+(setq harwiltz/light-theme 'base16-atelier-forest-light)
+(setq harwiltz/dark-theme 'wiltz-base16-brewer)
+(setq harwiltz/use-dark-theme t)
+(defun harwiltz/toggle-theme ()
+  (interactive)
+  (setq harwiltz/use-dark-theme (not harwiltz/use-dark-theme))
+  (if harwiltz/use-dark-theme
+      (enable-theme harwiltz/dark-theme)
+    (enable-theme harwiltz/light-theme)))
+(global-set-key (kbd "<f6>") 'harwiltz/toggle-theme)
+
 (require 'doc-view)
 (setq doc-view-continuous t)
 
@@ -26,7 +38,7 @@
 
 ;; highlight line
 (add-hook 'prog-mode-hook #'hl-line-mode)
-(add-hook 'hl-line-mode-hook (lambda () (set-face-background 'hl-line "#181818")))
+;; (add-hook 'hl-line-mode-hook (lambda () (set-face-background 'hl-line "#181818")))
 
 ;; hotkeys
 (global-set-key (kbd "M-e") 'eshell)
@@ -222,6 +234,50 @@
 	      (nconc (list notes static publish) (car org-publish-project-alist))
 	    (list notes static publish)))))
 
+;; Auto email agenda
+(require 'json)
+(defun auto-send-mail (from to &optional subject text html from-name to-name)
+  (let* ((api_key    (getenv "MAILJET_API_KEY"))
+	 (secret_key (getenv "MAILJET_SECRET_KEY"))
+	 (msgdata
+	  `((From     . ((Email . ,from) (Name . ,from-name)))
+	    (To       . (((Email ., to) (Name . ,to-name))))
+	    (Subject  . ,subject)
+	    (TextPart . ,text)
+	    (HTMLPart . ,html)))
+	 (data `((Messages . ,(list msgdata))))
+	 (rqst
+	  (list "curl -s -X POST"
+		"--user" (concat api_key ":" secret_key)
+		"https://api.mailjet.com/v3.1/send"
+		"-H 'Content-Type: application/json'"
+		"-d" (prin1-to-string (json-encode data)))))
+    (shell-command (mapconcat 'identity rqst " "))))
+
+(setq harwiltz/agenda-export-path "~/org-agenda.html")
+(setq harwiltz/default-agenda-recipient "wiltzerh@gmail.com")
+
+(defun export-agenda (&optional template)
+  (with-temp-buffer
+    (org-agenda nil (or template "h"))
+    (org-agenda-write harwiltz/agenda-export-path)))
+
+(defun send-agenda (&optional to template)
+  (interactive "sEmail to: " "sTemplate: ")
+  (export-agenda (or template nil))
+  (with-temp-buffer
+    (append-file-to-buffer harwiltz/agenda-export-path)
+    (auto-send-mail "emacs-vandelay@protonmail.com"
+		    (or to harwiltz/default-agenda-recipient)
+		    "Org Agenda Update"
+		    nil
+		    (buffer-string)
+		    "Your Worst Enemy"
+		    "Harley")))
+
+(run-at-time "11am" (* 60 60 4) 'send-agenda)
+
+
 ;; Hooks
 (require 'display-line-numbers)
 
@@ -236,7 +292,8 @@
 	    (auto-fill-mode)
 	    (org-bullets-mode)
 	    (setq org-hide-emphasis-markers t)
-	    (org-latex-scale 1.2)))
+	    (org-latex-scale 1.5)
+	    (org-hide-block-all)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
 ;; Let emacs do its thing after the following line: ;;
@@ -253,7 +310,7 @@
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(custom-enabled-themes '(wiltz-base16-brewer))
  '(custom-safe-themes
-   '("bcd06c6e9122bd259d7ddca22b1419ac3e2dc246a786cf5a2ada648ab7c045b1" "82b3fb1703e57aa18b363314c3e84bc822cc5677d5130d1da3a8740a8c05c500" "835bbafb65098338b773c2366efd72fb2e70557a2206061df364a0ae065d1d1a" "5880994631cd35eaa4648192abcf54d3a17d0c7a7299ca701edb6f7dc4dc2a00" "9a6432059f6c37f284bcff1b93c43eaca5119b03dba2197acb90c91165a1d5bf" "12bf83c6042c2e8574dae0615d8822d861f2a13a9b62bf5753cea438e97c4712" "abacfed3d9e3ef3c5a3e246e2878aa1f54539e9db86e21ec64e3243ff80615ca" "d3df0fb2912c994b3f8aed5445c37063593c6d813d35329b2e18ee126899d134" "4f372184a71ff469e0b56e00b88ed24b2ece05cea235567935d8c932f91c4b34" "bf364807168504cc693b37ad9d5af9a46edbbac55d523b2976c2c069e0088e97" "0f5bb770f15793bfb0e79e05738fbf1c1e238952b7806736898f7619900f5298" "02940c38e51991e8ee8ac69537341149d56e9c88d57f2c357eeb1744daad1953" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "840db7f67ce92c39deb38f38fbc5a990b8f89b0f47b77b96d98e4bf400ee590a" "f126f3b6ca7172a4a2c44186d57e86a989c2c196d0855db816a161bf857b58fb" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+   '("0961d780bd14561c505986166d167606239af3e2c3117265c9377e9b8204bf96" "a61109d38200252de49997a49d84045c726fa8d0f4dd637fce0b8affaa5c8620" "bcd06c6e9122bd259d7ddca22b1419ac3e2dc246a786cf5a2ada648ab7c045b1" "82b3fb1703e57aa18b363314c3e84bc822cc5677d5130d1da3a8740a8c05c500" "835bbafb65098338b773c2366efd72fb2e70557a2206061df364a0ae065d1d1a" "5880994631cd35eaa4648192abcf54d3a17d0c7a7299ca701edb6f7dc4dc2a00" "9a6432059f6c37f284bcff1b93c43eaca5119b03dba2197acb90c91165a1d5bf" "12bf83c6042c2e8574dae0615d8822d861f2a13a9b62bf5753cea438e97c4712" "abacfed3d9e3ef3c5a3e246e2878aa1f54539e9db86e21ec64e3243ff80615ca" "d3df0fb2912c994b3f8aed5445c37063593c6d813d35329b2e18ee126899d134" "4f372184a71ff469e0b56e00b88ed24b2ece05cea235567935d8c932f91c4b34" "bf364807168504cc693b37ad9d5af9a46edbbac55d523b2976c2c069e0088e97" "0f5bb770f15793bfb0e79e05738fbf1c1e238952b7806736898f7619900f5298" "02940c38e51991e8ee8ac69537341149d56e9c88d57f2c357eeb1744daad1953" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "840db7f67ce92c39deb38f38fbc5a990b8f89b0f47b77b96d98e4bf400ee590a" "f126f3b6ca7172a4a2c44186d57e86a989c2c196d0855db816a161bf857b58fb" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(fci-rule-color "#14151E")
  '(hl-todo-keyword-faces
    '(("TODO" . "#dc752f")
@@ -272,7 +329,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
