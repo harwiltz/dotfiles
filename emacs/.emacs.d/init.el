@@ -12,9 +12,11 @@
 (setq x-select-enable-clipboard t)
 
 ;; color themes
-(setq harwiltz/light-theme 'base16-atelier-forest-light)
+(setq harwiltz/light-theme 'base16-atelier-dune-light)
 (setq harwiltz/dark-theme 'wiltz-base16-brewer)
+
 (setq harwiltz/use-dark-theme t)
+
 (defun harwiltz/toggle-theme ()
   (interactive)
   (setq harwiltz/use-dark-theme (not harwiltz/use-dark-theme))
@@ -86,19 +88,27 @@
 (setq org-roam-capture-templates
       `(("b" "backlog"
 	 plain #'org-roam-capture--get-point
-	 "* TODO %^{PROMPT}\n%?"
+	 "* TODO %^{PROMPT} :inbox:\n%?"
 	 :file-name ,(concat org-roam-task-dir "/backlog")
 	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
 	 :unnarrowed t)))
 (setq org-roam-capture-ref-templates
       `(("c" "org-protocol-capture"
 	 plain #'org-roam-capture--get-point
-	 "* TODO [[${ref}][${title}]] :web:\n${body}"
+	 "* TODO [[${ref}][${title}]] :inbox:web:\n${body}"
 	 :immediate-finish t
 	 :file-name ,(concat org-roam-task-dir "/backlog")
 	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
 	 :no-save nil)))
-(add-hook 'after-init-hook 'org-roam-mode) ;; enable roam minor mode on startup
+(add-hook 'after-init-hook
+ (lambda ()
+  (progn
+    (org-roam-mode)
+    (message "about to load themes...")
+    (load-theme harwiltz/light-theme t (not harwiltz/use-dark-theme))
+    (message "loaded light theme")
+    (load-theme harwiltz/dark-theme t harwiltz/use-dark-theme)
+    (message "loaded dark theme"))))
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
 (define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
 (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
@@ -108,6 +118,7 @@
 	`(,base
 	  ,(concat base "/notes")
 	  ,(concat base "/papers")
+	  ,org-roam-directory
 	  ,(concat org-roam-task-dir "/"))))
 
 (setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %DEADLINE(Deadline)")
@@ -119,13 +130,13 @@
 (setq org-agenda-custom-commands
       '(("h" "Main agenda"
 	 ((agenda "")
-	  (tags-todo "CATEGORY=\"mission\""
+	  (tags-todo "processed"
 		     ((org-agenda-sorting-strategy '(deadline-up priority-down))))
 	  (tags-todo "-processed")))))
 
 (setq harwiltz/current-mission "mission")
 (setq org-clock-report-include-clocking-task t)
-(setq org-agenda-start-with-clockreport-mode t)
+(setq org-agenda-start-with-clockreport-mode nil)
 
 (defun harwiltz/process-backlog-task ()
   (interactive)
@@ -133,11 +144,12 @@
   (org-agenda-set-effort)
   (org-agenda-deadline nil)
   (org-agenda-set-tags "processed")
-  (org-agenda-refile nil
-		     `(nil
-		       ,(concat org-roam-task-dir "/" harwiltz/current-mission ".org")
-		       nil
-		       nil)))
+  (when (member "inbox" (org-get-at-bol 'tags))
+    (org-agenda-refile nil
+		       `(nil
+			 ,(concat org-roam-task-dir "/" harwiltz/current-mission ".org")
+			 nil
+			 nil))))
 
 ;; org-reveal stuff
 (setq org-reveal-root "file:///home/harwiltz/reveal")
