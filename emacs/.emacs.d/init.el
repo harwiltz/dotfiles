@@ -163,12 +163,14 @@
 (setq explicit-shell-file-name "/bin/bash")
 (setq multi-term-program "/bin/bash")
 
+(setq harwiltz/latex-scale 1.3)
 (defun org-latex-scale (scale)
-  (interactive "nEnter scale (default 1.0): ")
-  (let ((s (or scale 1.0)))
-    (setq org-format-latex-options
-	  (plist-put org-format-latex-options
-		     :scale s))))
+  (interactive "nEnter scale: ")
+  (when scale
+    (setq harwiltz/latex-scale scale))
+  (setq org-format-latex-options
+	(plist-put org-format-latex-options
+		   :scale harwiltz/latex-scale)))
 
 (defun insderiv ()
   "Insert equation* aligned"
@@ -287,7 +289,12 @@
 		    "Your Worst Enemy"
 		    "Harley")))
 
-(run-at-time "11am" (* 60 60 4) 'send-agenda)
+(unless (boundp 'send-agenda-automatically)
+  (setq send-agenda-automatically nil))
+
+(run-at-time "11am" (* 60 60 4)
+	     (lambda () (interactive)
+	       (when send-agenda-automatically (send-agenda))))
 
 
 ;; Hooks
@@ -304,7 +311,7 @@
 	    (auto-fill-mode)
 	    (org-bullets-mode)
 	    (setq org-hide-emphasis-markers t)
-	    (org-latex-scale 1.5)
+	    (org-latex-scale harwiltz/latex-scale)
 	    (org-hide-block-all)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
