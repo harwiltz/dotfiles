@@ -185,10 +185,11 @@
 (defun inseq (label)
   "Insert labeled equation"
   (interactive "sEnter label: ")
-  (insert (format "\\begin{equation}\\label{eq:%s}\n" label))
+  (insert (concat "#+NAME: eq:" label "\n"))
+  (insert "\\begin{equation}\n\n")
   (insert "\\end{equation}")
   (forward-line -1)
-  (end-of-line))
+  (beginning-of-line))
 
 (defun insthm (type header)
   "Insert text block with header"
