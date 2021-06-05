@@ -62,6 +62,7 @@
 
 (setq bibtex-completion-library-path '("/home/harwiltz/zettelkasten/"))
 (setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
+(setq bibtex-completion-pdf-open-function 'helm-open-file-with-default-tool)
 
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
