@@ -30,6 +30,7 @@
 
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
 (setq load-path (cons "~/.emacs.d/lisp/assemb.el" load-path))
+(setq load-path (cons "~/.emacs.d/lisp/hatch-button" load-path))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (require 'assemble)
 (require 'parc.el)
@@ -316,6 +317,10 @@
 	    (org-latex-scale harwiltz/latex-scale)
 	    (org-hide-block-all)))
 
+;; Hatch stuff
+(require 'hatch-button)
+(global-set-key (kbd "<f2>") 'hatch-reset)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:
 ;; Let emacs do its thing after the following line: ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -396,3 +401,4 @@
   (org-open-file (org-latex-export-to-pdf)))
 (defun org-auto-export-on() "auto export to pdf when saving an org file" (interactive)
        (when (eq major-mode 'org-mode) (add-hook 'after-save-hook 'org-export-pdf-then-open t t) ) )
+(put 'list-timers 'disabled nil)

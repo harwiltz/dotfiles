@@ -1,6 +1,6 @@
 :root {
-    --width: 500pt;
-    --total-width: 524pt;
+    --width: 600pt;
+    --total-width: 624pt;
     --padding: 12pt;
     --margin: -12pt;
     --shadow-x: 4px;
@@ -8,7 +8,7 @@
     --shadow-blur: 16px;
     --shadow-rad: 6pt;
     --navbar-height: 24pt;
-    --navbar-width: 600pt;
+    --navbar-width: 700pt;
 }
 
 @font-face {
