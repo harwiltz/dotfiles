@@ -25,6 +25,14 @@
     (enable-theme harwiltz/light-theme)))
 (global-set-key (kbd "<f6>") 'harwiltz/toggle-theme)
 
+;; regenerate scratch buffer
+(defun harwiltz/scratch (&optional name)
+  (interactive "sEnter name for buffer (default 'scratch'): ")
+  (let ((buf (if (string-empty-p (or name ""))
+		 "scratch"
+	       name)))
+    (switch-to-buffer (format "*%s*" buf))))
+
 (require 'doc-view)
 (setq doc-view-continuous t)
 
@@ -45,7 +53,7 @@
 
 ;; hotkeys
 (global-set-key (kbd "M-e") 'eshell)
-(global-set-key (kbd "M-s") 'multi-term)
+(global-set-key (kbd "M-s") 'harwiltz/scratch)
 (global-set-key (kbd "C-c p") 'parcel-add-zettel)
 (global-set-key (kbd "C-c b") 'parcel-add-reference)
 (global-set-key (kbd "C-c P") 'parcel-assemble-all)
@@ -60,6 +68,7 @@
 (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 (setq reftex-plug-into-AUCTeX t)
+(setq reftex-ref-style-default-list (list "Hyperref" "Default"))
 
 (setq bibtex-completion-library-path '("/home/harwiltz/zettelkasten/"))
 (setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
@@ -292,6 +301,21 @@
 		    "Your Worst Enemy"
 		    "Harley")))
 
+
+(defun buffer-paste (&optional endpoint)
+  (interactive)
+  (let* ((dest (or endpoint "https://dpaste.org/api/"))
+	 (file (make-temp-file "paste-content-"))
+	 (rqst (list "curl --silent"
+		     "-F 'format=default'"
+		     (concat "-F 'content=<" file "'")
+		     dest))
+	 (cmd (mapconcat 'identity rqst " "))
+	 (fp (write-region (point-min) (point-max) file))
+	 (res (shell-command-to-string cmd)))
+    (and (message res) (setq last-paste-url res) (delete-file file) res)))
+		     
+	       
 (unless (boundp 'send-agenda-automatically)
   (setq send-agenda-automatically nil))
 
@@ -387,6 +411,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
  '(mode-line ((t (:background "#2c2c2c" :foreground "#959697" :box (:line-width 1 :color "black" :style pressed-button)))))
  '(org-level-1 ((t (:height 1.5 :weight bold))))
  '(org-level-2 ((t (:height 1.4 :weight bold))))
