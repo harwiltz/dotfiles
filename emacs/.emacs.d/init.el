@@ -70,6 +70,13 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq reftex-ref-style-default-list (list "Hyperref" "Default"))
 
+(defun harwiltz/tex-fold-envs ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward "^\\\\begin{" nil t)
+      (TeX-fold-env))))
+
 (setq bibtex-completion-library-path '("/home/harwiltz/zettelkasten/"))
 (setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
 (setq bibtex-completion-pdf-open-function 'helm-open-file-with-default-tool)
