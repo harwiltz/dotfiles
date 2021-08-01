@@ -11,6 +11,8 @@ zstyle :compinstall filename '/home/harwiltz/.zshrc'
 export VISUAL="/usr/bin/vim"
 export EDITOR="$VISUAL"
 
+export ANDROID_SDK_ROOT=/home/harwiltz/Android/Sdk
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -158,6 +160,7 @@ function get_ps1() {
 }
 
 export PATH="/home/harwiltz/.local/bin:$PATH"
+export PATH="/home/harwiltz/android-studio/android-studio/bin:$PATH"
 source /home/harwiltz/api_tokens
 
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

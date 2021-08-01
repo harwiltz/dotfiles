@@ -20,7 +20,7 @@
     :base05 "#b7b8b9"   ;; some foreground stuff
     :base06 "#dadbdc"   ;; no idea
     :base07 "#fcfdfe"   ;; no idea
-    :base08 "#999900"   ;; cursor
+    :base08 "#ffff00"   ;; cursor
     :base09 "#e6550d"   ;; local variable keyword
     :base0A "#dca060"   ;; macro name?
     :base0B "#31a354"   ;; status bar file path

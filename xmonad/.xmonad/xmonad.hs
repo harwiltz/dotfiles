@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (avoidStruts, docks)
 import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.Grid
@@ -13,7 +14,7 @@ import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.Types (Direction1D(..))
 
-main = spawnPipe bar >>= (xmonad . xmonadConfig)
+main = spawnPipe bar >>= (xmonad . ewmh . xmonadConfig)
 
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
