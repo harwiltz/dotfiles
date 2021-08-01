@@ -1,14 +1,0 @@
-;; Emacs-W3 HTTP cookies file
-;; Automatically generated file!!! DO NOT EDIT!!!
-
-(setq url-cookie-storage
- '(("ieeexploreapi.ieee.org"
-  [url-cookie "WLSESSION" "203580044.20480.0000" "Sat, 03-Apr-2021 19:03:47 GMT" "/" "ieeexploreapi.ieee.org" nil]))
-)
-(setq url-cookie-secure-storage
- 'nil)
-
-;; Local Variables:
-;; version-control: never
-;; no-byte-compile: t
-;; End:
