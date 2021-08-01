@@ -14,6 +14,7 @@
 ;; color themes
 (setq harwiltz/light-theme 'base16-atelier-dune-light)
 (setq harwiltz/dark-theme 'wiltz-base16-brewer)
+(setq harwiltz/pdoc-process nil)
 
 (setq harwiltz/use-dark-theme t)
 
@@ -32,6 +33,30 @@
 		 "scratch"
 	       name)))
     (switch-to-buffer (format "*%s*" buf))))
+
+(defun harwiltz/killall (regex)
+  (interactive "sEnter regex: ")
+  (kill-matching-buffers regex nil t))
+
+(defvar pdoc-server-buffer-name "pdoc server")
+
+(defun run-pdoc-server (dir &optional port)
+  (interactive "sEnter server root: \nsPort (8080): ")
+  (setenv "PYTHONPATH" (concat (pwd) ":" (getenv "PYTHONPATH")))
+  (let ((root (or dir (pwd)))
+	(port (if (and port (not (string-empty-p port)))
+		  (string-to-number port)
+		8080)))
+    (shell-command (concat "pdoc3 --html --http localhost:" (number-to-string port)
+			   " -c latex_math=True " root "&")
+		   (format "*%s %s*" pdoc-server-buffer-name (file-name-base root)))))
+			 
+(defun kill-pdoc-server ()
+  (interactive)
+  (if harwiltz/pdoc-process
+      (cons (delete-process harwiltz/pdoc-process)
+	    (setq harwiltz/pdoc-process nil))
+    (message "There is no pdoc process running")))
 
 (require 'doc-view)
 (setq doc-view-continuous t)
@@ -386,7 +411,7 @@
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
