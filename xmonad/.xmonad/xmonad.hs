@@ -3,18 +3,25 @@ import System.IO
 
 import XMonad
 import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
+import XMonad.Actions.Navigation2D
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (avoidStruts, docks)
 import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.Types (Direction1D(..))
 
-main = spawnPipe bar >>= (xmonad . ewmh . xmonadConfig)
+nav2dconfig = navigation2D def
+                           (xK_k, xK_h, xK_j, xK_l)
+                           [(mod4Mask, windowGo), (mod4Mask .|. shiftMask, windowSwap)]
+                           False
+
+main = spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonadConfig)
 
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
@@ -71,9 +78,8 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                  , ppOutput = hPutStrLn h
                                  }
           layouts =
-            Tall 1 (3/100) (1/2) |||
-            emptyBSP |||
-            Mirror (Tall 1 (3/100) (3/5)) ||| Full
+            smartBorders emptyBSP |||
+            noBorders Full
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = romanNumerals
@@ -84,7 +90,7 @@ romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 stars :: [WorkspaceId]
 stars = take 10 $ repeat "*"
 
-keyMaps = [ ((mod4Mask, xK_Return), spawn "termite")
+keyMaps = [ ((mod4Mask, xK_Return), spawn "st")
           , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
           ] ++ --additional workspace stuff
