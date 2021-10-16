@@ -21,9 +21,10 @@
 (defun harwiltz/toggle-theme ()
   (interactive)
   (setq harwiltz/use-dark-theme (not harwiltz/use-dark-theme))
-  (if harwiltz/use-dark-theme
-      (enable-theme harwiltz/dark-theme)
-    (enable-theme harwiltz/light-theme)))
+  (let ((new (if harwiltz/use-dark-theme harwiltz/dark-theme harwiltz/light-theme))
+	(old (if harwiltz/use-dark-theme harwiltz/light-theme harwiltz/dark-theme)))
+    (cons (disable-theme old) (enable-theme new))))
+
 (global-set-key (kbd "<f6>") 'harwiltz/toggle-theme)
 
 ;; regenerate scratch buffer
@@ -160,6 +161,7 @@
     (message "loaded dark theme"))))
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
 (define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
+(define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
 (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
 
 (setq org-agenda-files
@@ -205,13 +207,20 @@ Effort column next to the Time column."
   (org-agenda-priority)
   (org-agenda-set-effort)
   (org-agenda-deadline nil)
-  (org-agenda-set-tags "processed")
+  (org-agenda-set-tags "processed" 'on)
   (when (member "inbox" (org-get-at-bol 'tags))
     (org-agenda-refile nil
 		       `(nil
 			 ,(concat org-roam-task-dir "/" harwiltz/current-mission ".org")
 			 nil
 			 nil))))
+
+(defun harwiltz/unprocess-task ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'org-agenda-deadline))
+  (org-agenda-priority)
+  (org-agenda-set-tags "processed" 'off))
 
 ;; org-reveal stuff
 (setq org-reveal-root "file:///home/harwiltz/reveal")
