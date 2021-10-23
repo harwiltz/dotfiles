@@ -351,38 +351,39 @@
 				  num-runs
 				  stochastic-backlinks
 				  num-backlink-candidates)
-  (let* ((filepath (or file (buffer-file-name)))
-	 (p (or reset-prob parcel-pagerank-reset-prob))
-	 (stochastic-backlinks? (or stochastic-backlinks parcel-stochastic-backlinks))
-	 (num-stochastic-backlinks (or num-backlink-candidates parcel-num-backlink-candidates))
-	 (backlinks (parcel-find-backlinks filepath
-					   stochastic-backlinks?
-					   num-stochastic-backlinks))
-	 (runs (or num-runs parcel-pagerank-runs))
-	 (relfile (file-name-nondirectory filepath))
-	 (roots (cons relfile backlinks))
-	 (chosen-roots (mapcar
-			(lambda (n)
-			  (nth (random (length roots)) roots))
-			(number-sequence 1 runs)))
-	 (geometric-samples (mapcar
-			     (lambda (n)
-			       (let* ((precision 10000)
-				      (u (/ (float (random precision)) precision)))
-				 (/ (log (- 1 u)) (log (- 1 p)))))
-			     chosen-roots))
-	 (path-lengths (mapcar 'ceiling geometric-samples))
-	 (leaves (mapcar
-		  (lambda (z) (pcase z (`(,r . ,l) (parcel-random-walk r l))))
-		  (-zip-pair chosen-roots path-lengths)))
-	 (filtered-leaves (seq-filter
-			   (lambda (f)
-			     (not (string= (car f) relfile)))
-			   leaves))
-	 (grouped-leaves (-group-by 'identity filtered-leaves)))
-    (mapcar 'car
-	    (--sort (> (length it) (length other))
-		    grouped-leaves))))
+  (unless (and parcel-pagerank-runs (= parcel-pagerank-runs 0))
+    (let* ((filepath (or file (buffer-file-name)))
+	   (p (or reset-prob parcel-pagerank-reset-prob))
+	   (stochastic-backlinks? (or stochastic-backlinks parcel-stochastic-backlinks))
+	   (num-stochastic-backlinks (or num-backlink-candidates parcel-num-backlink-candidates))
+	   (backlinks (parcel-find-backlinks filepath
+					     stochastic-backlinks?
+					     num-stochastic-backlinks))
+	   (runs (or num-runs parcel-pagerank-runs))
+	   (relfile (file-name-nondirectory filepath))
+	   (roots (cons relfile backlinks))
+	   (chosen-roots (mapcar
+			  (lambda (n)
+			    (nth (random (length roots)) roots))
+			  (number-sequence 1 runs)))
+	   (geometric-samples (mapcar
+			       (lambda (n)
+				 (let* ((precision 10000)
+					(u (/ (float (random precision)) precision)))
+				   (/ (log (- 1 u)) (log (- 1 p)))))
+			       chosen-roots))
+	   (path-lengths (mapcar 'ceiling geometric-samples))
+	   (leaves (mapcar
+		    (lambda (z) (pcase z (`(,r . ,l) (parcel-random-walk r l))))
+		    (-zip-pair chosen-roots path-lengths)))
+	   (filtered-leaves (seq-filter
+			     (lambda (f)
+			       (not (string= (car f) relfile)))
+			     leaves))
+	   (grouped-leaves (-group-by 'identity filtered-leaves)))
+      (mapcar 'car
+	      (--sort (> (length it) (length other))
+		      grouped-leaves)))))
 
 (defun parcel-random-walk (root path-length)
   (let* ((has-visitor (get-buffer root))

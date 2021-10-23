@@ -70,6 +70,7 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , layoutHook         = avoidStruts $ layouts
                                      , workspaces         = myWorkspaces
                                      , logHook            = dynamicLogWithPP prettyPrint
+                                     , manageHook         = className =? "gksqt" --> doFloat
                                      } `additionalKeys` keyMaps
     where prettyPrint :: PP
           prettyPrint = xmobarPP { ppCurrent = xmobarColor "#FFFF00" "" . pad
