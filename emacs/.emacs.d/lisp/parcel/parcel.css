@@ -267,6 +267,7 @@ pre.src {
     box-shadow: inset 3pt 3pt 8pt 8pt rgba(0, 0, 0, 0.2);
     background-color: #eeeeee;
     padding: 6pt;
+    margin: 8pt;
 }
 
 .theorem:before {
