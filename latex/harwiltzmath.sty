@@ -57,7 +57,9 @@
 \newcommand{\indexed}[3]{\left(#3_{#2}\right)_{#2 #1}}
 \newcommand{\indexedabove}[3][0]{\indexed{\geq #1}{#2}{#3}}
 \newcommand{\indexedin}[3]{\indexed{\in #1}{#2}{#3}}
-\newcommand{\indexedint}[4][1]{\left\{#4_{#2}\right\}_{#2=#1}^{#3}}
+\newcommand{\indexedint}[4][1]{\left\{{#4}_{#2}\right\}_{#2=#1}^{#3}}
+\newcommand{\sequence}[3][1]{\indexedint[#1]{#2}{\infty}{#3}}
+\newcommand{\subsequence}[4][1]{\left\{#4_{#3_#2}\right\}_{#2=#1}^\infty}
 % Tuple processes
 \newcommand{\iindexed}[4]{\left(#3_{#2}, #4_{#2}\right)_{#2 #1}}
 \newcommand{\iindexedabove}[4][0]{\iindexed{\geq #1}{#2}{#3}{#4}}
