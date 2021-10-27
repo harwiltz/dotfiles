@@ -13,3 +13,5 @@ emacs/.emacs.d/elpa/archives
 *.db
 auto
 elpa
+emacs/.emacs.d/transient
+.org-id-locations

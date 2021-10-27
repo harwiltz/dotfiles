@@ -16,6 +16,8 @@ fi
 
 
 # Put your fun stuff here.
+alias ls='ls --color=auto'
+alias gl="git log --color --pretty=tformat:'%C(6)%h %C(1 bold)%d%Creset %s %C(5)by %an, %cr%Creset' --graph"
 function git_unstaged() {
     if git status 1> /dev/null 2>&1
     then

@@ -94,6 +94,7 @@ stars = take 10 $ repeat "*"
 keyMaps = [ ((mod4Mask, xK_Return), spawn "st")
           , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
+          , ((mod1Mask, xK_l), spawn "xscreensaver-command -lock")
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
           , ((mod4Mask .|. shiftMask, xK_0), windows $ W.shift $ myWorkspaces !! 9)

@@ -10,6 +10,7 @@
 (global-display-line-numbers-mode 1)
 (display-time)
 (setq x-select-enable-clipboard t)
+(setq org-roam-v2-ack t)
 
 ;; color themes
 (setq harwiltz/light-theme 'base16-atelier-dune-light)
@@ -116,11 +117,9 @@
  '((python . t) (haskell . t)))
 (setq bibtex-completion-library-path "~/zettelkasten/library")
 
-
 ;; org-roam stuff
 (require 'org-roam-protocol)
 (require 'org-agenda)
-(require 'org-roam-graph-export)
 (setq org-roam-directory "~/zettelkasten")
 (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
 (setq org-roam-file-exclude-regexp "-index.org")
@@ -153,12 +152,13 @@
 (add-hook 'after-init-hook
  (lambda ()
   (progn
-    (org-roam-mode)
+    (org-roam-db-autosync-mode)
     (message "about to load themes...")
     (load-theme harwiltz/light-theme t (not harwiltz/use-dark-theme))
     (message "loaded light theme")
     (load-theme harwiltz/dark-theme t harwiltz/use-dark-theme)
     (message "loaded dark theme"))))
+
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
 (define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
 (define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
@@ -228,7 +228,6 @@ Effort column next to the Time column."
 ;; org-journal stuff
 (setq org-journal-dir "/home/harwiltz/research/backlog/journal")
 (setq org-journal-date-format "%A, %d %B %Y")
-(require 'org-journal)
 
 ;; shell stuff
 (setq explicit-shell-file-name "/bin/bash")
@@ -418,7 +417,6 @@ Effort column next to the Time column."
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
- '(custom-enabled-themes '(wiltz-base16-brewer))
  '(custom-safe-themes
    '("1d079355c721b517fdc9891f0fda927fe3f87288f2e6cc3b8566655a64ca5453" "f304ae0c7ebe86aafc7ec4608ec20e3f335176718a806c83c68d6767ba88d49b" "cbd8e65d2452dfaed789f79c92d230aa8bdf413601b261dbb1291fb88605110c" "72a81c54c97b9e5efcc3ea214382615649ebb539cb4f2fe3a46cd12af72c7607" "0961d780bd14561c505986166d167606239af3e2c3117265c9377e9b8204bf96" "a61109d38200252de49997a49d84045c726fa8d0f4dd637fce0b8affaa5c8620" "bcd06c6e9122bd259d7ddca22b1419ac3e2dc246a786cf5a2ada648ab7c045b1" "82b3fb1703e57aa18b363314c3e84bc822cc5677d5130d1da3a8740a8c05c500" "835bbafb65098338b773c2366efd72fb2e70557a2206061df364a0ae065d1d1a" "5880994631cd35eaa4648192abcf54d3a17d0c7a7299ca701edb6f7dc4dc2a00" "9a6432059f6c37f284bcff1b93c43eaca5119b03dba2197acb90c91165a1d5bf" "12bf83c6042c2e8574dae0615d8822d861f2a13a9b62bf5753cea438e97c4712" "abacfed3d9e3ef3c5a3e246e2878aa1f54539e9db86e21ec64e3243ff80615ca" "d3df0fb2912c994b3f8aed5445c37063593c6d813d35329b2e18ee126899d134" "4f372184a71ff469e0b56e00b88ed24b2ece05cea235567935d8c932f91c4b34" "bf364807168504cc693b37ad9d5af9a46edbbac55d523b2976c2c069e0088e97" "0f5bb770f15793bfb0e79e05738fbf1c1e238952b7806736898f7619900f5298" "02940c38e51991e8ee8ac69537341149d56e9c88d57f2c357eeb1744daad1953" "e1498b2416922aa561076edc5c9b0ad7b34d8ff849f335c13364c8f4276904f0" "840db7f67ce92c39deb38f38fbc5a990b8f89b0f47b77b96d98e4bf400ee590a" "f126f3b6ca7172a4a2c44186d57e86a989c2c196d0855db816a161bf857b58fb" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(fci-rule-color "#14151E")
