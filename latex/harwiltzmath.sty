@@ -60,6 +60,7 @@
 \newcommand{\indexedint}[4][1]{\left\{{#4}_{#2}\right\}_{#2=#1}^{#3}}
 \newcommand{\sequence}[3][1]{\indexedint[#1]{#2}{\infty}{#3}}
 \newcommand{\subsequence}[4][1]{\left\{#4_{#3_#2}\right\}_{#2=#1}^\infty}
+\newcommand{\collection}[2]{\left\{{#2}_{#1}\right\}}
 % Tuple processes
 \newcommand{\iindexed}[4]{\left(#3_{#2}, #4_{#2}\right)_{#2 #1}}
 \newcommand{\iindexedabove}[4][0]{\iindexed{\geq #1}{#2}{#3}{#4}}
@@ -98,11 +99,18 @@
   \hrulefill\\
 }{\hfill$\blacksquare$}
 
+\DeclareMathOperator{\R}{\mathbf{R}}
+\DeclareMathOperator{\Z}{\mathbf{Z}}
+\DeclareMathOperator{\N}{\mathbf{N}}
+\DeclareMathOperator{\Q}{\mathbf{Q}}
+\DeclareMathOperator{\C}{\mathbf{C}}
 \DeclareMathOperator{\support}{supp}
 \DeclareMathOperator{\identity}{\mathsf{id}}
 \DeclareMathOperator{\trace}{\mathsf{Tr}}
 \DeclareMathOperator{\range}{\mathsf{Ran}}
 \DeclareMathOperator{\kernel}{\mathsf{Ker}}
+\DeclareMathOperator{\sgn}{\mathsf{sgn}}
+\DeclareMathOperator{\zeroset}{\{0\}}
 \DeclareMathOperator{\returnfunction}{\mathscr{J}}
 \DeclareMathOperator{\rewardfunctional}{\mathsf{J}}
 \DeclareMathOperator{\jointspace}{\mathcal{Z}}
