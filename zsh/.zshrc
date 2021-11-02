@@ -116,8 +116,11 @@ CWD_THRESH=30
 PS1_USERHOST="%B%F{yellow}%n@%F{magenta}%M%f%b"
 PS1_CWD_LONG="%B%F{blue}%~%f%b"
 PS1_CWD_SHORT="%B%F{cyan}_/%F{blue}%1~%f%b"
+#PS1_CWD_TRUNC="%B%F{blue}%3~%f%b"
+PS1_CWD_TRUNC="%B%F{blue}%40<..<%~%<<"
 PS1_PROMPT="%(?.%B%F{green}│Ψ > .%B%F{red}♯ %? )%f%b"
-export PROMPT='$(get_ps1)'
+#export PROMPT='$(get_ps1)'
+
 
 function git_unstaged() {
     if git status 1> /dev/null 2>&1
@@ -158,6 +161,8 @@ function get_ps1() {
         echo "$PS1_USERHOST $PS1_CWD_LONG %{$(git_status_info)%} $PS1_PROMPT"
     fi
 }
+
+export PROMPT="$PS1_USERHOST $PS1_CWD_TRUNC %{$(git_status_info)%} $PS1_PROMPT"
 
 export PATH="/home/harwiltz/.local/bin:$PATH"
 export PATH="/home/harwiltz/android-studio/android-studio/bin:$PATH"
