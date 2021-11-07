@@ -13,7 +13,7 @@ end
 require "paq" {
   "savq/paq-nvim";
   "neovim/nvim-lspconfig";
-  {"lervag/vimtex", opt=true};
+  "lervag/vimtex";
   "mhartington/oceanic-next";
   "nvim-lualine/lualine.nvim";
 }
