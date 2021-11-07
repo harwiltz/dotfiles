@@ -325,9 +325,9 @@ discard_colors_if_item_is_selected = yes
 ## be used to build 'empty' part of progressbar.
 ##
 #progressbar_look = ▣▣
-progressbar_look = ▪■
+#progressbar_look = ▪■
 #
-progressbar_boldness = yes
+#progressbar_boldness = yes
 #
 ## Available values: database, playlist.
 ##
@@ -496,7 +496,7 @@ color1 = white
 #
 color2 = blue
 #
-main_window_highlight_color = blue
+#main_window_highlight_color = blue
 #
 progressbar_color = black
 #
@@ -506,7 +506,7 @@ progressbar_elapsed_color = yellow
 #
 #alternative_ui_separator_color = black
 #
-active_column_color = 215
+#active_column_color = 215
 #
 #visualizer_color = blue
 #
