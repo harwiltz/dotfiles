@@ -162,7 +162,11 @@ function get_ps1() {
     fi
 }
 
-export PROMPT="$PS1_USERHOST $PS1_CWD_TRUNC %{$(git_status_info)%} $PS1_PROMPT"
+function get_ps1_trunc() {
+    echo "$PS1_USERHOST $PS1_CWD_TRUNC %{$(git_status_info)%} $PS1_PROMPT"
+}
+
+export PROMPT='$(get_ps1_trunc)'
 
 export PATH="/home/harwiltz/.local/bin:$PATH"
 export PATH="/home/harwiltz/android-studio/android-studio/bin:$PATH"
