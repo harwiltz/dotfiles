@@ -15,5 +15,10 @@ vim.o.wildignore = [[
 *.pyc,*.o,*.class
 ]]
 
-vim.g.neon_style = "dark"
+vim.g.vimtex_fold_enabled = false -- folding seems pretty slow
+
+vim.g.vimtex_compiler_latexmk = {
+  ['build_dir'] = 'build',
+}
+
 vim.cmd[[colorscheme nightfox]]
