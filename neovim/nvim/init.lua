@@ -1,3 +1,4 @@
+require('maps')
 require('settings')
 require('statusline')
 require('tools')
@@ -16,6 +17,14 @@ require "paq" {
   "lervag/vimtex";
   "mhartington/oceanic-next";
   "nvim-lualine/lualine.nvim";
+  "rafamadriz/neon";
+  "folke/tokyonight.nvim";
+  "theniceboy/nvim-deus";
+  "novakne/kosmikoa.nvim";
+  "shaunsingh/nord.nvim";
+  "FrenzyExists/aquarium-vim";
+  "EdenEast/nightfox.nvim";
+  "kvrohit/substrata.nvim";
 }
 
 -- statusline stuff
