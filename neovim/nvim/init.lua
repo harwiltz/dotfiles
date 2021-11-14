@@ -1,8 +1,3 @@
-require('maps')
-require('settings')
-require('statusline')
-require('tools')
-
 -- paq
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
@@ -25,7 +20,14 @@ require "paq" {
   "FrenzyExists/aquarium-vim";
   "EdenEast/nightfox.nvim";
   "kvrohit/substrata.nvim";
+  "norcalli/snippets.nvim";
 }
+
+require('maps')
+require('settings')
+require('statusline')
+require('tools')
+require('my-snippets')
 
 -- statusline stuff
 -- stl = require('statusline')
