@@ -28,7 +28,7 @@ require'snippets'.snippets = {
     ald = texenvheader('aligned'),
     Eq = texenvheader('equation', true, 'eq'),
     fig = texenvheader('figure', label, 'fig'),
-    prob = '\\begin{problem}{$0}\n\\end{problem}'
+    prob = '\\begin{problem}{'
   },
   markdown = {
     Al = texenv('align'),
