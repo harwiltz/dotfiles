@@ -8,7 +8,7 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle :compinstall filename '/home/harwiltz/.zshrc'
 
 
-export VISUAL="/usr/bin/vim"
+export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
 export ANDROID_SDK_ROOT=/home/harwiltz/Android/Sdk

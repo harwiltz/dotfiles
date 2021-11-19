@@ -15,6 +15,8 @@ vim.o.wildignore = [[
 *.pyc,*.o,*.class
 ]]
 
+vim.o.textwidth = 80
+
 vim.g.vimtex_fold_enabled = false -- folding seems pretty slow
 
 vim.g.vimtex_compiler_latexmk = {
