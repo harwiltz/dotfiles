@@ -21,6 +21,10 @@ require "paq" {
   "EdenEast/nightfox.nvim";
   "kvrohit/substrata.nvim";
   "norcalli/snippets.nvim";
+  {"oberblastmeister/neuron.nvim", branch="unstable"};
+  "nvim-lua/popup.nvim";
+  "nvim-lua/plenary.nvim";
+  "nvim-telescope/telescope.nvim";
 }
 
 require('maps')
@@ -46,4 +50,12 @@ require'lualine'.setup {
     lualine_y = {'progress'},
     lualine_z = {'location'}
   }
+}
+
+require 'neuron'.setup {
+  virtual_titles = true,
+  mappings = true,
+  run = nil,
+  neuron_dir = "~/slipbox/slipbox",
+  leader = "gz"
 }
