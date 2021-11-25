@@ -25,6 +25,7 @@ require "paq" {
   "nvim-lua/popup.nvim";
   "nvim-lua/plenary.nvim";
   "nvim-telescope/telescope.nvim";
+  "JuliaEditorSupport/julia-vim";
 }
 
 require('maps')

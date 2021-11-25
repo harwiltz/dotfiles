@@ -16,6 +16,7 @@ vim.o.wildignore = [[
 ]]
 
 vim.o.textwidth = 80
+vim.cmd[[set clipboard+=unnamedplus]]
 
 vim.g.vimtex_fold_enabled = false -- folding seems pretty slow
 
