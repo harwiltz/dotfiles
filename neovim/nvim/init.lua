@@ -33,6 +33,7 @@ require('settings')
 require('statusline')
 require('tools')
 require('my-snippets')
+require('my-telescope')
 
 -- statusline stuff
 -- stl = require('statusline')

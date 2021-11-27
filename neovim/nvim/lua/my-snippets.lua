@@ -34,6 +34,8 @@ require'snippets'.snippets = {
     Al = texenv('align'),
     al = texenv('align*'),
     ald = texenv('aligned'),
-    Eq = texenv('equation')
+    Eq = texenv('equation'),
+    l = '\\$\\$\n$0\n\\$\\$',
+    sf = [[\mathsf{]]
   }
 }
