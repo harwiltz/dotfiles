@@ -31,7 +31,7 @@ require "paq" {
 require('maps')
 require('settings')
 require('statusline')
-require('tools')
+tools = require('tools')
 require('my-snippets')
 require('my-telescope')
 
