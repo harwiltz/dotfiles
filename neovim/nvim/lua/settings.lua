@@ -25,3 +25,14 @@ vim.g.vimtex_compiler_latexmk = {
 }
 
 vim.cmd[[colorscheme nightfox]]
+
+vim.api.nvim_command([[
+  autocmd BufRead *.jl :set tabstop=4
+  autocmd BufRead *.jl :set shiftwidth=4
+]])
+
+-- folding stuff
+vim.api.nvim_command([[
+  set nofoldenable
+  set fdm=indent
+]])

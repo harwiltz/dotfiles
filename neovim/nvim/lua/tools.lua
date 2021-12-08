@@ -33,7 +33,7 @@ end
 
 function M.reloadCurrent()
   local fname = api.nvim_buf_get_name(0)
-  local module = string.find(fname, "(.+)\.lua$")
+  local module = string.find(fname, "(.+).lua$")
   require('plenary.reload').reload_module(module)
 end
 
