@@ -26,6 +26,8 @@ require "paq" {
   "nvim-lua/plenary.nvim";
   "nvim-telescope/telescope.nvim";
   "JuliaEditorSupport/julia-vim";
+  "Shatur/neovim-ayu";
+  "bluz71/vim-moonfly-colors";
 }
 
 require('maps')

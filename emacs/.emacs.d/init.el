@@ -11,11 +11,14 @@
 (display-time)
 (setq x-select-enable-clipboard t)
 (setq org-roam-v2-ack t)
+(setq custom-safe-themes t)
 
 ;; color themes
 (setq harwiltz/light-theme 'base16-atelier-dune-light)
-(setq harwiltz/dark-theme 'base16-atelier-cave)
+(setq harwiltz/dark-theme 'doom-sourcerer)
 (setq harwiltz/pdoc-process nil)
+
+(setq harwiltz/font "Inconsolata-12")
 
 (setq harwiltz/use-dark-theme t)
 
@@ -153,10 +156,12 @@
  (lambda ()
   (progn
     (org-roam-db-autosync-mode)
+    ;; (set-face-attribute 'default nil :font harwiltz/font)
+    (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
     (message "about to load themes...")
-    (load-theme harwiltz/light-theme t (not harwiltz/use-dark-theme))
+    (load-theme harwiltz/light-theme t harwiltz/use-dark-theme)
     (message "loaded light theme")
-    (load-theme harwiltz/dark-theme t harwiltz/use-dark-theme)
+    (load-theme harwiltz/dark-theme t (not harwiltz/use-dark-theme))
     (message "loaded dark theme"))))
 
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
@@ -270,6 +275,12 @@ Effort column next to the Time column."
     (insert "#+end_" (downcase type) "\n")
     (forward-line -2)
     (end-of-line))
+
+(defun insproof ()
+  (interactive)
+  (save-excursion
+    (insert "#+begin_proof\n\n#+end_proof\n"))
+  (forward-line))
 
 (defun idify (s)
   "Make id string from arbitrary string"
@@ -438,7 +449,7 @@ Effort column next to the Time column."
      ("\\?\\?\\?+" . "#dc752f")))
  '(linum-format " %7i ")
  '(package-selected-packages
-   '(julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
