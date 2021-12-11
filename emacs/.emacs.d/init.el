@@ -22,6 +22,43 @@
 
 (setq harwiltz/use-dark-theme t)
 
+(defun install-missing-packages ()
+  (interactive)
+  (let ((packages-exist
+	 (seq-reduce (lambda (a b) (and a b))
+		     (mapcar 'package-installed-p package-selected-packages)
+		     t)))
+    (when packages-exist
+      (message "All packages are installed."))
+    (unless packages-exist
+      (message "Refreshing package metadata...")
+      (package-refresh-contents)
+      (package-install-selected-packages)
+      (message "Finished installing missing packages."))))
+
+;; Tab bar stuff
+(set-face-attribute
+ 'tab-bar nil
+ :family "Terminus"
+ :background "gray20"
+ :foreground "gray80"
+ :box nil
+ :height 0.75)
+(set-face-attribute
+ 'tab-bar-tab nil
+ :background "gray20"
+ :foreground "yellow"
+ :box nil
+ :height 1.0)
+(set-face-attribute
+ 'tab-bar-tab-inactive nil
+ :background "gray20"
+ :foreground "gray80"
+ :box nil
+ :height 1.0)
+
+(set-face-attribute 'default nil :font "Inconsolata-12")
+
 (defun harwiltz/toggle-theme ()
   (interactive)
   (setq harwiltz/use-dark-theme (not harwiltz/use-dark-theme))
@@ -155,8 +192,8 @@
 (add-hook 'after-init-hook
  (lambda ()
   (progn
+    (install-missing-packages)
     (org-roam-db-autosync-mode)
-    ;; (set-face-attribute 'default nil :font harwiltz/font)
     (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
     (message "about to load themes...")
     (load-theme harwiltz/light-theme t harwiltz/use-dark-theme)
