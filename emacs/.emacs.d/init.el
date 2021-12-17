@@ -18,7 +18,13 @@
 (setq harwiltz/dark-theme 'doom-sourcerer)
 (setq harwiltz/pdoc-process nil)
 
-(setq harwiltz/font "Inconsolata-12")
+(setq harwiltz/font "UbuntuMono-13")
+
+(defun reset-font (&optional font size)
+  (interactive "sFont family: \nsFont size: ")
+  (let ((f (or font harwiltz/font))
+	(s (or size "12")))
+    (set-face-attribute 'default nil :font (concat f "-" s))))
 
 (setq harwiltz/use-dark-theme t)
 
@@ -56,8 +62,6 @@
  :foreground "gray80"
  :box nil
  :height 1.0)
-
-(set-face-attribute 'default nil :font "Inconsolata-12")
 
 (defun harwiltz/toggle-theme ()
   (interactive)
@@ -107,8 +111,6 @@
 (setq load-path (cons "~/.emacs.d/lisp/assemb.el" load-path))
 (setq load-path (cons "~/.emacs.d/lisp/hatch-button" load-path))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(require 'assemble)
-(require 'parc.el)
 
 ;; configuring my scripts
 (setq parcel-split-window 0) ;; split horizontally
@@ -129,13 +131,14 @@
 (define-key doc-view-mode-map (kbd "k") 'doc-view-previous-line-or-previous-page)
 
 ;; latex/auctex stuff
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
-(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
-(setq reftex-plug-into-AUCTeX t)
-(setq reftex-ref-style-default-list (list "Hyperref" "Default"))
+(defun harwiltz/init-latex ()
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
+  (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+  (setq reftex-plug-into-AUCTeX t)
+  (setq reftex-ref-style-default-list (list "Hyperref" "Default")))
 
 (defun harwiltz/tex-fold-envs ()
   (interactive)
@@ -158,61 +161,45 @@
 (setq bibtex-completion-library-path "~/zettelkasten/library")
 
 ;; org-roam stuff
-(require 'org-roam-protocol)
-(require 'org-agenda)
-(setq org-roam-directory "~/zettelkasten")
-(setq org-roam-task-dir (concat org-roam-directory "/backlog"))
-(setq org-roam-file-exclude-regexp "-index.org")
-(setq org-roam-graph-extra-config '(("bgcolor" . "grey12")))
-(setq org-roam-graph-edge-extra-config '(("color" . "grey42")))
-(setq org-roam-graph-node-extra-config '(("shape" . "rect")
-					 ("style" . "filled")
-					 ("fillcolor" . "gray50")))
-(setq org-roam-capture-templates
-      `(("b" "backlog"
-	 plain #'org-roam-capture--get-point
-	 "* TODO %^{PROMPT} :inbox:\n%?"
-	 :file-name ,(concat org-roam-task-dir "/backlog")
-	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
-	 :unnarrowed t)
-	("d" "default"
-	 entry #'org-roam-capture--get-point
-	 "* TODO %^{PROMPT}\n%?"
-	 :file-name ,(concat org-roam-task-dir "/${slug}")
-	 :head "#+title: ${slug}\n"
-	 :unnarrowed t)))
-(setq org-roam-capture-ref-templates
-      `(("c" "org-protocol-capture"
-	 plain #'org-roam-capture--get-point
-	 "* TODO [[${ref}][${title}]] :inbox:web:\n${body}"
-	 :immediate-finish t
-	 :file-name ,(concat org-roam-task-dir "/backlog")
-	 :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
-	 :no-save nil)))
-(add-hook 'after-init-hook
- (lambda ()
-  (progn
-    (install-missing-packages)
-    (org-roam-db-autosync-mode)
-    (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
-    (message "about to load themes...")
-    (load-theme harwiltz/light-theme t harwiltz/use-dark-theme)
-    (message "loaded light theme")
-    (load-theme harwiltz/dark-theme t (not harwiltz/use-dark-theme))
-    (message "loaded dark theme"))))
-
-(global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
-(define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
-(define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
-(global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
-
-(setq org-agenda-files
-      (let ((base "~/research"))
-	`(,base
-	  ,(concat base "/notes")
-	  ,(concat base "/papers")
-	  ;; ,org-roam-directory
-	  ,(concat org-roam-task-dir "/"))))
+(defun harwiltz/init-org-roam ()
+  (require 'org-roam-protocol)
+  (require 'org-agenda)
+  (setq org-roam-directory "~/zettelkasten")
+  (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
+  (setq org-roam-file-exclude-regexp "-index.org")
+  (setq org-roam-graph-extra-config '(("bgcolor" . "grey12")))
+  (setq org-roam-graph-edge-extra-config '(("color" . "grey42")))
+  (setq org-roam-graph-node-extra-config '(("shape" . "rect")
+                                           ("style" . "filled")
+                                           ("fillcolor" . "gray50")))
+  (setq org-roam-capture-templates
+        `(("b" "backlog"
+           plain #'org-roam-capture--get-point
+           "* TODO %^{PROMPT} :inbox:\n%?"
+           :file-name ,(concat org-roam-task-dir "/backlog")
+           :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
+           :unnarrowed t)
+          ("d" "default"
+           entry #'org-roam-capture--get-point
+           "* TODO %^{PROMPT}\n%?"
+           :file-name ,(concat org-roam-task-dir "/${slug}")
+           :head "#+title: ${slug}\n"
+           :unnarrowed t)))
+  (setq org-roam-capture-ref-templates
+        `(("c" "org-protocol-capture"
+           plain #'org-roam-capture--get-point
+           "* TODO [[${ref}][${title}]] :inbox:web:\n${body}"
+           :immediate-finish t
+           :file-name ,(concat org-roam-task-dir "/backlog")
+           :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
+           :no-save nil)))
+  (setq org-agenda-files
+        (let ((base "~/research"))
+          `(,base
+             ,(concat base "/notes")
+             ,(concat base "/papers")
+             ;; ,org-roam-directory
+             ,(concat org-roam-task-dir "/")))))
 
 (setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %DEADLINE(Deadline)")
 (setq org-agenda-prefix-format
@@ -226,6 +213,28 @@
 	  (tags-todo "processed"
 		     ((org-agenda-sorting-strategy '(deadline-up priority-down))))
 	  (tags-todo "-processed")))))
+
+(add-hook 'after-init-hook
+ (lambda ()
+  (progn
+    (install-missing-packages)
+    (require 'assemble)
+    (require 'parc.el)
+    (harwiltz/init-latex)
+    (harwiltz/init-org-roam)
+    (org-roam-db-autosync-mode)
+    (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
+    (message "about to load themes...")
+    (load-theme harwiltz/light-theme t harwiltz/use-dark-theme)
+    (message "loaded light theme")
+    (load-theme harwiltz/dark-theme t (not harwiltz/use-dark-theme))
+    (message "loaded dark theme"))))
+
+(global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
+;;(define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
+;;(define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
+(global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
+
 
 (setq harwiltz/current-mission "mission")
 (setq org-clock-report-include-clocking-task t)
@@ -484,7 +493,7 @@ Effort column next to the Time column."
      ("\\?\\?\\?+" . "#dc752f")))
  '(linum-format " %7i ")
  '(package-selected-packages
-   '(doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
