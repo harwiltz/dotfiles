@@ -142,6 +142,7 @@
 (defun harwiltz/init-latex ()
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
+  (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
   (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
@@ -158,6 +159,7 @@
 (setq bibtex-completion-library-path '("/home/harwiltz/zettelkasten/"))
 (setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
 (setq bibtex-completion-pdf-open-function 'helm-open-file-with-default-tool)
+(setq bibtex-completion-notes-path "/home/harwiltz/zettelkasten/paper-notes")
 
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
