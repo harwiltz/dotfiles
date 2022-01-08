@@ -18,7 +18,15 @@
 (setq harwiltz/dark-theme 'doom-sourcerer)
 (setq harwiltz/pdoc-process nil)
 
-(setq harwiltz/font "UbuntuMono-13")
+(setq harwiltz/font "UbuntuMono-12")
+
+;; deft stuff
+(setq deft-extensions '("org" "tex"))
+(setq deft-directory "/home/harwiltz/zettelkasten")
+(setq deft-recursive t)
+(setq deft-use-filter-string-for-filename t)
+(setq deft-use-filename-as-title t)
+(global-set-key (kbd "C-c o") 'deft)
 
 (defun reset-font (&optional font size)
   (interactive "sFont family: \nsFont size: ")
@@ -157,7 +165,7 @@
 (setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "PASS")))
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((python . t) (haskell . t)))
+ '((python . t) (haskell . t) (latex . t)))
 (setq bibtex-completion-library-path "~/zettelkasten/library")
 
 ;; org-roam stuff
@@ -223,6 +231,7 @@
     (harwiltz/init-latex)
     (harwiltz/init-org-roam)
     (org-roam-db-autosync-mode)
+    (require 'deft)
     (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
     (message "about to load themes...")
     (load-theme harwiltz/light-theme t harwiltz/use-dark-theme)
@@ -493,7 +502,7 @@ Effort column next to the Time column."
      ("\\?\\?\\?+" . "#dc752f")))
  '(linum-format " %7i ")
  '(package-selected-packages
-   '(nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(deft nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)

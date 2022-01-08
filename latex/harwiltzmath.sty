@@ -5,30 +5,34 @@
 \usetikzlibrary{arrows}
 \usepackage{pgfplots}
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\theoremstyle{definition}
-\newtheorem{defbasic}{Definition}
-\newtheorem{assumption}{Assumption}
-\newtheorem{remark}{Remark}
+% \theoremstyle{plain}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{proposition}{Proposition}
+% \theoremstyle{definition}
+% \newtheorem{defbasic}{Definition}
+% \newtheorem{assumption}{Assumption}
+% \newtheorem{remark}{Remark}
 
-\newcommand{\myrule}{
-  \begin{center}
-    \begin{tikzpicture}
-      \draw[diamond-diamond](0,0) to (0.25\linewidth,0);
-    \end{tikzpicture}
-  \end{center}
-}
+% \newcommand{\myrule}{
+%   \begin{center}
+%     \begin{tikzpicture}
+%       \draw[diamond-diamond](0,0) to (0.25\linewidth,0);
+%     \end{tikzpicture}
+%   \end{center}
+% }
 
-\newenvironment{definition}{%
-  \begin{defbasic}
-  }{%
-  \end{defbasic}
-  \myrule
-}
+% \newenvironment{definition}{%
+%   \begin{defbasic}
+%   }{%
+%   \end{defbasic}
+%   \myrule
+% }
+
+% Dummy environments for compatibility with org-reveal presentations
+\newenvironment{NOTES}{}{}
+\newenvironment{BLOCK}{}{}
 
 \newcommand{\Expectation}[2]{\underset{#1}{\mathbf{E}}\left[#2\right]}
 \newcommand{\expectation}[2]{\mathbf{E}_{#1}\left[#2\right]}
