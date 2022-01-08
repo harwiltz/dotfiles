@@ -17,8 +17,8 @@
 (setq lsp-keymap-prefix "<f5>")
 
 ;; color themes
-(setq harwiltz/light-theme 'kaolin-light)
-(setq harwiltz/dark-theme 'kaolin-bubblegum)
+(setq harwiltz/light-theme 'base16-one-light)
+(setq harwiltz/dark-theme 'doom-solarized-dark-high-contrast)
 (setq harwiltz/pdoc-process nil)
 
 (setq harwiltz/font "UbuntuMono-12")
@@ -216,7 +216,6 @@
 (defun harwiltz/init-org-roam ()
   (message "Initializing org roam stuff...")
   (require 'org-roam-protocol)
-  (require 'org-agenda)
   (setq org-roam-directory "~/zettelkasten")
   (setq org-roam-task-dir (concat org-roam-directory "/backlog"))
   (setq org-roam-file-exclude-regexp "-index.org")
@@ -232,6 +231,7 @@
     (install-missing-packages)
     (require 'assemble)
     (require 'parc.el)
+    (load-file "/home/harwiltz/.emacs.d/harwiltz-agenda.el")
     (harwiltz/init-latex)
     (harwiltz/init-org-roam)
     (message "Syncing org-roam db...")
@@ -247,9 +247,6 @@
     (message "loaded dark theme"))))
 
 (global-set-key (kbd "C-c j") (lambda () (interactive) (org-roam-capture)))
-;;(define-key org-agenda-mode-map (kbd "C-c p") 'harwiltz/process-backlog-task)
-;;(define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
-(global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
 
 (defun harwiltz/setup-lsp ()
   (add-hook 'prog-mode-hook #'lsp))
@@ -264,41 +261,7 @@
 ;;    (add-hook 'prog-mode-hook #'lsp)))
 
 (setq harwiltz/current-mission "mission")
-(setq org-clock-report-include-clocking-task t)
-(setq org-agenda-start-with-clockreport-mode t)
 
-(defun scrum-clocktable-write (&rest args)
-  "Custom clocktable formatter for placing the
-Effort column next to the Time column."
-  (apply #'org-clocktable-write-default args)
-  (save-excursion
-    (forward-char)                ;; [File] Effort Headline Time
-    (org-table-next-field)        ;; File [Effort] Headline Time
-    (org-table-move-column-right) ;; File Headline [Effort] Time
-    ))
-
-(setq org-agenda-clockreport-parameter-plist
-      '(:link t :maxlevel 2 :narrow 80 :properties ("Effort") :formatter scrum-clocktable-write))
-
-(defun harwiltz/process-backlog-task ()
-  (interactive)
-  (org-agenda-priority)
-  (org-agenda-set-effort)
-  (org-agenda-deadline nil)
-  (org-agenda-set-tags "processed" 'on)
-  (when (member "inbox" (org-get-at-bol 'tags))
-    (org-agenda-refile nil
-		       `(nil
-			 ,(concat org-roam-task-dir "/" harwiltz/current-mission ".org")
-			 nil
-			 nil))))
-
-(defun harwiltz/unprocess-task ()
-  (interactive)
-  (let ((current-prefix-arg '(4)))
-    (call-interactively 'org-agenda-deadline))
-  (org-agenda-priority)
-  (org-agenda-set-tags "processed" 'off))
 
 ;; org-reveal stuff
 (setq org-reveal-root "file:///home/harwiltz/reveal")
@@ -566,7 +529,13 @@ n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
+ '(exwm-floating-border-color "#d6d4d4")
  '(fci-rule-color "#14151E")
+ '(highlight-tail-colors
+   ((("#f0f3e5" "#669900" "green")
+     . 0)
+    (("#f3f8f7" "#8abeb7" "cyan")
+     . 20)))
  '(hl-todo-keyword-faces
    '(("TODO" . "#dc752f")
      ("NEXT" . "#dc752f")
@@ -583,10 +552,19 @@ n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
      ("FIXME" . "#dc752f")
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
+ '(jdee-db-active-breakpoint-face-colors (cons "#f2f2f2" "#4271ae"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#f2f2f2" "#718c00"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#f2f2f2" "#8e908c"))
+ '(line-spacing 0.2)
  '(linum-format " %7i ")
+ '(objed-cursor-color "#c82829")
+ '(org-fontify-done-headline nil)
+ '(org-fontify-todo-headline nil)
  '(package-selected-packages
    '(company lsp-ui lsp-treemacs lsp-mode treemacs projectile kaolin-themes elfeed org-present magit fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+ '(rustic-ansi-faces
+   ["#ffffff" "#c82829" "#718c00" "#eab700" "#4271ae" "#c678dd" "#8abeb7" "#4d4d4c"])
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
      (default-assemble-target . "dev-env.pdf")))

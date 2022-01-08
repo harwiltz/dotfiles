@@ -28,6 +28,7 @@ require "paq" {
   "JuliaEditorSupport/julia-vim";
   "Shatur/neovim-ayu";
   "bluz71/vim-moonfly-colors";
+  "LnL7/vim-nix";
 }
 
 require('maps')
