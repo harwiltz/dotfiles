@@ -181,48 +181,7 @@
   (setq org-roam-graph-edge-extra-config '(("color" . "grey42")))
   (setq org-roam-graph-node-extra-config '(("shape" . "rect")
                                            ("style" . "filled")
-                                           ("fillcolor" . "gray50")))
-  (setq org-roam-capture-templates
-        `(("b" "backlog"
-           plain #'org-roam-capture--get-point
-           "* TODO %^{PROMPT} :inbox:\n%?"
-           :file-name ,(concat org-roam-task-dir "/backlog")
-           :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
-           :unnarrowed t)
-          ("d" "default"
-           entry #'org-roam-capture--get-point
-           "* TODO %^{PROMPT}\n%?"
-           :file-name ,(concat org-roam-task-dir "/${slug}")
-           :head "#+title: ${slug}\n"
-           :unnarrowed t)))
-  (setq org-roam-capture-ref-templates
-        `(("c" "org-protocol-capture"
-           plain #'org-roam-capture--get-point
-           "* TODO [[${ref}][${title}]] :inbox:web:\n${body}"
-           :immediate-finish t
-           :file-name ,(concat org-roam-task-dir "/backlog")
-           :head "#+TITLE: Backlog\n#+CATEGORY: backlog\n"
-           :no-save nil)))
-  (setq org-agenda-files
-        (let ((base "~/research"))
-          `(,base
-             ,(concat base "/notes")
-             ,(concat base "/papers")
-             ;; ,org-roam-directory
-             ,(concat org-roam-task-dir "/")))))
-
-(setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %DEADLINE(Deadline)")
-(setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-	(todo . " %i %-12:c %(symbol-name 'E)%-6 e")
-	(tags . " %i %-12:c %(symbol-name 'E)%-6 e")
-	(search . " %i %-12:c %(symbol-name 'E)%-6 e")))
-(setq org-agenda-custom-commands
-      '(("h" "Main agenda"
-	 ((agenda "")
-	  (tags-todo "processed"
-		     ((org-agenda-sorting-strategy '(deadline-up priority-down))))
-	  (tags-todo "-processed")))))
+                                           ("fillcolor" . "gray50"))))
 
 (add-hook 'after-init-hook
  (lambda ()
@@ -233,6 +192,7 @@
     (harwiltz/init-latex)
     (harwiltz/init-org-roam)
     (org-roam-db-autosync-mode)
+    (load-file "/home/harwiltz/.emacs.d/arxiv-sources.el")
     (require 'deft)
     (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
     (message "about to load themes...")
