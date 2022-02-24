@@ -1,6 +1,9 @@
 import Data.List (intercalate)
+import System.Exit (ExitCode(..))
 import System.IO
+import System.Process (runInteractiveCommand, getProcessExitCode)
 
+import qualified Xmobar as Xmb
 import XMonad
 import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
 import XMonad.Actions.Navigation2D
@@ -21,15 +24,15 @@ nav2dconfig = navigation2D def
                            [(mod4Mask, windowGo), (mod4Mask .|. shiftMask, windowSwap)]
                            False
 
-main = spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonadConfig)
+main = (putStrLn bar) >> spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonadConfig)
 
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
     where barArgs :: [String]
-          barArgs = [ "-t", "\"%StdinReader%}{%alsa:default:Master% | %date% [%battery%]\""
+          barArgs = [ "-t", "\"%StdinReader%}{%wake% %alsa:default:Master% | %date% [%battery%]\""
                     , "-d"
-                    , "-C", show [batteryCmd, dateCmd, volumeCmd]
-                    , "-f", "\"xft: xos4 terminus\""
+                    , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd]
+                    , "-f", "\"xft: xos4 Terminus\""
                     ]
 
 batteryCmd :: String
@@ -61,6 +64,40 @@ volumeCmd = unwords [ "Run Alsa"
                     ]
     where volumeOpts :: [String]
           volumeOpts = [ "--template", "<fc=#444477>Vol</fc>: <volume>% <status>" ]
+
+screenCmd = unwords [ "Run Com"
+                    , show "/home/harwiltz/scripts/xmobar-screen-wakeness"
+                    , show [""]
+                    , show "wake"
+                    , show 10
+                    ]
+--screenCmd = "Run ScreenWakeness \"wake\""
+
+data ScreenWakeness = ScreenWakeness String deriving (Read, Show)
+
+instance Xmb.Exec ScreenWakeness where
+  alias (ScreenWakeness s) = s
+  start sw cb = do
+    (hstdin, hstdout, hstderr, ph) <- runInteractiveCommand cmd
+    hClose hstdin
+    hClose hstderr
+    hClose hstdout
+    hSetBinaryMode hstdout False
+    hSetBuffering hstdout LineBuffering
+    forever ph
+    where forever ph =
+            do
+              ec <- getProcessExitCode ph
+              case ec of
+                 Nothing -> forever ph
+                 Just (ExitFailure _) -> cb "Enabled"
+                 Just ExitSuccess -> cb "Disabled"
+          cmd = unwords [ "xset q"
+                        , "|"
+                        , "grep DPMS"
+                        , "|"
+                        , "grep Disabled"
+                        ]
 
 xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , modMask            = mod4Mask
@@ -105,6 +142,7 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
           ] ++ -- brightness stuff
           [ ((mod4Mask .|. controlMask, xK_equal), spawn "xbacklight -inc 10" )
           , ((mod4Mask .|. controlMask, xK_minus), spawn "xbacklight -dec 10" )
+          , ((mod4Mask .|. mod1Mask, xK_o), spawn "/home/harwiltz/scripts/screenon.sh")
           ] ++ --bspc stuff
           [ ((mod4Mask .|. mod1Mask, xK_l), sendMessage $ ExpandTowards R)
           , ((mod4Mask .|. mod1Mask, xK_h), sendMessage $ ExpandTowards L)
