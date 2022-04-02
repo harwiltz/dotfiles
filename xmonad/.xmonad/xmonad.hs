@@ -91,7 +91,7 @@ romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 stars :: [WorkspaceId]
 stars = take 10 $ repeat "*"
 
-keyMaps = [ ((mod4Mask, xK_Return), spawn "st")
+keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
           , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
           , ((mod1Mask, xK_l), spawn "xscreensaver-command -lock")

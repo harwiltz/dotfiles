@@ -140,6 +140,7 @@
 
 ;; latex/auctex stuff
 (defun harwiltz/init-latex ()
+  (message "Initializing latex stuff...")
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq org-latex-inputenc-alist '(("utf8" . "utf8x")))
@@ -183,6 +184,7 @@
 
 ;; org-roam stuff
 (defun harwiltz/init-org-roam ()
+  (message "Initializing org roam stuff...")
   (require 'org-roam-protocol)
   (require 'org-agenda)
   (setq org-roam-directory "~/zettelkasten")
@@ -202,7 +204,9 @@
     (require 'parc.el)
     (harwiltz/init-latex)
     (harwiltz/init-org-roam)
+    (message "Syncing org-roam db...")
     (org-roam-db-autosync-mode)
+    (message "Finished initializing org-roam")
     (load-file "/home/harwiltz/.emacs.d/arxiv-sources.el")
     (require 'deft)
     (add-to-list 'default-frame-alist `(font . ,harwiltz/font))
