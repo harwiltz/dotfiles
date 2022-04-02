@@ -160,6 +160,17 @@
 (setq bibtex-completion-bibliography '("/home/harwiltz/zettelkasten/sources.bib"))
 (setq bibtex-completion-pdf-open-function 'helm-open-file-with-default-tool)
 (setq bibtex-completion-notes-path "/home/harwiltz/zettelkasten/paper-notes")
+(setq bibtex-completion-notes-template-multiple-files
+      "#+TITLE: [Notes] ${title}
+#+AUTHOR: ${author-or-editor}
+
+#+BEGIN_SRC bibtex
+@${=type=}{
+  title={${title}},
+  author={${author}},
+  year={${year}}
+}
+#+END_SRC")
 
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
@@ -464,7 +475,7 @@ Effort column next to the Time column."
      ("\\?\\?\\?+" . "#dc752f")))
  '(linum-format " %7i ")
  '(package-selected-packages
-   '(deft nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
