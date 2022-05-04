@@ -28,7 +28,7 @@ alias l='asciiquarium'
 
 alias tailf="tail -f"
 
-neofetch
+neofetch --disable gpu
 #echo ""
 
 # Attempt to fix PS1 in emacs shell
