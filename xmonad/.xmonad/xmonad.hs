@@ -5,7 +5,7 @@ import System.Process (runInteractiveCommand, getProcessExitCode)
 
 import qualified Xmobar as Xmb
 import XMonad
-import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
+--import XMonad.Actions.Volume (toggleMute, raiseVolume, lowerVolume)
 import XMonad.Actions.Navigation2D
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
@@ -29,9 +29,11 @@ main = (putStrLn bar) >> spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonad
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
     where barArgs :: [String]
-          barArgs = [ "-t", "\"%StdinReader%}{%wake% %alsa:default:Master% | %date% [%battery%]\""
+          barArgs = [ "-t", "\"%StdinReader%}{%wake% | %date% [%battery%]\""
+                    --"-t", "\"%StdinReader%}{%wake% %alsa:default:Master% | %date% [%battery%]\""
                     , "-d"
-                    , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd]
+                    --, "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd]
+                    , "-C", show [batteryCmd, dateCmd, screenCmd]
                     , "-f", "\"xft: xos4 Terminus\""
                     ]
 
@@ -135,10 +137,10 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
           , ((mod4Mask .|. shiftMask, xK_0), windows $ W.shift $ myWorkspaces !! 9)
-          ] ++ -- volume stuff
-          [ ((mod4Mask .|. mod1Mask, xK_equal), raiseVolume volDeltaPct >> return())
-          , ((mod4Mask .|. mod1Mask, xK_minus), lowerVolume volDeltaPct >> return())
-          , ((mod4Mask .|. mod1Mask, xK_m), toggleMute >> return())
+          --] ++ -- volume stuff
+          --[ ((mod4Mask .|. mod1Mask, xK_equal), raiseVolume volDeltaPct >> return())
+          --, ((mod4Mask .|. mod1Mask, xK_minus), lowerVolume volDeltaPct >> return())
+          --, ((mod4Mask .|. mod1Mask, xK_m), toggleMute >> return())
           ] ++ -- brightness stuff
           [ ((mod4Mask .|. controlMask, xK_equal), spawn "xbacklight -inc 10" )
           , ((mod4Mask .|. controlMask, xK_minus), spawn "xbacklight -dec 10" )
