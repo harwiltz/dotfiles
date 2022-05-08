@@ -30,7 +30,9 @@ alias ls="ls --color=auto"
 alias grep='grep --color=auto'
 alias l='asciiquarium'
 
-alsi -a arch
+alias tailf="tail -f"
+
+neofetch
 #echo ""
 
 # Attempt to fix PS1 in emacs shell

@@ -7,11 +7,11 @@
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
-(global-display-line-numbers-mode 1)
 (display-time)
 (setq x-select-enable-clipboard t)
 (setq org-roam-v2-ack t)
 (setq custom-safe-themes t)
+(setq evil-want-C-i-jump nil)
 
 ;; color themes
 (setq harwiltz/light-theme 'base16-atelier-dune-light)
@@ -126,6 +126,7 @@
 
 ;; highlight line
 (add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 ;; (add-hook 'hl-line-mode-hook (lambda () (set-face-background 'hl-line "#181818")))
 
 ;; hotkeys
@@ -429,6 +430,20 @@ Effort column next to the Time column."
 ;; Hooks
 (require 'display-line-numbers)
 
+(defcustom display-line-numbers-exempt-modes
+  '(org-agenda-mode eshell-mode helm-mode)
+  "Modes for which no line numbers should be rendered."
+  :group 'display-line-numbers
+  :type 'list
+  :version "green")
+
+(defun display-line-numbers--turn-on ()
+  (unless (or (minibufferp)
+	      (member major-mode display-line-numbers-exempt-modes))
+    (display-line-numbers-mode)))
+
+;; (global-display-line-numbers-mode)
+
 (add-hook 'doc-view-mode-hook
 	  (lambda ()
 	    (message "Turning off line numbers")
@@ -439,6 +454,8 @@ Effort column next to the Time column."
 	    (org-indent-mode)
 	    (auto-fill-mode)
 	    (org-bullets-mode)
+	    (display-line-numbers-mode)
+	    (hl-line-mode)
 	    (setq org-hide-emphasis-markers t)
 	    (org-latex-scale harwiltz/latex-scale)
 	    (org-hide-block-all)))
