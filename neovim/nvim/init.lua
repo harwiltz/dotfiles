@@ -21,7 +21,7 @@ require "paq" {
   "EdenEast/nightfox.nvim";
   "kvrohit/substrata.nvim";
   "norcalli/snippets.nvim";
-  {"oberblastmeister/neuron.nvim", branch="unstable"};
+  --{"oberblastmeister/neuron.nvim", branch="unstable"};
   "nvim-lua/popup.nvim";
   "nvim-lua/plenary.nvim";
   "nvim-telescope/telescope.nvim";
@@ -57,10 +57,10 @@ require'lualine'.setup {
   }
 }
 
-require 'neuron'.setup {
-  virtual_titles = true,
-  mappings = true,
-  run = nil,
-  neuron_dir = "~/slipbox/slipbox",
-  leader = "gz"
-}
+-- require 'neuron'.setup {
+--   virtual_titles = true,
+--   mappings = true,
+--   run = nil,
+--   neuron_dir = "~/slipbox/slipbox",
+--   leader = "gz"
+-- }
