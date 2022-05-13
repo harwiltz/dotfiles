@@ -142,13 +142,10 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
           , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
           , ((mod1Mask, xK_l), spawn "xscreensaver-command -lock")
+          , ((mod4Mask .|. mod1Mask, xK_p), spawn "scrot /home/harwiltz/temp.png")
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
           , ((mod4Mask .|. shiftMask, xK_0), windows $ W.shift $ myWorkspaces !! 9)
-          --] ++ -- volume stuff
-          --[ ((mod4Mask .|. mod1Mask, xK_equal), raiseVolume volDeltaPct >> return())
-          --, ((mod4Mask .|. mod1Mask, xK_minus), lowerVolume volDeltaPct >> return())
-          --, ((mod4Mask .|. mod1Mask, xK_m), toggleMute >> return())
           ] ++ -- volume stuff
           [ ((mod4Mask .|. mod1Mask, xK_equal), spawn "amixer -q sset Master 10%+")
           , ((mod4Mask .|. mod1Mask, xK_minus), spawn "amixer -q sset Master 10%-")
