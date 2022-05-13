@@ -35,4 +35,5 @@ vim.api.nvim_command([[
 vim.api.nvim_command([[
   set nofoldenable
   set fdm=indent
+  set cursorline
 ]])
