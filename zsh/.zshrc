@@ -177,3 +177,6 @@ if [ -f '/home/harwiltz/nomadic-packages/google-cloud-sdk/path.zsh.inc' ]; then 
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/harwiltz/nomadic-packages/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/harwiltz/nomadic-packages/google-cloud-sdk/completion.zsh.inc'; fi
+
+GPG_TTY=$(tty)
+export GPG_TTY
