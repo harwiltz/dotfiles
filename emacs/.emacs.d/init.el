@@ -515,6 +515,7 @@
  '(org-level-5 ((t (:height 1.1 :weight bold)))))
 
 (require 'emacs)
+(evil-set-initial-state 'deft-mode 'emacs)
 (evil-mode 1)
 
 (defun org-export-pdf-then-open()
