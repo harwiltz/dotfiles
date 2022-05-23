@@ -514,9 +514,11 @@
  '(org-level-4 ((t (:height 1.2 :weight bold))))
  '(org-level-5 ((t (:height 1.1 :weight bold)))))
 
-(require 'emacs)
+(require 'evil)
 (evil-set-initial-state 'deft-mode 'emacs)
 (evil-mode 1)
+
+(require 'mu4e)
 
 (defun org-export-pdf-then-open()
   (org-open-file (org-latex-export-to-pdf)))
