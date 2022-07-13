@@ -10,9 +10,18 @@
 (setq org-agenda-files
       (find-lisp-find-files
        harwiltz/org-agenda-base "\.org$"))
+(setq harwiltz/org-agenda-scheduled-marker-expr
+      "(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled \"S\" \" \"))")
+(setq harwiltz/org-agenda-deadline-marker-expr
+      "(let ((deadline (org-get-deadline-time (point)))) (if deadline \"D\" \" \"))")
 (setq org-agenda-prefix-format
-      '((agenda . " %i %-12:c%?-12t% s")
-	(todo . " %i %-12:c %(symbol-name 'E)%-6 e")
+      `((agenda . " %i %-12:c%?-12t% s")
+	(todo . ,(concat " %i %-12:c %"
+			harwiltz/org-agenda-scheduled-marker-expr
+			"%"
+			harwiltz/org-agenda-deadline-marker-expr
+			" %(symbol-name 'E)%-6 e"))
+	;; (todo . " %i %-12:c %(symbol-name 'E)%-6 e")
 	(tags . " %i %-12:c %(symbol-name 'E)%-6 e")
 	(search . " %i %-12:c %(symbol-name 'E)%-6 e")))
 (setq org-agenda-custom-commands
@@ -24,10 +33,16 @@
 		  (list (concat harwiltz/org-agenda-base "/inbox.org")))))
 	  (todo "IN PROGRESS"
 		((org-agenda-overriding-header "In Progress")))
+	  (todo "WAITING"
+		((org-agenda-overriding-header "Waiting")))
 	  (todo "TODO"
 		((org-agenda-overriding-header "Backlog")
 		 (org-agenda-files
-		  (list (concat harwiltz/org-agenda-base "/backlog.org"))))))
+		  (list (concat harwiltz/org-agenda-base "/backlog.org")))))
+	  (todo "TODO"
+		((org-agenda-overriding-header "Upcoming Events")
+		 (org-agenda-files
+		  (list (concat harwiltz/org-agenda-base "/events.org"))))))
 		 ;; (org-agenda-skip-function
 		 ;;  '(org-agenda-skip-entry-if 'deadline 'scheduled)))))
 	 nil)))
@@ -36,6 +51,7 @@
       org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 (setq org-refile-targets '(("backlog.org" :level . 1)
+			   ("events.org" :level . 1)
 			   ("test.org" :level . 1)))
 
 (add-hook 'org-agenda-mode-hook #'hl-line-mode)

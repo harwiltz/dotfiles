@@ -29,10 +29,10 @@ main = (putStrLn bar) >> spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonad
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
     where barArgs :: [String]
-          barArgs = [ "-t", "\"%StdinReader%}{%wake% vol:%vol% | %date% [%battery%]\""
+          barArgs = [ "-t", "\"%StdinReader%}{%mbsync% | %ipaddr% | %wake% vol:%vol% | %date% [%battery%]\""
                     --"-t", "\"%StdinReader%}{%wake% %alsa:default:Master% | %date% [%battery%]\""
                     , "-d"
-                    , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd]
+                    , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd, emailCmd, ipCmd]
                     -- , "-C", show [batteryCmd, dateCmd, screenCmd]
                     , "-f", "\"xft: xos4 Terminus\""
                     ]
@@ -81,6 +81,20 @@ screenCmd = unwords [ "Run Com"
                     , show "wake"
                     , show 10
                     ]
+emailCmd = unwords [ "Run Com"
+                   , show "/home/harwiltz/scripts/xmobar-mbsync-xoauth"
+                   , show [""]
+                   , show "mbsync"
+                   , show 30
+                   ]
+
+ipCmd = unwords [ "Run Com"
+                , show "/home/harwiltz/scripts/xmobar-ip"
+                , show [""]
+                , show "ipaddr"
+                , show 30
+                ]
+
 --screenCmd = "Run ScreenWakeness \"wake\""
 
 data ScreenWakeness = ScreenWakeness String deriving (Read, Show)
