@@ -180,3 +180,4 @@ if [ -f '/home/harwiltz/nomadic-packages/google-cloud-sdk/completion.zsh.inc' ];
 
 GPG_TTY=$(tty)
 export GPG_TTY
+export EDITOR=nvim

@@ -28,6 +28,12 @@
 (setq deft-use-filename-as-title t)
 (global-set-key (kbd "C-c o") 'deft)
 
+;; elfeed (rss) stuff
+(setq elfeed-feeds
+      '(("https://jmlr.org/jmlr.xml" jmlr)
+	("https://rss.sciencedirect.com/publication/science/00051098" automatica)))
+(setq-default elfeed-search-filter "@2-days-ago +unread")
+
 (defun reset-font (&optional font size)
   (interactive "sFont family: \nsFont size: ")
   (let ((f (or font harwiltz/font))
@@ -136,6 +142,7 @@
 (global-set-key (kbd "C-c b") 'parcel-add-reference)
 (global-set-key (kbd "C-c P") 'parcel-assemble-all)
 (global-set-key (kbd "C-c v") (lambda () (interactive) (assemble nil)))
+(global-set-key (kbd "C-c m") (lambda () (interactive) (shell-command-to-string "make")))
 (define-key doc-view-mode-map (kbd "j") 'doc-view-next-line-or-next-page)
 (define-key doc-view-mode-map (kbd "k") 'doc-view-previous-line-or-previous-page)
 
@@ -177,7 +184,7 @@
 ;; org-mode stuff
 (eval-after-load 'org '(add-to-list 'org-file-apps '("\\.pdf\\'" . emacs)))
 (setq org-latex-create-formula-image-program 'dvipng)
-(setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "|" "DONE" "PASS")))
+(setq org-todo-keywords '((sequence "TODO" "IN PROGRESS" "WAITING" "|" "DONE" "PASS")))
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t) (haskell . t) (latex . t)))
@@ -394,7 +401,7 @@
 (require 'display-line-numbers)
 
 (defcustom display-line-numbers-exempt-modes
-  '(org-agenda-mode eshell-mode helm-mode)
+  '(org-agenda-mode eshell-mode helm-mode org-present-mode)
   "Modes for which no line numbers should be rendered."
   :group 'display-line-numbers
   :type 'list
@@ -472,7 +479,7 @@
  '(org-fontify-done-headline nil)
  '(org-fontify-todo-headline nil)
  '(package-selected-packages
-   '(magit fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(elfeed org-present magit fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(rustic-ansi-faces
    ["#ffffff" "#c82829" "#718c00" "#eab700" "#4271ae" "#c678dd" "#8abeb7" "#4d4d4c"])
@@ -516,8 +523,11 @@
 
 (require 'evil)
 (evil-set-initial-state 'deft-mode 'emacs)
+(evil-set-initial-state 'elfeed-search 'emacs)
+(evil-set-initial-state 'elfeed-search-mode 'emacs)
 (evil-mode 1)
 
+(setq user-mail-address "harley.wiltzer@mail.mcgill.ca")
 (require 'mu4e)
 
 (defun org-export-pdf-then-open()
