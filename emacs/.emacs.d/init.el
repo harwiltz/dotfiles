@@ -203,6 +203,36 @@
                                            ("style" . "filled")
                                            ("fillcolor" . "gray50"))))
 
+(eval-after-load "org-present"
+  '(progn
+     (add-hook 'org-present-mode-hook
+	       (lambda ()
+		 (org-present-big)
+		 (org-display-inline-images)
+		 (org-present-hide-cursor)
+		 (org-present-read-only)
+		 (display-line-numbers-mode -1)
+		 (evil-mode -1)))
+     (add-hook 'org-present-mode-quit-hook
+	       (lambda ()
+		 (org-present-small)
+		 (org-remove-inline-images)
+		 (org-present-show-cursor)
+		 (org-present-read-write)
+		 (display-line-numbers-mode 1)
+		 (evil-mode)))))
+
+(eval-after-load "mu4e"
+  (lambda ()
+    (setq sendmail-program "/usr/bin/msmtp"
+	  mu4e-root-maildir "~/.mail"
+	  mu4e-mu4e-mail-path "~/.mail"
+	  send-mail-function 'sendmail-send-it
+	  message-send-mail-function 'message-send-mail-with-sendmail
+	  smtpmail-auth-supported '(xoauth2 cram-md5 plain login)
+	  message-sendmail-extra-arguments `("-a" "mcgill"))))
+
+
 (add-hook 'after-init-hook
  (lambda ()
   (progn
@@ -487,6 +517,8 @@
    '((assemble-pdf-beamer . t)
      (default-assemble-target . "dev-env.pdf")))
  '(send-mail-function 'smtpmail-send-it)
+ '(smtpmail-smtp-server "smtp.office365.com")
+ '(smtpmail-smtp-service 25)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    '((20 . "#d54e53")
