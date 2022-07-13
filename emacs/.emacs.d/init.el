@@ -14,8 +14,8 @@
 (setq evil-want-C-i-jump nil)
 
 ;; color themes
-(setq harwiltz/light-theme 'base16-atelier-dune-light)
-(setq harwiltz/dark-theme 'doom-sourcerer)
+(setq harwiltz/light-theme 'kaolin-light)
+(setq harwiltz/dark-theme 'kaolin-bubblegum)
 (setq harwiltz/pdoc-process nil)
 
 (setq harwiltz/font "UbuntuMono-12")
