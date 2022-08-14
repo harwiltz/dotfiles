@@ -467,6 +467,37 @@ Effort column next to the Time column."
 	    (org-latex-scale harwiltz/latex-scale)
 	    (org-hide-block-all)))
 
+;; Taken from https://stackoverflow.com/a/29757750
+(defun ediff-copy-both-to-C ()
+  "Function to sequentially add both variants from diff to control buffer in ediff"
+  (interactive)
+  (ediff-copy-diff ediff-current-difference nil 'C nil
+		   (concat
+		    (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+		    (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+(defun add-copy-both-to-C-to-ediff-mode-map ()
+  (setq ediff-long-help-message-merge
+	"
+p,DEL -previous diff |     | -vert/horiz split   |  x -copy buf X's region to C
+n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
+    j -jump to diff  |     @ -auto-refinement    |  * -refine current region
+   gx -goto X's point|    ## -ignore whitespace  |  ! -update diff regions
+  C-l -recenter      | #f/#h -focus/hide regions |  + -combine diff regions
+  v/V -scroll up/dn  |     X -read-only in buf X | wx -save buf X
+  </> -scroll lt/rt  |     m -wide display       | wd -save diff output
+    ~ -swap variants |     s -shrink window C    |  / -show/hide ancestor buff
+                     |  $$ -show clashes only    |  & -merge w/new default
+                     |  $* -skip changed regions |  B -copy both regions to C
+")
+  (define-key ediff-mode-map "B" 'ediff-copy-both-to-C))
+
+(add-hook 'ediff-keymap-setup-hook 'add-copy-both-to-C-to-ediff-mode-map)
+(add-hook 'ediff-prepare-buffer-hook 
+          (lambda () 
+            (cond ((eq major-mode 'org-mode)
+                   (visible-mode 1)))))
+
+
 ;; Hatch stuff
 (require 'hatch-button)
 (global-set-key (kbd "<f2>") 'hatch-reset)
