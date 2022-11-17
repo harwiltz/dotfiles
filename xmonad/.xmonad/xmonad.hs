@@ -34,7 +34,7 @@ bar = intercalate " " $ "xmobar":barArgs
                     , "-d"
                     , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd, emailCmd, ipCmd]
                     -- , "-C", show [batteryCmd, dateCmd, screenCmd]
-                    , "-f", "\"xft: xos4 Terminus\""
+                    , "-f", "\"Terminus\""
                     ]
 
 batteryCmd :: String
@@ -182,7 +182,7 @@ keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
     where volDeltaPct = 5.0
 
 dmenuCmd = unwords [ "dmenu_run"
-                   , "-fn", show "xos4 Terminus"
+                   , "-fn", show "Terminus"
                    , "-p" , show "run:"
                    , "-nb", show "#111"
                    , "-nf", show "#888"

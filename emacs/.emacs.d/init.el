@@ -21,7 +21,7 @@
 (setq harwiltz/dark-theme 'doom-solarized-dark-high-contrast)
 (setq harwiltz/pdoc-process nil)
 
-(setq harwiltz/font "UbuntuMono-12")
+(setq harwiltz/font "Dejavu Sans Mono-12")
 
 ;; deft stuff
 (setq deft-extensions '("org" "tex"))
@@ -642,7 +642,7 @@ n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
 (evil-mode 1)
 
 (setq user-mail-address "harley.wiltzer@mail.mcgill.ca")
-(require 'mu4e)
+;;(require 'mu4e)
 
 (defun org-export-pdf-then-open()
   (org-open-file (org-latex-export-to-pdf)))
