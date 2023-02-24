@@ -13,6 +13,9 @@
 (setq custom-safe-themes t)
 (setq evil-want-C-i-jump nil)
 
+
+(setq lsp-keymap-prefix "<f5>")
+
 ;; color themes
 (setq harwiltz/light-theme 'kaolin-light)
 (setq harwiltz/dark-theme 'kaolin-bubblegum)
@@ -27,6 +30,25 @@
 (setq deft-use-filter-string-for-filename t)
 (setq deft-use-filename-as-title t)
 (global-set-key (kbd "C-c o") 'deft)
+
+;;; org-tree-slide
+(defun harwiltz/otp-play()
+  (setq harwiltz/otp-font (face-attribute 'default :font))
+  (setq org-format-latex-options
+	(plist-put org-format-latex-options
+		   :scale 3.0))
+  (org-latex-preview '(64))
+  (org-latex-preview '(16))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-20"))
+
+(defun harwiltz/otp-end()
+  (org-latex-scale harwiltz/latex-scale)
+  (org-latex-preview '(64))
+  (org-latex-preview '(16))
+  (set-face-attribute 'default nil :font harwiltz/font))
+
+(add-hook 'org-tree-slide-play-hook 'harwiltz/otp-play)
+(add-hook 'org-tree-slide-stop-hook 'harwiltz/otp-end)
 
 ;; elfeed (rss) stuff
 (setq elfeed-feeds
@@ -229,6 +251,17 @@
 ;;(define-key org-agenda-mode-map (kbd "C-c q") 'harwiltz/unprocess-task)
 (global-set-key (kbd "<f1>") (lambda () (interactive) (org-agenda nil "h")))
 
+(defun harwiltz/setup-lsp ()
+  (add-hook 'prog-mode-hook #'lsp))
+
+(defun harwiltz/lsp-init ()
+  (interactive)
+  (harwiltz/setup-lsp))
+
+;;(eval-after-load 'lsp-mode
+;;  (progn
+;;    (setq lsp-keymap-prefix "<f5>")
+;;    (add-hook 'prog-mode-hook #'lsp)))
 
 (setq harwiltz/current-mission "mission")
 (setq org-clock-report-include-clocking-task t)
@@ -322,6 +355,24 @@ Effort column next to the Time column."
     (insert "#+begin_proof\n\n#+end_proof\n"))
   (forward-line))
 
+(defun instikz (name dir)
+  (interactive "sFile name (no extension): \nsDirectory [.]: ")
+  (let* ((dir-trim (s-trim dir))
+	 (dir-default (if (string-empty-p dir-trim) "." dir-trim))
+	 (clean-dir (string-remove-suffix "/" dir-default)))
+    (progn
+      (insert (concat "#+HEADER: :file " clean-dir "/" name ".svg :imagemagick yes\n"))
+      (insert "#+HEADER: :results output silent :headers '(\"\\\\usepackage{tikz}\")\n")
+      (insert "#+HEADER: :fit yes :imoutoptions -geometry 400 :iminoptions -density 600\n")
+      (insert "#+BEGIN_SRC latex\n")
+      (insert "\\begin{tikzpicture}\n")
+      (insert "\\end{tikzpicture}\n")
+      (insert "#+END_SRC\n")
+      (insert "\n")
+      (insert (concat "[[" clean-dir "/" name ".svg]]\n"))
+      (forward-line -5)
+      (end-of-line))))
+
 (defun idify (s)
   "Make id string from arbitrary string"
   (downcase (string-join (split-string s " ") "-")))
@@ -336,7 +387,7 @@ Effort column next to the Time column."
   (save-excursion
     (save-restriction
       (if (use-region-p)
-	  (narrow-to-region region-beginning region end)
+	  (narrow-to-region (region-beginning) (region-end))
 	(widen))
       (goto-char (if (boundp 'point-min) point-min 0))
       (let ((ws (count-matches "\\sw+")))
@@ -534,7 +585,7 @@ n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
      ("\\?\\?\\?+" . "#dc752f")))
  '(linum-format " %7i ")
  '(package-selected-packages
-   '(elfeed org-present magit fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
+   '(company lsp-ui lsp-treemacs lsp-mode treemacs projectile kaolin-themes elfeed org-present magit fzf deft org-tree-slide epresent yasnippet nix-mode ox-hugo org-roam-ui doom-themes dracula-theme gruvbox-theme helm-bibtex julia-repl julia-mode kotlin-mode sublime-themes request org-roam ox-reveal scala-mode dash-functional org-journal latex-preview-pane auctex markdown-preview-mode markdown-mode yaml-mode org-bullets org-re-reveal-ref dash org-ref base16-theme afternoon-theme inkpot-theme htmlize ample-theme haskell-mode multi-term spacemacs-theme evil))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
    '((assemble-pdf-beamer . t)
