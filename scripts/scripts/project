@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+MONITOR=${PROJECT_MONITOR:-HDMI-2}
+LAPTOP=${PROJECT_LAPTOP:-eDP-1}
+POSITION=${PROJECTOR_POSITION:-above}
+
+if [[ $(xrandr --listactivemonitors | grep $MONITOR) ]]; then
+  echo "Already projecting, turning off projector..."
+  xrandr --output $MONITOR --off
+else
+  if [[ -z $(xrandr | grep "$MONITOR connected") ]]; then
+    echo "Error: Monitor $MONITOR is not connected"
+    exit 1
+  fi
+  echo "Turning on projector to $MONITOR $POSITION $LAPTOP"
+  xrandr --output $MONITOR --auto --primary
+  sleep 1
+  xrandr --output $MONITOR --$POSITION $LAPTOP
+fi
+
+feh --bg-fill ~/Pictures/nixos-dark.png

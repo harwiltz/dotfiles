@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+INTERFACE=wlp0s20f3
+OFFLINE_COLOR="#444444"
+ONLINE_COLOR="#44aa44"
+
+IP_REGEX="\([0-9]\+.[0-9]\+.[0-9]\+.[0-9]\+\)\/[0-9]\+"
+
+netstuff=$(ip addr | grep $INTERFACE)
+ip=$(echo $netstuff | grep -o $IP_REGEX | sed "s/$IP_REGEX/\1/g")
+
+if [[ -z $ip ]]; then
+  echo "<fc=$OFFLINE_COLOR>offline</fc>"
+else
+  echo "<fc=$ONLINE_COLOR>$ip</fc>"
+fi

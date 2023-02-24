@@ -51,9 +51,20 @@
 (add-hook 'org-tree-slide-stop-hook 'harwiltz/otp-end)
 
 ;; elfeed (rss) stuff
+(defun arxiv-rss-source (subject)
+  (let ((url (concat "http://arxiv.org/rss/" (symbol-name subject))))
+    `(,url ,subject)))
+
 (setq elfeed-feeds
-      '(("https://jmlr.org/jmlr.xml" jmlr)
-	("https://rss.sciencedirect.com/publication/science/00051098" automatica)))
+      `(("https://jmlr.org/jmlr.xml" jmlr)
+	("https://rss.sciencedirect.com/publication/science/00051098" automatica)
+	("https://rss.sciencedirect.com/publication/science/00043702" artificial-intelligence)
+	,(arxiv-rss-source 'math.OC)
+	,(arxiv-rss-source 'math.PR)
+	,(arxiv-rss-source 'cs.LG)
+	,(arxiv-rss-source 'cs.AI)
+	,(arxiv-rss-source 'stat.ML)))
+
 (setq-default elfeed-search-filter "@2-days-ago +unread")
 
 (defun reset-font (&optional font size)
@@ -262,6 +273,7 @@
     (require 'assemble)
     (require 'parc.el)
     (load-file "/home/harwiltz/.emacs.d/harwiltz-agenda.el")
+    (load-file "/home/harwiltz/.emacs.d/harwiltz-bibtex.el")
     (harwiltz/init-latex)
     (harwiltz/init-org-roam)
     (message "Syncing org-roam db...")
@@ -621,7 +633,8 @@ n,SPC -next diff     |     h -highlighting       |  r -restore buf C's old diff
      (320 . "goldenrod")
      (340 . "#e7c547")
      (360 . "DarkOliveGreen3")))
- '(vc-annotate-very-old-color nil))
+ '(vc-annotate-very-old-color nil)
+ '(warning-suppress-log-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

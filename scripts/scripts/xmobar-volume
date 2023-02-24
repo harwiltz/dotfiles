@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+ON_COLOR="#9999cc"
+OFF_COLOR="#ff0000"
+
+master_data=$(amixer get Master)
+if [[ $(echo $master_data | grep '\[off\]') ]]; then
+  color=$OFF_COLOR
+else
+  color=$ON_COLOR
+fi
+
+vol=$(echo $master_data | grep -o '\[[0-9]\+%\]' | head -n1 | sed "s/[^0-9%]//g")
+echo "<fc=$color>$vol</fc>"

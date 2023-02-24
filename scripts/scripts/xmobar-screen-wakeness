@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+DPMS_COLOR="#444477"
+NODPMS_COLOR="#FFFF00"
+
+info=$(xset q)
+dpms=$(echo $info | grep "DPMS is Enabled")
+if [[ $dpms ]]; then
+  echo "<fc=$DPMS_COLOR>---</fc>"
+else
+  echo "<fc=$NODPMS_COLOR>[o]</fc>"
+fi

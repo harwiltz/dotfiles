@@ -29,7 +29,7 @@ main = (putStrLn bar) >> spawnPipe bar >>= (xmonad . ewmh . nav2dconfig . xmonad
 bar :: String
 bar = intercalate " " $ "xmobar":barArgs
     where barArgs :: [String]
-          barArgs = [ "-t", "\"%StdinReader%}{%mbsync% | %ipaddr% | %wake% vol:%vol% | %date% [%battery%]\""
+          barArgs = [ "-t", "\"%StdinReader%}{ %ipaddr% | %wake% vol:%vol% | %date% [%battery%]\""
                     --"-t", "\"%StdinReader%}{%wake% %alsa:default:Master% | %date% [%battery%]\""
                     , "-d"
                     , "-C", show [batteryCmd, dateCmd, volumeCmd, screenCmd, emailCmd, ipCmd]
