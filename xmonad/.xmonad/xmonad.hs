@@ -14,8 +14,10 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docks)
 import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.Grid
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.ManageHook
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.Types (Direction1D(..))
 
@@ -131,7 +133,7 @@ xmonadConfig h = docks desktopConfig { terminal           = "termite"
                                      , layoutHook         = avoidStruts $ layouts
                                      , workspaces         = myWorkspaces
                                      , logHook            = dynamicLogWithPP prettyPrint
-                                     , manageHook         = className =? "gksqt" --> doFloat
+                                     , manageHook         = (className =? "gksqt" --> doFloat) <+> (namedScratchpadManageHook scratchpads)
                                      } `additionalKeys` keyMaps
     where prettyPrint :: PP
           prettyPrint = xmobarPP { ppCurrent = xmobarColor "#FFFF00" "" . pad
@@ -152,11 +154,14 @@ romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 stars :: [WorkspaceId]
 stars = take 10 $ repeat "*"
 
+scratchpads = [ NS "term" "kitty -T scratch-term -o background=#0c0c33" (title =? "scratch-term") (customFloating $ W.RationalRect 0 (2/3) 1 (1/3)) ]
+
 keyMaps = [ ((mod4Mask, xK_Return), spawn "kitty")
           , ((mod4Mask, xK_e), spawn "emacsclient -nc")
           , ((mod4Mask, xK_p), spawn dmenuCmd)
           , ((mod1Mask, xK_l), spawn "xscreensaver-command -lock")
           , ((mod4Mask .|. mod1Mask, xK_p), spawn "scrot /home/harwiltz/temp.png")
+          , ((mod4Mask .|. mod1Mask, xK_space), namedScratchpadAction scratchpads "term")
           ] ++ --additional workspace stuff
           [ ((mod4Mask, xK_0), windows $ W.greedyView $ myWorkspaces !! 9)
           , ((mod4Mask .|. shiftMask, xK_0), windows $ W.shift $ myWorkspaces !! 9)
