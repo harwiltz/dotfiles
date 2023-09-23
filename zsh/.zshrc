@@ -32,7 +32,7 @@ alias l='asciiquarium'
 
 alias tailf="tail -f"
 
-neofetch
+alsi -a
 #echo ""
 
 # Attempt to fix PS1 in emacs shell
