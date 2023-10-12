@@ -120,7 +120,7 @@ PS1_CWD_LONG="%B%F{blue}%~%f%b"
 PS1_CWD_SHORT="%B%F{cyan}_/%F{blue}%1~%f%b"
 #PS1_CWD_TRUNC="%B%F{blue}%3~%f%b"
 PS1_CWD_TRUNC="%B%F{blue}%20<..<%~%<<"
-PS1_PROMPT="%(?.%B%F{green}│Ψ > .%B%F{red}♯ %? )%f%b"
+PS1_PROMPT="%(?.%B%F{green}│Ψ 〉.%B%F{red}♯ %? )%f%b"
 #export PROMPT='$(get_ps1)'
 
 

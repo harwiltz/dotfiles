@@ -2395,6 +2395,6 @@ cursor_blink_interval 0
 
 
 # BEGIN_KITTY_THEME
-# Alabaster Dark
+# Rosé Pine
 include current-theme.conf
 # END_KITTY_THEME
