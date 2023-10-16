@@ -43,3 +43,8 @@
 (use-package org-ref :ensure t)
 
 (use-package catppuccin-theme :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets")))

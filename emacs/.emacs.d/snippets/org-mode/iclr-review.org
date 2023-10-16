@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: ICLR Review
+# key: r-iclr
+# --
+** [=#${1:ID}=] ${2:TITLE}
+*** Summary
+$0
+*** Soundness
+- [ ] 4 Excellent
+- [ ] 3 Good
+- [ ] 2 Fair
+- [ ] 1 Poor
+*** Presentation
+- [ ] 4 Excellent
+- [ ] 3 Good
+- [ ] 2 Fair
+- [ ] 1 Poor
+*** Contribution
+- [ ] 4 Excellent
+- [ ] 3 Good
+- [ ] 2 Fair
+- [ ] 1 Poor
+*** Strengths
+*** Weaknesses
+*** Questions
+*** Rating
+- [ ] 1 Strong Reject
+- [ ] 3 Reject, not good enough
+- [ ] 5 Marginally below the acceptance threshold
+- [ ] 6 Marginally above the acceptance threshold
+- [ ] 8 Accept, good paper
+- [ ] 10 Strong accept, should be highlighted at the conference
+*** Confidence
+- [ ] 1 You are unable to assess this paper and have alerted the ACs
+  to seek an opinion from different reviewers.
+- [ ] 2 You are willing to defend your assessment, but it is quite
+  likely that you didn't understand the central parts of the
+  submission or that you are unfamiliar with some pieces of related
+  work. Math/other details were not carefully checked.
+- [ ] 3 You are fairly confident in your assessment. It is possible
+  that you did not understand some parts of the submission or that you
+  are unfamiliar with some pieces of related work. Math/other details
+  were not carefully checked.
+- [ ] 4 You are confident in your assessment, but not absolutely
+  certain. It is unlikely, but not impossible, that you did not
+  understand some parts of the submission or that you are unfamiliar
+  with some pieces of related work.
+- [ ] 5 You are absolutely certain about your assessment. You are very
+  familiar with the related work and checked the math/other details
+  carefully.
