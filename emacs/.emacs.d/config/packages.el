@@ -26,8 +26,23 @@
 (use-package bibtex-completion
   :ensure t
   :config
-  (setq bibtex-completion-bibliography "~/zettelkasten/sources.bib"
+  (setq bibtex-completion-bibliography "~/zotero-sources.bib"
 	bibtex-completion-library-path "~/zettelkasten/library"
+	bibtex-completion-notes-path "~/zettelkasten/paper-notes"
+	bibtex-completion-pdf-field "file"
+	bibtex-completion-notes-template-multiple-files
+	"#+TITLE: [Notes] ${title}
+#+AUTHOR: ${author-or-editor}
+
+#+BEGIN_SRC bibtex
+@${=type=}{
+    title={${title}},
+    author={${author}},
+    year={${year}}
+}
+#+END_SRC
+
+"
 	bibtex-completion-pdf-open-function
 	(lambda (path) (call-process "zathura" nil 0 nil path))))
 
@@ -48,3 +63,5 @@
   :ensure t
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
+
+(use-package magit :ensure t)
