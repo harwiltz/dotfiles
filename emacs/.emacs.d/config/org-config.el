@@ -15,7 +15,10 @@
      '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
     (setq org-hide-emphasis-markers t
 	  org-todo-keywords '((sequence "TODO" "IN PROGRESS" "WAITING" "|" "DONE" "PASS")
-			      (sequence "BACKLOG" "NEXT" "PENDING" "|" "FINISHED"))))
+			      (sequence "BACKLOG" "NEXT" "PENDING" "|" "FINISHED"))
+	  harwiltz/org-latex-packages-alist '(("" "harwiltzmath" t)
+					      ("" "harwiltzdraft" t))
+	  org-latex-packages-alist harwiltz/org-latex-packages-alist))
   :hook ((org-mode . org-indent-mode)
 	 (org-mode . auto-fill-mode)
 	 (org-mode . (lambda () (org-latex-scale nil)))))
