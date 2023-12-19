@@ -17,3 +17,7 @@
   :hook ((python-ts-mode . eglot-ensure)
 	 (python-ts-mode . company-mode))
   :mode ("\\.py\\'" . python-ts-mode))
+
+(use-package pipenv
+  :ensure t
+  :hook ((python-mode . pipenv-mode)))

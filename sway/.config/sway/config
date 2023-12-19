@@ -33,7 +33,8 @@ set $menu dmenu_path | dmenu -fn "Terminus" -nb "#000" -nf "#888" -sb "#000" -sf
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/harwiltz/Pictures/triangle-sunset.png fill
+# output * bg /home/harwiltz/Pictures/triangle-sunset.png fill
+output * bg /home/harwiltz/Pictures/flowers.png fill
 #
 # Example configuration:
 #
@@ -87,6 +88,11 @@ output * bg /home/harwiltz/Pictures/triangle-sunset.png fill
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
+
+    # Volume control
+    bindsym $mod+Mod1+m exec pamixer --toggle-mute
+    bindsym $mod+Mod1+Equal exec pamixer --increase 5
+    bindsym $mod+Mod1+Minus exec pamixer --decrease 5
 
     # Reload the configuration file
     bindsym $mod+Shift+x reload
@@ -218,7 +224,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+    status_command while ~/.config/sway/status.sh; do sleep 1; done
 
     colors {
         statusline #ffffff

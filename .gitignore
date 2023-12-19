@@ -15,3 +15,5 @@ auto
 elpa
 emacs/.emacs.d/transient
 .org-id-locations
+/mpd/.mpd/database
+/mpd/.mpd/sticker.sql

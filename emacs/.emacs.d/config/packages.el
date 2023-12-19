@@ -65,3 +65,10 @@
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
 (use-package magit :ensure t)
+
+(use-package markdown-mode :ensure t)
+
+(use-package dimmer
+  :ensure t
+  :custom (dimmer-fraction 0.3)
+  :config (dimmer-mode))

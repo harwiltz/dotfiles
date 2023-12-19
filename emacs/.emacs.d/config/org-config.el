@@ -14,7 +14,8 @@
      '(org-tag ((t (:inherit (shadow fixed-pitch)))))
      '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
     (setq org-hide-emphasis-markers t
-	  org-todo-keywords '((sequence "TODO" "IN PROGRESS" "WAITING" "|" "DONE" "PASS"))))
+	  org-todo-keywords '((sequence "TODO" "IN PROGRESS" "WAITING" "|" "DONE" "PASS")
+			      (sequence "BACKLOG" "NEXT" "PENDING" "|" "FINISHED"))))
   :hook ((org-mode . org-indent-mode)
 	 (org-mode . auto-fill-mode)
 	 (org-mode . (lambda () (org-latex-scale nil)))))

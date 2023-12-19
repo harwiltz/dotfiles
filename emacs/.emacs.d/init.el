@@ -5,11 +5,14 @@
 
 (setq custom-file "~/.emacs.d/emacs-custom.el")
 
+(setq harwiltz/agenda-dir "~/agenda")
+
 (load "packages.el")
 (load "lsp.el")
 (load "org-config.el")
 (load "org-roam-config.el")
 (load "keybindings.el")
+(and (file-exists-p harwiltz/agenda-dir) (load "agenda.el"))
 (load custom-file t)
 ;; (load-theme 'modus-operandi)
 (setq catppuccin-flavor 'mocha)
