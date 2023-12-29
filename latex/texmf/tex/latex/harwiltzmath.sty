@@ -71,7 +71,11 @@
 \newcommand{\iindexedin}[4]{\iindexed{\in #1}{#2}{#3}{#4}}
 
 \newcommand{\proj}[1]{\iota_{#1}}
-\newcommand{\probset}[1]{\mathcal{P}\left(#1\right)}
+\newcommand{\measset}[2][]{\mathcal{M}^{#1}_+(#2)}
+\newcommand{\zeromeasset}[2][]{\mathcal{M}^{#1}_0(#2)}
+\newcommand{\probset}[1]{\mathcal{P}(#1)}
+\newcommand{\Probset}[1]{\mathcal{P}\left(#1\right)}
+\newcommand{\simplex}[1]{\Delta_{#1}}
 \newcommand{\wassersteinspace}[2][2]{\mathbf{W}_{#1}\left(#2\right)}
 \newcommand{\wasserspace}[1][2]{\mathbf{W}_{#1}}
 \newcommand{\wassersteinmetric}[2][2]{d_{\wassersteinspace[#1]{#2}}}

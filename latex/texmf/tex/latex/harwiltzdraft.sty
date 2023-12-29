@@ -1,13 +1,36 @@
-\usepackage[dvipsnames]{xcolor}
-\usepackage{hyperref}
-\usepackage{parskip}
-\usepackage{mlmodern}
-\usepackage{amsthm}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{harwiltzdraft}
+
+\newif\if@fancycolors
+\newif\if@theorytheme
+
+\RequirePackage{hyperref}
+\RequirePackage{parskip}
+\RequirePackage{mlmodern}
+\RequirePackage{amsthm}
+
 \hypersetup{
   colorlinks=true,
-  linkcolor=BlueViolet,
-  citecolor=ForestGreen
+  linkcolor=blue,
+  citecolor=magenta,
 }
+
+\DeclareOption{fancycolors}{\@fancycolorstrue}
+\DeclareOption{theorytheme}{\@theorythemetrue}
+\ProcessOptions\relax
+
+\if@fancycolors
+  \RequirePackage[dvipsnames]{xcolor}
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=BlueViolet,
+    citecolor=ForestGreen
+  }
+\fi
+
+\if@theorytheme
+  \RequirePackage{times}
+\fi
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}

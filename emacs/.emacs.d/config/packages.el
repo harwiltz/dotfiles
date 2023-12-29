@@ -18,10 +18,13 @@
 (use-package auctex
   :ensure t
   :defer t
+  :config
+  (reftex-plug-into-AUCTeX t)
   :hook
   ((LaTeX-mode . (lambda () (add-to-list 'TeX-view-program-selection
 					 '(output-pdf  "Zathura"))))
-   (LaTeX-mode . auto-fill-mode)))
+   (LaTeX-mode . auto-fill-mode)
+   (LaTeX-mode . turn-on-reftex)))
 
 (use-package bibtex-completion
   :ensure t
