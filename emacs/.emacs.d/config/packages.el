@@ -66,6 +66,7 @@
 
 (use-package yasnippet
   :ensure t
+  :hook ((text-mode prog-mode conf-mode snippet-mode) . yas-minor-mode-on)
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
@@ -77,3 +78,5 @@
   :ensure t
   :custom (dimmer-fraction 0.3)
   :config (dimmer-mode))
+
+(use-package json-mode :ensure t)

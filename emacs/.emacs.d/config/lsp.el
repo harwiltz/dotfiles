@@ -21,3 +21,5 @@
 (use-package pipenv
   :ensure t
   :hook ((python-mode . pipenv-mode)))
+
+(use-package pyvenv :ensure t)

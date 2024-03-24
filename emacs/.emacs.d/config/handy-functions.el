@@ -1,0 +1,45 @@
+(defun review-index--review-path (directory)
+  (concat directory "/review.org"))
+
+(defun review-index--is-review-dir (file)
+  (and (file-directory-p file) (file-exists-p (review-index--review-path file))))
+
+(defun review-index--add-review-criterion (criterion)
+  (org-return-and-maybe-indent)
+  (insert (concat "- [ ] " criterion)))
+
+(defun review-index--get-title-from-review (file)
+  (message file)
+  (let ((buf (find-file-noselect file)))
+    (with-current-buffer buf
+      (org-macro-initialize-templates)
+      (assoc-default "subtitle" org-macro-templates))))
+
+(defun review-index--make-review-entry (directory)
+  (let* ((review-file (review-index--review-path directory))
+	 (title (review-index--get-title-from-review review-file))
+	 (paper-id (file-name-base directory)))
+    (progn
+      (org-insert-todo-heading-respect-content)
+      (insert (concat (org-link-make-string review-file title) "[/]"))
+      (review-index--add-review-criterion "Read paper")
+      (review-index--add-review-criterion "Write summary")
+      (review-index--add-review-criterion "Strengths and weaknesses")
+      (review-index--add-review-criterion "Questions")
+      (review-index--add-review-criterion "Score")
+      (review-index--add-review-criterion "Submit review"))))
+
+(defun make-review-index (venue)
+  (and (file-exists-p "index.org") (error (concat "File index.org already exists.")))
+  (with-temp-file "index.org"
+    (org-mode)
+    (insert (concat "#+TITLE: " venue " Reviews\n"))
+    (insert "#+AUTHOR: Harley Wiltzer\n")
+    (insert "#+STARTUP: overview\n")
+    (insert "#+OPTIONS: toc:nil num:nil\n")
+    (insert "\n")
+    (org-insert-heading)
+    (insert "Papers [/]")
+    (let* ((files (directory-files "."))
+	   (directories (seq-filter 'review-index--is-review-dir files)))
+      (mapcar 'review-index--make-review-entry directories))))

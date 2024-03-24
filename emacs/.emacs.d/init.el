@@ -12,6 +12,7 @@
 (load "org-config.el")
 (load "org-roam-config.el")
 (load "keybindings.el")
+(load "handy-functions.el")
 (and (file-exists-p harwiltz/agenda-dir) (load "agenda.el"))
 
 (load custom-file t)

@@ -1,6 +1,8 @@
 (use-package org
   :config
   (progn
+    (add-to-list 'org-file-apps
+		 '("\\.pdf\\'" . "zathura %s"))
     (custom-theme-set-faces
      'user
      '(org-block ((t (:inherit fixed-pitch))))
