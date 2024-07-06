@@ -1,5 +1,6 @@
 // -*- mode: jsonc -*-
 {
+    "layer": "top",
     "spacing": 4,
     "modules-left": [
 	"hyprland/workspaces",
@@ -17,7 +18,26 @@
     ],
     "hyprland/workspaces": {
 	"active-only": false,
-	"all-outputs": true
+	"all-outputs": false
+    },
+    "clock": {
+	"format": "{:%H:%M}",
+	"format-alt": "{:%A, %B %d, %Y (%R)}",
+	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+	"calendar": {
+	    "mode": "year",
+	    "mode-mon-col": 3,
+	    "weeks-pos": "right",
+	    "on-scroll": 1,
+	    "on-click-right": "mode",
+	    "format": {
+		"months": "<span color='#ffead3'><b>{}</b></span>",
+		"days": "<span color='#ecc6d9'><b>{}</b></span>",
+		"weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+		"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+		"today": "<span color='#ffcc99'><b><u>{}</u></b></span>"
+	    },
+	},
     },
     "network": {
 	"format-wifi": "{essid} ({signalStrength}%) ",
@@ -27,7 +47,7 @@
 	"format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}\t\t{format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
