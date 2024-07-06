@@ -3,6 +3,7 @@
 
 \newif\if@fancycolors
 \newif\if@theorytheme
+\newif\if@gdmtheme
 
 \RequirePackage{hyperref}
 \RequirePackage{parskip}
@@ -17,6 +18,7 @@
 
 \DeclareOption{fancycolors}{\@fancycolorstrue}
 \DeclareOption{theorytheme}{\@theorythemetrue}
+\DeclareOption{gdmtheme}{\@gdmthemetrue}
 \ProcessOptions\relax
 
 \if@fancycolors
@@ -30,6 +32,12 @@
 
 \if@theorytheme
   \RequirePackage{times}
+\fi
+
+\if@gdmtheme
+  \RequirePackage{pifont}
+  \RequirePackage{XCharter}
+  \RequirePackage[xcharter,bigdelims,vvarbb]{newtxmath}
 \fi
 
 \newtheorem{theorem}{Theorem}
