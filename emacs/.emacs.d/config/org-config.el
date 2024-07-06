@@ -18,8 +18,8 @@
     (setq org-hide-emphasis-markers t
 	  org-todo-keywords '((sequence "TODO" "IN PROGRESS" "WAITING" "|" "DONE" "PASS")
 			      (sequence "BACKLOG" "NEXT" "PENDING" "|" "FINISHED"))
-	  harwiltz/org-latex-packages-alist '(("" "harwiltzmath" t)
-					      ("" "harwiltzdraft" t))
+	  org-journal-dir "~/journal"
+	  harwiltz/org-latex-packages-alist '(("" "harwiltzmath" t))
 	  org-latex-packages-alist harwiltz/org-latex-packages-alist))
   :hook ((org-mode . org-indent-mode)
 	 (org-mode . auto-fill-mode)
