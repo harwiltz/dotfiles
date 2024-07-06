@@ -18,6 +18,12 @@
 	 (python-ts-mode . company-mode))
   :mode ("\\.py\\'" . python-ts-mode))
 
+(use-package typst-ts-mode
+  :straight (:type git :host sourcehut :repo "meow_king/typst-ts-mode" :files (:defaults "*.el"))
+  :hook ((typst-ts-mode . eglot-ensure)
+	 (typst-ts-mode . company-mode))
+  :mode ("\\.typ\\'" . typst-ts-mode))
+
 (use-package pipenv
   :ensure t
   :hook ((python-mode . pipenv-mode)))
