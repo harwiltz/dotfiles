@@ -1,41 +1,33 @@
-(set-face-attribute 'default nil :height 120 :family "Ubuntu Mono") ; Remove later
-
 (add-to-list 'load-path "~/.emacs.d/config")
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-(setq custom-file "~/.emacs.d/emacs-custom.el")
+;; (add-to-list 'default-frame-alist
+;;              '(font . "Inconsolata-12"))
 
-(setq harwiltz/agenda-dir "~/agenda")
-
-(load "straight.el")
 (load "packages.el")
-(load "lsp.el")
 (load "org-config.el")
 (load "org-roam-config.el")
 (load "keybindings.el")
-(load "handy-functions.el")
-(load "typst.el")
-(and (file-exists-p harwiltz/agenda-dir) (load "agenda.el"))
 
-(load custom-file t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(blink-cursor-mode -1)
+(global-hl-line-mode)
+
+(electric-pair-mode t)
+(show-paren-mode 1)
+(setq-default indent-tabs-mode nil)
+(save-place-mode t)
+(savehist-mode t)
+(recentf-mode t)
+(global-auto-revert-mode t)
 
 (defadvice load-theme (before theme-dont-propagate activate)
   (mapc #'disable-theme custom-enabled-themes))
 
-;; Nice themes:
-;; - ample (dark)
-;; - modus-operandi-tinted (light)
-;; - modus-vivendi (dark)
-;; - gruvbox (dark)
-;; - doom-gruvbox (dark)
-;; - kaolin-breeze (light)
-;; - kaolin-shiva (dark)
-;; - spacemacs-dark (dark)
-;; - spacemacs-light (light)
-
-(setq harwiltz/dark-theme 'spacemacs-dark)
-(setq harwiltz/light-theme 'spacemacs-light)
-(setq harwiltz/apply-dark-theme t)
+(setq harwiltz/dark-theme 'kaolin-ocean)
+(setq harwiltz/light-theme 'modus-operandi)
+(setq harwiltz/apply-dark-theme nil)
 
 (defun harwiltz/load-theme ()
   (interactive)
@@ -47,18 +39,19 @@
   (harwiltz/load-theme))
 
 (harwiltz/load-theme)
-;; (setq catppuccin-flavor 'mocha)
-;; (load-theme 'catppuccin)
 
-(blink-cursor-mode 0)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(global-hl-line-mode)
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward
+      window-resize-pixelwise t
+      frame-resize-pixelwise t
+      load-prever-newer t
+      backup-by-copying t
+      custom-file (expand-file-name "custom.el" user-emacs-directory))
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(load custom-file t)
 
-(custom-theme-set-faces
- 'user
- '(variable-pitch ((t (:family "Linux Libertine" :height 120 :weight thin))))
- '(fixed-pitch ((t (:family "Ubuntu Mono" :height 120)))))
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(unless package-archive-contents
+  (package-refresh-contents))

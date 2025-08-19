@@ -8,51 +8,66 @@
 (use-package vertico
   :ensure t
   :config
-  (vertico-mode t))
+  (vertico-mode t)
+  :bind (:map vertico-map
+              ("M-DEL" . vertico-directory-delete-word)))
 
 (use-package marginalia
   :ensure t
   :config
   (marginalia-mode t))
 
-(use-package auctex
+(use-package embark
   :ensure t
-  :defer t
-  :config
-  (reftex-plug-into-AUCTeX t)
-  :hook
-  ((LaTeX-mode . (lambda () (add-to-list 'TeX-view-program-selection
-					 '(output-pdf  "Zathura"))))
-   (LaTeX-mode . auto-fill-mode)
-   (LaTeX-mode . turn-on-reftex)))
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
 
-(use-package bibtex-completion
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  :config
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package citar
+  :ensure t
+  :custom
+  (citar-bibliography '("~/zotero-sources.bib")))
+
+(use-package company :ensure t)
+
+(use-package avy  ; fast navigation
   :ensure t
   :config
-  (setq bibtex-completion-bibliography "~/zotero-sources.bib"
-	bibtex-completion-library-path "~/zettelkasten/library"
-	bibtex-completion-notes-path "~/zettelkasten/paper-notes"
-	bibtex-completion-pdf-field "file"
-	bibtex-completion-notes-template-multiple-files
-	"#+TITLE: [Notes] ${title}
-#+AUTHOR: ${author-or-editor}
+  (global-set-key (kbd "C-;") 'avy-goto-char)
+  (setq avy-all-windows 'all-frames))
 
-#+BEGIN_SRC bibtex
-@${=type=}{
-    title={${title}},
-    author={${author}},
-    year={${year}}
-}
-#+END_SRC
+(use-package eat :ensure t)
 
-"
-	bibtex-completion-pdf-open-function
-	(lambda (path) (call-process "zathura" nil 0 nil path))))
-
-(use-package helm-bibtex :ensure t)
-
-(use-package company
-  :ensure t)
+(use-package powerthesaurus :ensure t)
 
 (use-package org-bullets
   :ensure t
@@ -60,9 +75,16 @@
 
 (use-package org-ref :ensure t)
 
+(use-package olivetti  ; margins in org-mode
+  :ensure t)
+
 (use-package catppuccin-theme :ensure t)
 
-(use-package spacemacs-theme :ensure t)
+(use-package kaolin-themes :ensure t)
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
 
 (use-package yasnippet
   :ensure t
@@ -71,12 +93,3 @@
   (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 
 (use-package magit :ensure t)
-
-(use-package markdown-mode :ensure t)
-
-(use-package dimmer
-  :ensure t
-  :custom (dimmer-fraction 0.3)
-  :config (dimmer-mode))
-
-(use-package json-mode :ensure t)

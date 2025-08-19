@@ -1,0 +1,139 @@
+# -*- mode: snippet -*-
+# name: NeurIPS 2025 Review
+# key: r-neuips-25
+# --
+
+#+TITLE: [[file:paper.pdf][${1:TITLE}]]
+#+SUBTITLE: Review of Submission ${2:ID} for NeurIPS 2025
+#+STARTUP: overview
+
+$0
+
+* TODO Summary
+#+BEGIN_COMMENT
+Briefly summarize the paper and its contributions. This is not the
+place to critique the paper; the authors should generally agree with a
+well-written summary. This is also not the place to paste the
+abstract—please provide the summary in your own understanding after
+reading.
+#+END_COMMENT
+* TODO Strengths and Weaknesses
+#+BEGIN_COMMENT
+Please provide a thorough assessment of the strengths and weaknesses
+of the paper. A good mental framing for strengths and weaknesses is to
+think of reasons you might accept or reject the paper. Please touch on
+the following dimensions: Quality, Clarity, Significance, and
+Originality. For more information, please see the NeurIPS 2025
+Reviewer Guidelines
+(https://neurips.cc/Conferences/2025/ReviewerGuidelines). You can
+incorporate Markdown and LaTeX into your review. See
+https://openreview.net/faq.
+#+END_COMMENT
+* TODO Quality
+#+BEGIN_COMMENT
+Based on what you discussed in "Strengths and Weaknesses", please
+assign the paper a numerical rating on the following scale to indicate
+the quality of the work.
+#+END_COMMENT
+- [ ] 4: excellent
+- [ ] 3: good
+- [ ] 2: fair
+- [ ] 1: poor
+* TODO Clarity
+#+BEGIN_COMMENT
+Based on what you discussed in "Strengths and Weaknesses", please
+assign the paper a numerical rating on the following scale to indicate
+the clarity of the paper.
+#+END_COMMENT
+- [ ] 4: excellent
+- [ ] 3: good
+- [ ] 2: fair
+- [ ] 1: poor
+* TODO Significance
+#+BEGIN_COMMENT
+Based on what you discussed in "Strengths and Weaknesses", please
+assign the paper a numerical rating on the following scale to indicate
+the significance of the paper.
+#+END_COMMENT
+- [ ] 4: excellent
+- [ ] 3: good
+- [ ] 2: fair
+- [ ] 1: poor
+* TODO Originality
+#+BEGIN_COMMENT
+Based on what you discussed in "Strengths and Weaknesses", please
+assign the paper a numerical rating on the following scale to indicate
+the originality of the paper.
+#+END_COMMENT
+- [ ] 4: excellent
+- [ ] 3: good
+- [ ] 2: fair
+- [ ] 1: poor
+* TODO Questions
+#+BEGIN_COMMENT
+Please list up and carefully describe questions and suggestions for
+the authors, which should focus on key points (ideally around 3–5)
+that are actionable with clear guidance. Think of the things where a
+response from the author can change your opinion, clarify a confusion
+or address a limitation. You are strongly encouraged to state the
+clear criteria under which your evaluation score could increase or
+decrease. This can be very important for a productive rebuttal and
+discussion phase with the authors.
+#+END_COMMENT
+* TODO Limitations
+#+BEGIN_COMMENT
+Have the authors adequately addressed the limitations and potential
+negative societal impact of their work? If so, simply leave “yes”; if
+not, please include constructive suggestions for improvement. In
+general, authors should be rewarded rather than punished for being up
+front about the limitations of their work and any potential negative
+societal impact. You are encouraged to think through whether any
+critical points are missing and provide these as feedback for the
+authors.
+#+END_COMMENT
+* TODO Rating
+- [ ] 6: *Strong Accept*: Technically flawless paper with groundbreaking
+  impact on one or more areas of AI, with exceptionally strong
+  evaluation, reproducibility, and resources, and no unaddressed
+  ethical considerations.
+- [ ] 5: *Accept*: Technically solid paper, with high impact on at least
+  one sub-area of AI or moderate-to-high impact on more than one area
+  of AI, with good-to-excellent evaluation, resources,
+  reproducibility, and no unaddressed ethical considerations.
+- [ ] 4: *Borderline Accept*: Technicall solid paper where reasons to
+  accept outweight reasons to reject, e.g., limited evaluation. Please
+  use sparingly.
+- [ ] 3: *Borderline Reject*: Technically solid paper where reasons to
+  reject, e.g., limited evaluation, outweigh reasons to accept,
+  e.g. good evaluation. Please use sparingly.
+- [ ] 2: *Reject*: For instance, a paper with technical flaws, weak
+  evaluation, inadequate reproducibility and incompletely addressed
+  ethical considerations.
+- [ ] 1: *Strong Reject*: For instance, a paper with well-known results
+  or unaddressed ethical considerations.
+* TODO Confidence
+- [ ] 5: You are absolutely certain about your assessment. You are
+  very familiar with the related work and checked the math/other
+  details carefully.
+- [ ] 4: You are confident in your assessment, but not absolutely
+  certain. It is unlikely, but not impossible, that you did not
+  understand some parts of the submission or that you are unfamiliar
+  with some pieces of related work.
+- [ ] 3: You are fairly confident in your assessment. It is possible
+  that you did not understand some parts of the submission or that you
+  are unfamiliar with some pieces of related work. Math/other details
+  were not carefully checked.
+- [ ] 2: You are willing to defend your assessment, but it is quite
+  likely that you did not understand the central parts of the
+  submission or that you are unfamiliar with some pieces of related
+  work. Math/other details were not carefully checked.
+- [ ] 1: Your assessment is an educated guess. The submission is not
+  in your area or the submission was difficult to
+  understand. Math/other details were not carefully checked.
+* TODO Paper Formatting Instructions
+#+BEGIN_COMMENT
+If you notice any major formatting issues in this paper, please list
+them below. Please follow the NeurIPS 2025 Paper Formatting
+Instructions for guidance
+(https://neurips.cc/Conferences/2025/CallForPapers).
+#+END_COMMENT

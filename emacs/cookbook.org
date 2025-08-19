@@ -1,0 +1,611 @@
+#+TITLE: Cookbook
+#+STARTUP: overview
+
+Some useful sites for sourcing recipes (supported by =org-chef=):
+1. https://www.simplyrecipes.com/
+2. http://allrecipes.com/
+3. http://www.geniuskitchen.com/
+4. https://www.budgetbytes.com/
+5. https://showmetheyummy.com/
+
+* TODO Red Lentil Dal
+:PROPERTIES:
+:source-url:
+:servings: 2
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/7]
+- [ ] 170g or 1 cup of dry red lentils
+- [ ] 1/2 onion
+- [ ] 3 red chilis
+- [ ] 2g ground turmeric
+- [ ] 30g vegetable oil
+- [ ] 4g cumin seeds
+- [ ] 1/2 crushed tomatos
+** Directions
+1. Set sauce pan on medium heat
+2. Add lentils to sauce pan with 2 cups of water
+3. Add turmeric, bring to boil
+4. Once boiling, cover the sauce pan and simmer
+5. Set frying pan on medium-high heat
+6. Add oil and cumin seads, fry for 30 seconds
+7. Add chilis and onions, stir fry until onions brown (about 4-5 minutes)
+8. Add crushed tomatos, stir fry for 30 seconds
+9. Dump everything from frying pan into sauce pan
+10. Stir, add salt to taste
+* TODO Soba Noodle Salad
+:PROPERTIES:
+:source-url:
+:servings: 2
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/11]
+- [ ] 9.5 oz soba noodles
+- [ ] 1 cup fresh cilantro
+- [ ] 1 cup red cabbage
+- [ ] 1 cup carrots
+- [ ] 3 green onions
+- [ ] 1/4 cup rice vinegar
+- [ ] 3.5 tbsp olive oil
+- [ ] 3 tbsp soy sauce
+- [ ] 1 tbsp sesame oil
+- [ ] 1-2 tbsp agave
+- [ ] 1 tsp ginger
+** Directions
+1. Cook noodles as per package instructions. When done, run under cold
+   water. Proceed in parallel.
+2. Make the dressing:
+   1. Add the following ingredients to a bowl and mix:
+      1. Rice vinegar
+      2. Olive oil
+      3. Soy sauce
+      4. Sesame oil
+      5. Agave
+      6. Ginger
+3. Thinly chop green onions
+4. Add noodles and vegetables to large bowl and toss
+5. Add dressing and toss.
+* TODO Khao Soi (Hot Thai Kitchen)
+:PROPERTIES:
+:source-url:
+:servings: 4
+:prep-time: 40m
+:cook-time: 1h
+:ready-in:
+:END:
+** Ingredients [0/15]
+*Curry Paste*
+- [ ] 2 pods of black cardamom (substitute for green if necessary)
+- [ ] 1.5 tbsp coriander seeds
+- [ ] 0.75 oz ginger
+- [ ] 1 tsp ground turmeric (or 5g / 1.5 inch fresh turmeric)
+- [ ] 1/2 cup shallots
+- [ ] 1 tsp coarse salt (to help grind paste)
+
+*Soup*
+- [ ] 1.5 cups of coconut milk
+- [ ] 8 pieces of chicken drumsticks
+- [ ] 3 cups of water
+- [ ] 3 tbsp soy sauce
+- [ ] 1 tbsp black soy sauce
+- [ ] 2-3 tsp fish sauce
+- [ ] 1 tbsp palm sugar (or brown sugar if necessary)
+- [ ] 12 oz noodles (e.g., wonton noodles)
+- [ ] Cilantro and green onions for garnish
+** Directions
+*Curry Paste*
+1. Smash the cardamom pods with a pestle or something heavy and take
+   out the seeds.
+2. Place cardamom seeds, coriander seeds in dry skillet.
+3. Toast seeds over high heat, moving them constantly, until coriander
+   seeds darken slightly. Then remove from heat and set aside.
+4. In the same skillet, place ginger (and turmeric if fresh) and let
+   them sear until slightly charred (about 2-3m).
+5. Flip and char the other side.
+6. In the same skillet over high heat, place the sliced shallots and
+   let them sear until charred spots form (a few seconds).
+7. Stir shallots and let them char a little more, then remove and set
+   aside.
+8. Chop up chilis.
+9. Add chilis, cardamom, coriander seeds to spice grinder and grind
+   into a powder.
+10. In a mortar and pestle, pound ginger (and turmeric if fresh) into
+    a fine paste.
+11. Add shallots and coarse salt into the mortar and pound into a fine paste.
+12. Once the mixture starts to get wet and slippery, add some of the
+    ground spices to help absorb the mixture.
+13. Once you have a fine paste, add remaining dried spices and pound
+    to mix.
+
+*Broth*
+1. In a pot, add 1/2 cup of coconut milk and bring to a boil over
+   medium heat.
+2. Add the curry paste, stir to dissolve, and keep stirring for a few
+   minutes until the mixture is very thick and coconut oil starts to
+   sizzle around the edge of the paste.
+3. Add the remaining coconut oil and stir to dissolve the curry paste.
+4. Add water, soy sauce, dark soy sauce, sugar, and chicken.
+5. Bring to a simme, turn the heat to low and let simmer for about 40m.
+6. Add fish sauce, salt to taste.
+* TODO Red Curry Chicken (Hot Thai Kitchen)
+:PROPERTIES:
+:source-url:
+:servings: 2
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/10]
+- [ ] 1/2 pound boneless skinless chicken thighs (or breast)
+- [ ] 2 tsp fish sauce
+- [ ] 2 tbsp coconut oil (or neutral oil)
+- [ ] 2-3 tbsp red curry paste (Mae Ploy, Aroy-D, or Nam Jai)
+- [ ] 3/4 cup coconut milk
+- [ ] 1/2 cup chicken broth
+- [ ] 1 tbsp palm sugar (or brown sugar)
+- [ ] 4.5 oz bamboo shoots (or really any vegetable you want)
+- [ ] 3 kaffir lime leaves (optional)
+- [ ] 1/2 cup Thai basil leaves
+- [ ] Rice
+** Directions
+1. Cut chicken into 1cm strips.
+2. Mix the chicken with 2 tsp of fish sauce and set aside.
+3. Put a pot over medium low heat, add oil and curry paste.
+4. Saute the curry paste for 2m, deglaze with water if the paste
+   starts to stick.
+5. Increase heat to medium-high, add coconut milk, chicken broth,
+   sugar, bamboo shoots and stir to mix.
+6. Twist lime leaves to bruise, then tear into chunks and add them to
+   the pot.
+7. Simmer for 5m, adjusting the heat as needed to maintain a simmer
+   (not a boil).
+8. Add marinated chicken, and once sauce comes back to a simmer, cook
+   for another 1-2m.
+9. Turn off heat, stir in Thai basil.
+10. Add fish sauce, salt, and/or sugar to taste.
+11. Serve with rice.
+* TODO Egg Pad See Ew (Hot Thai Kitchen)
+:PROPERTIES:
+:source-url: https://hot-thai-kitchen.com/pad-see-ew-vermicelli/
+:servings: 2
+:prep-time: 10m
+:cook-time: 7m
+:ready-in:
+:END:
+** Ingredients [0/12]
+- [ ] 150g rice noodles (Hot Thai Kitchen uses Vermicelli)
+- [ ] 2 tbsp neutral oil
+- [ ] 4 cloves garlic
+- [ ] 3 eggs
+- [ ] 150g Chinese broccoli
+- [ ] 60g water
+- [ ] 1 tbsp soy sauce
+- [ ] 1 tbsp Golden Mountain sauce (or otherwise dark soy sauce)
+- [ ] 1/4 tsp ground white pepper
+- [ ] 4 tsp sugar
+- [ ] 1-2 Thai chilis
+- [ ] 2-3 tbsp white vinegar (enough to cover chilis)
+** Directions
+1. Soak noodles in room temp water until fully limp (about 5-15m),
+   then drain.
+2. Place chopped chilis into smal bowl and add just enough vinegar to
+   submerge. Mash the chilis a bit with a spoon to extract flavors
+   into the vinegar.
+3. Heat wok over medium-high heat, add the oil and garlic and stir
+   until the garlic starts to turn golden.
+4. Add eggs and break the yolks. Let them set halfway before scrambling.
+5. Once eggs are cooked, add noodles and 1/4 cup of water, toss to mix.
+6. Add soy sauce, Golden Mountain sauce, sugar, and white pepper, then
+   use tongs to toss around until all liquid has been absorbed.
+7. Once the noodles are done, add Chinese broccoli and toss until wilted.
+8. Turn off the heat, place, and serve with the chili vinegar.
+* TODO Tabbouli / Tabouli / Tabbouleh Salad (Parsley Salad)
+:PROPERTIES:
+:source-url: https://www.food.com/recipe/tabbouli-tabouli-tabbouleh-salad-parsley-salad-197922
+:servings: 8-10 serving(s)
+:prep-time: 30 minutes
+:cook-time: Unknown
+:ready-in: 30 minutes
+:END:
+** Ingredients [0/9]
+- [ ] 150   g    flat leaf parsley (This is about 2 bunches) or 150   g    fresh parsley, finely chopped.  (This is about 2 bunches)
+- [ ] 6       spring onions (About 1 bunch) or 6       green onions, finely chopped  (About 1 bunch)
+- [ ] 4   large    tomatoes, finely chopped
+- [ ] 3       lemons, juice of (Freshly Squeeze)
+- [ ] 5   tablespoons    olive oil
+- [ ] 1   cup    bulgur (Also know as bourghul in Australia which is cracked wheat) or 1   cup    burghul (Also know as bourghul in Australia which is cracked wheat)
+- [ ] 1   cup    water, boiled
+- [ ] 1/8  teaspoon    ground black pepper
+- [ ] 1/8  teaspoon    salt
+** Directions
+1. Add one cup of boiled water and one cup of bourghul (bulgur) in a small bowl and mix. Place a tea towel over the bowl so the steam is unable to escape.  Set aside until cool.
+2. Finely chop the parsley, spring onions and tomatoes and place them into your separate large salad bowl.
+3. Juice all the fresh lemons and pour it over the salad mixture. Add olive oil, black pepper and salt in the salad mixture.  Mix well.
+4. Place over the cool bourghul and mix well.
+5. Serve.
+6. Refrigerate any left overs for about 2-3 days.
+
+* TODO Ground Beef Stuffed Green Bell Peppers With Cheese
+:PROPERTIES:
+:source-url: https://www.food.com/recipe/ground-beef-stuffed-green-bell-peppers-with-cheese-1356
+:servings: 6 peppers, 3 serving(s)
+:prep-time: 15 minutes
+:cook-time: 35 minutes
+:ready-in: 50 minutes
+:END:
+** Ingredients [0/9]
+- [ ] 6   large    green peppers
+- [ ] 1   lb    beef, Ground
+- [ ] 1/2  cup    onion, Chopped
+- [ ] 1 (16   ounce) can   tomatoes, diced
+- [ ] 1/2  cup    long grain rice, any available rice is fine it may affect cooking time though
+- [ ] 1   cup    water
+- [ ] 1   teaspoon    salt
+- [ ] 1   teaspoon    Worcestershire sauce
+- [ ] 1   cup    cheddar cheese, Shredded  (about 4 ounces)
+** Directions
+1. Cut off the tops of green peppers; discard seeds and membranes.
+2. Chop enough of the tops to make 1/4 cup, set aside.
+3. Cook the whole green peppers, uncovered in boiling water for about 5 minutes; invert to drain well.
+4. Sprinkle insides of the peppers lightly with salt.
+5. In a skillet cook ground beef, onion and 1/4 cup chopped pepper till meat is browned and vegetables are tender.
+6. Drain off excess fat. Add drained tomatoes, salt, Worcestershire, and a dash of pepper.
+7. in a separate pot put water bring to boil add rice cook until rice is soft. if needed add more water.
+8. add rice to beef mixture.
+9. Stir in cheese. Stuff peppers with meat mixture. Place in a 10x6x2 baking dish.
+10. Bake, covered in a 350 degree oven for      30    minutes. in the last 5 minutes add any remaining cheese to the top of the peppers.
+
+* TODO Bourbon Chicken
+:PROPERTIES:
+:source-url: https://www.food.com/recipe/bourbon-chicken-45809
+:servings: 4 serving(s)
+:prep-time: 15 minutes
+:cook-time: 20 minutes
+:ready-in: 35 minutes
+:END:
+** Ingredients [0/11]
+- [ ] 2   lbs    boneless chicken breasts, cut into bite-size pieces
+- [ ] 1 -2   tablespoon    olive oil
+- [ ] 1       garlic clove, crushed
+- [ ] 1/4  teaspoon    ginger
+- [ ] 3/4  teaspoon    crushed red pepper flakes
+- [ ] 1/4  cup    apple juice
+- [ ] 1/3  cup    light brown sugar
+- [ ] 2   tablespoons    ketchup
+- [ ] 1   tablespoon    cider vinegar
+- [ ] 1/2  cup    water
+- [ ] 1/3  cup    soy sauce
+** Directions
+1. Editor's Note:  Named Bourbon Chicken because it was supposedly created by a Chinese cook who worked in a restaurant on Bourbon Street.
+2. Heat oil in a large skillet.
+3. Add chicken pieces and cook until lightly browned.
+4. Remove chicken.
+5. Add remaining ingredients, heating over medium Heat until well mixed and dissolved.
+6. Add chicken and bring to a hard boil.
+7. Reduce heat and simmer for 20 minutes.
+8. Serve over hot rice and ENJOY.
+
+* TODO Award Winning Chili
+:PROPERTIES:
+:source-url: https://www.food.com/recipe/award-winning-chili-105865
+:servings: 6 serving(s)
+:prep-time: 15 minutes
+:cook-time: 2 hours
+:ready-in: 2 hours, 15 minutes
+:END:
+** Ingredients [0/17]
+- [ ] 1   lb    ground beef or 1   lb    ground turkey
+- [ ] 2       onions, diced
+- [ ] 1       green pepper, diced
+- [ ] 1   tablespoon    jalapeno, finely chopped
+- [ ] 1 (14   ounce) can   Mexican-style tomatoes (like Rotel)
+- [ ] 2 (8   ounce) cans   tomato sauce
+- [ ] 2   tablespoons    cumin
+- [ ] 2   tablespoons    chili powder
+- [ ] 1   teaspoon    salt
+- [ ] 1/2  teaspoon    cayenne pepper
+- [ ] 1/2  teaspoon    paprika (smoked if you can find it)
+- [ ] 1 (14   ounce) can   kidney beans, drained and rinsed
+- [ ] 1 (14   ounce) can   black beans, drained and rinsed
+- [ ] 1   cup    water
+- [ ] sour cream
+- [ ] cheddar cheese
+- [ ] green onion
+** Directions
+1. In a medium Dutch oven over medium-high heat add the olive oil. Add the ground meat and cook, breaking up into pieces, until browned. Add the onions, bell pepper and jalapeno and cook until softened. Drain excess grease.
+2. Add the tomatoes, tomato sauce, cumin, chili powder, salt, cayenne, paprika and 1 cup water. Mix to combine.
+3. Add the kidney beans and black beans, mix and bring to a simmer. Cover and cook for 1-2 hours.
+4. Serve with desired toppings.
+
+* TODO The Easy Ground Beef Skillet Dinner I Make Every Summer
+:PROPERTIES:
+:source-url: https://www.simplyrecipes.com/ratatouille-ground-beef-skillet-recipe-11728395
+:servings: 4
+:prep-time: 20 minutes
+:cook-time: 30 minutes
+:ready-in: 50 minutes
+:END:
+** Ingredients [0/16]
+- [ ] 1 medium eggplant (about 1 pound)
+- [ ] 2 large red bell peppers, stemmed and seeded
+- [ ] 5 Roma tomatoes
+- [ ] 1 large zucchini (about 12 ounces)
+- [ ] 1 large summer squash (about 12 ounces)
+- [ ] 2 teaspoons kosher salt
+- [ ] 1/4 cup olive oil, plus more for serving
+- [ ] 4 cloves garlic, chopped
+- [ ] 1 large yellow onion, chopped
+- [ ] 1 1/2 tablespoons tomato paste
+- [ ] 1 teaspoon Herbes de Provence
+- [ ] 1/4 teaspoon freshly ground black pepper, plus more for serving
+- [ ] 1/4 teaspoon red pepper flakes
+- [ ] 1 pound 90% lean ground beef
+- [ ] Fresh basil leaves
+- [ ] Crusty bread, for serving
+** Directions
+1. Prep and salt the vegetables: Chop the eggplant, peppers, tomatoes, zucchini, and summer squash into bite-sized pieces and add them to a large bowl. Sprinkle the salt over the vegetables and toss to combine. Let sit for 15 minutes.
+2. Cook the aromatics: While the vegetables sit, heat the olive oil and garlic in a large, high-sided skillet, Dutch oven, or braising pan over medium heat. When the garlic begins to bubble around the edges, add the onion and sauté until the onion is softened and begins to brown just a bit, about 5 minutes. Add the tomato paste, Herbes de Provence, black pepper, and red pepper flakes and sauté until fragrant, about 1 minute.
+3. Add the beef: Add the ground beef to the skillet. Sauté, breaking up the meat with a wooden spoon or spatula while it cooks, until the beef is cooked through, about 5 minutes.
+4. Cook the vegetables: Add the salted vegetables to the skillet along with any liquid that has accumulated in the bowl. Stir to combine, using the wooden spoon to nudge up any cooked-on bits from the bottom of the pan. Cover the pan and let cook, uncovering to stir every 5 minutes or so, until the vegetables are softened and cooked through but not mushy, 12 to 15 minutes.
+5. Finish and serve: Uncover the pot, give everything a final stir, then turn off the heat. Tear up the basil leaves and sprinkle them over the top of the ratatouille. Add a few grinds of black pepper and a generous drizzle of olive oil. Spoon the ratatouille onto serving plates or into bowls and serve right away, with crusty bread on the side. Let any leftovers cool to room temperature, then store in an airtight container in the fridge for 3 to 4 days. Reheat a serving in the microwave for about 2 minutes, stirring halfway through. Love the recipe? Leave us stars and a comment below!
+
+* TODO Easy American Goulash
+:PROPERTIES:
+:source-url: https://www.budgetbytes.com/goulash/
+:servings: [6 6 About 1.5 cups each]
+:prep-time: 10 minutes
+:cook-time: 60 minutes
+:ready-in: 70 minutes
+:END:
+** Ingredients [0/16]
+- [ ] 1 Tbsp olive oil ($0.22)
+- [ ] 1  yellow onion  ($0.70)
+- [ ] 4 cloves garlic  ($0.16)
+- [ ] 2  bell peppers  ($1.72)
+- [ ] 1 lb ground beef (see notes, $4.98)
+- [ ] 1/2 cup red wine (see notes, $0.72)
+- [ ] 1 28oz. can diced tomatoes  ($1.63)
+- [ ] 1 15oz. can tomato sauce  ($1.06)
+- [ ] 2 Tbsp soy sauce  ($0.05)
+- [ ] 2  whole bay leaves (optional, $0.30)
+- [ ] 1/2 tsp dried oregano  ($0.05)
+- [ ] 1/2 tsp dried basil  ($0.05)
+- [ ] 1/4 tsp crushed red pepper  ($0.02)
+- [ ] 1/2 cup water ($0.00)
+- [ ] 2 cups elbow macaroni (about 1/2 lb. see notes, $0.59)
+- [ ] salt to taste ($0.05)
+** Directions
+1. Dice the onion and mince the garlic. Sauté both in a large soup pot with the olive oil over medium heat until the onions are translucent. While the onion and garlic are sautéing, dice the bell peppers, then add them to the pot and continue to sauté for about two minutes more.
+2. Add the ground beef to the pot with the vegetables and continue to sauté over medium until the beef is cooked through. Add the red wine to the pot and stir to dissolve any browned bits off the bottom of the pot.
+3. Add the diced tomatoes (with juices), tomato sauce, soy sauce, bay leaves, oregano, basil, crushed red pepper, and water to the pot. Stir to combine, place a lid on the pot, and allow it to come up to a boil. Once boiling, turn it down to low, and let the sauce simmer for 30 minutes with the lid on, stirring occasionally.
+4. After the sauce has simmered for 30 minutes, add the macaroni and stir to combine. Continue to let the macaroni simmer in the sauce, with the lid on, stirring occasionally, until the pasta is tender (about 10-12 minutes).
+5. Once the pasta is tender, taste the goulash and add salt to taste. Remove the bay leaves, then serve.
+
+* TODO Greek Chicken and Orzo Recipe
+:PROPERTIES:
+:source-url: https://www.budgetbytes.com/greek-chicken-and-orzo/
+:servings: [4 4 servings]
+:prep-time: 15 minutes
+:cook-time: 30 minutes
+:ready-in: 45 minutes
+:END:
+** Ingredients [0/18]
+- [ ] 1 tsp paprika ($0.10)
+- [ ] ½ tsp dried thyme ($0.05)
+- [ ] ½ tsp garlic powder ($0.05)
+- [ ] 1 ½ tsp dried oregano, divided ($0.15)
+- [ ] 1 tsp salt, divided ($0.05)
+- [ ] ½ tsp freshly cracked black pepper, divided ($0.02)
+- [ ] 4  boneless, skinless chicken thighs (about 1.3 lbs.)   ($5.15)
+- [ ] 1 Tbsp olive oil ($0.16)
+- [ ] 1 Tbsp butter ($0.14)
+- [ ] 1  small yellow onion, diced ($0.39)
+- [ ] 1  red bell pepper, diced ($1.59)
+- [ ] 2 cloves of garlic, minced ($0.16)
+- [ ] 1 ¼ cup uncooked orzo pasta ($1.25)
+- [ ] 2 cups chicken broth ($0.34)
+- [ ] ½ pint grape tomatoes, halved ($1.50)
+- [ ] 2 Tbsp lemon juice ($0.79)
+- [ ] ⅓ cup pitted kalamata olives ($1.45)
+- [ ] 2 Tbsp fresh chopped parsley ($0.14)
+** Directions
+1. In a small bowl, combine the paprika, dried thyme, garlic powder, 1 tsp dried oregano, ¾ tsp salt, and ¼ tsp black pepper.
+2. Blot the chicken thighs dry with a paper towel, then season both sides liberally with the seasoning blend.
+3. Heat the olive oil and butter in a large deep skillet over medium heat. Once the skillet is hot, add the chicken and cook on each side until golden brown and cooked through (about 5 minutes per side). Remove the chicken from the skillet and transfer to a clean plate. Cover with aluminum foil to keep warm.
+4. In the same skillet, add the diced onion, diced bell pepper, and minced garlic. Sauté for 3-4 minutes until onions are translucent.
+5. Now add in the orzo pasta, ½ tsp dried oregano, ¼ tsp salt, ¼ tsp black pepper, and the chicken broth. Stir to combine and scrape up any browned bits that may be stuck at the bottom of the pan.
+6. Return the chicken to the pan and nestle it down into the orzo. Place a lid on the skillet, turn the heat up to medium-high, and let the broth come to a full boil. Once the broth is boiling, turn the heat down to medium-low and let the skillet simmer for about 12 minutes or until most of the broth is absorbed.
+7. After about 12 minutes, add in the sliced grape tomatoes and let the skillet continue to simmer, without the lid, for 3-4 more minutes.
+8. Remove the skillet from the heat and finish by stirring in fresh lemon juice, sliced kalamata olives, and topping with fresh parsley. Enjoy!
+* TODO Khao Soi (Joshua Weissman)
+:PROPERTIES:
+:source-url: https://www.youtube.com/watch?v=bBqwT03GlrQ
+:servings: 4
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/20]
+- [ ] 7 pods black cardamom
+- [ ] 3.5 tbsp coriander seeds
+- [ ] 5 shallots
+- [ ] 2oz ginger
+- [ ] 1oz turmeric
+- [ ] 2oz guajillo chilies
+- [ ] 4 cloves garlic
+- [ ] 4 tsp kosher salt
+- [ ] 2 tbsp coconut oil
+- [ ] 2.25 cups of coconut milk
+- [ ] 2.75 cups of water
+- [ ] 1.5 tbsp dark soy sauce
+- [ ] 2 tbsp soy sauce
+- [ ] 3 tbsp palm sugar
+- [ ] 6-8 chicken drumsticks
+- [ ] Wonton noodles
+- [ ] Green onions for garnish
+- [ ] 3 tbsp fish sauce
+- [ ] 4 tbsp lime juice
+- [ ] Cilantro for garnish
+** Directions
+*Paste*
+1. Toast black cardamom and coriander seeds, constantly moving around,
+   until they brown a bit (about 5m). Then remove from pan and set aside.
+2. Peel ginger and turmeric.
+3. Split ginger, turmeric, and shallots in half lengthwise.
+4. Add ginger, turmeric, 4 shallots to hot (dry) pan, cut sides
+   down. Char for 2-3m.
+5. Put cardamom, coriander seeds, and guajillo chilies in blender,
+   blend to powder.
+6. Remove from blender, add charred vegetables, garlic, and kosher
+   salt to blender and blend to paste.
+7. Add spices back to blender and blend again.
+8. Use only half! The other half can be frozen.
+
+*Broth*
+1. Add coconut oil to pot on medium heat.
+2. Once hot, add khao soi paste.
+3. Add coconut milk and stir (scrape up stuck bits).
+4. Add water.
+5. Add soy sauce, dark soy sauce, and palm sugar.
+6. Increase heat to medium-high, bring to boil, and then reduce heat
+   to low.
+7. Add drumsticks.
+8. Cover with lid, braise for 40m.
+9. Dice remaining shallot.
+10. Chop green onions.
+11. Add fish sauce and lime juice to broth after the 40m braise.
+12. Add fish sauce, lime juice, salt, palm sugar to taste.
+13. Boil wonton noodles.
+
+*Plating*
+1. Add noodles
+2. Add 2 drumsticks
+3. Add broth
+4. Add green onion and shallots
+5. Add cilantro for garnish
+* TODO Miso Ramen (Cameron Marti)
+:PROPERTIES:
+:source-url: https://www.youtube.com/watch?v=jeYxGQ8jCYQ
+:servings: 2
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/14]
+- [ ] 4 green onions
+- [ ] 2 cloves of garlic
+- [ ] Ginger (about the same amount as garlic)
+- [ ] 2 eggs
+- [ ] 150g ground pork
+- [ ] 3 tbsp miso paste
+- [ ] 1 tsp toban djan (spicy chili bean paste; replace with chili
+  garlic paste or sriracha)
+- [ ] 1 tsp sugar
+- [ ] 700ml water
+- [ ] 1 tsp chicken bouillon
+- [ ] 0.5 tsp dashi powder
+- [ ] Dash of chili oil (sesame oil instead maybe?)
+- [ ] White pepper to taste
+- [ ] Ramen noodles
+** Directions
+1. Bring water to boil (for eggs & noodles).
+2. In the meantime, chop green onions, mince garlic and ginger.
+3. Once water is boiling, place eggs in, cook for 6m45s (soft boil).
+4. Once eggs are done, remove immediately and place in ice bath. Keep
+   cooking water in pot.
+5. Heat a large pot on medium high, add in pork, frequently mix around.
+6. Once pork has browned a bit, add in green onion, ginger, garlic.
+7. Once vegetables have softened, turn heat down to low.
+8. Add in miso paste and toban djan, mix.
+9. Add sugar. If it looks too dry, add a bit of water. Mix again.
+10. Add 700ml of water, chicken bouillon, and dashi powder.
+11. Add a dash of chili oil, salt, and white pepper.
+12. Simmer for 5-10m.
+13. In the meantime, cook ramen noodles.
+* TODO Chicken Shoyu Ramen (Joshua Weissman)
+:PROPERTIES:
+:source-url:
+:servings: 2
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/10]
+- [ ] 4 shiitake mushrooms (optional)
+- [ ] 2 green onions
+- [ ] 3 cloves garlic
+- [ ] 1 inch ginger
+- [ ] 6 cups chicken stock
+- [ ] 90g soy sauce
+- [ ] 1 tbsp honey
+- [ ] 2 tsp (light) corn syrup
+- [ ] 4 boneless chicken thighs
+- [ ] Sesame oil (to drizzle)
+** Directions
+*Broth*
+1. Heat sauce pan to medium-high, add enough neutral oil to coat
+   bottom of the pan.
+2. Add mushrooms (thinly sliced), sear for 2-3m, mixing
+   occasionally. Then remove mushrooms and set aside, but leave pan.
+3. Add thinly sliced whites from the 2 green onions.
+4. Add 2 cloves garlic, crushed.
+5. Add ginger, grated.
+6. Saute until fragrant (about 30-45s).
+7. Add stock.
+8. Add 60g soy sauce.
+9. Let liquid boil, reduce heat to low, and simmer for 5-10m.
+10. Season lightly with salt (to taste).
+
+*Chicken topping*
+1. Heat large pan over medium-high.
+2. In a mixing bowl, add 30g soy sauce, honey, corn syrup, and 1 clove
+   garlic. Mix.
+3. Once pan is hot, place chicken thighs skin-side down and sear for 3m.
+4. Flip chicken, reduce heat to medium, and cook for 6m.
+5. Brush chicken with glaze, flipping occasionally for about 1m.
+
+*Soup*
+1. Cook ramen noodles.
+2. Soft boil egg (optional).
+3. Add noodles, mushrooms, egg, sliced chicken.
+4. Add sliced greens of green onions.
+5. Drizzle with sesame oil.
+
+* Pad Kra Pao (Hot Thai Kitchen)
+:PROPERTIES:
+:source-url: https://hot-thai-kitchen.com/holy-basil-stir-fry/
+:servings: 2-3
+:prep-time:
+:cook-time:
+:ready-in:
+:END:
+** Ingredients [0/16]
+- [ ] 5-10 Thai chilies, or to taste
+- [ ] 5 cloves garlic
+- [ ] 1 spur chilies or another mild, red pepper, chopped
+- [ ] ½ cup long beans, cut into short pieces
+- [ ] ½ small onion, diced
+- [ ] 300g chicken, coarsely ground (see video for how to grind your own chicken)
+- [ ] 1 Tbsp oyster sauce
+- [ ] 1 Tbsp soy sauce
+- [ ] 2 tsp fish sauce
+- [ ] 1½ tsp black soy sauce (or sub dark soy sauce and reduce regular soy sauce to 2 tsp)
+- [ ] 2 Tbsp water
+- [ ] 1 ½ tsp sugar
+- [ ] 1 ½ cup holy basil leaves, loosely packed (see note)
+- [ ] Vegetable oil, as needed 
+- [ ] 2-3 eggs (1 per person)
+- [ ] Jasmine rice for serving
+** Directions
+1. Pound Thai chilies into a fine paste.
+2. Add garlic and spur chilies and pound into a rough paste.
+3. Combine oyster sauce, soy sauce, fish sauce, black soy sauce, water and sugar; stir to dissolve the sugar.
+4. In a wok or a large saute pan, saute the garlic-chili paste in a little vegetable oil over medium high heat until the garlic starts to turn golden.
+5. Add chicken and toss until they're no longer in big clumps. Add the sauce and continue tossing until the chicken is almost done.
+6. Add onions and long beans; toss until the chicken is done.
+7. Remove from heat and stir in the holy basil.
+8. Taste and adjust seasoning as needed.
